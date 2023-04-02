@@ -20,7 +20,7 @@ public class UsuarioController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/agregar")
+    @PostMapping("/agregar") //metodo para agregar usuarios al sistema
     public ResponseEntity<?> agregarUsuario(@RequestBody UsuarioRegisterRequest registerRequest){
 
         CrearUsuarioDTO usuarioDTO = modelMapper.map(registerRequest, CrearUsuarioDTO.class);
