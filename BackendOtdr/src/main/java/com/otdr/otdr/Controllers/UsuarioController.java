@@ -1,6 +1,7 @@
 package com.otdr.otdr.Controllers;
 
 import com.otdr.otdr.Data.Entidades.Mensaje;
+import com.otdr.otdr.Models.Peticiones.PerfilCrearRequest;
 import com.otdr.otdr.Models.Peticiones.PermisosRequest;
 import com.otdr.otdr.Models.Peticiones.UsuarioRegisterRequest;
 import com.otdr.otdr.Models.Respuestas.UsuarioRegisterResponse;
@@ -58,5 +59,13 @@ public class UsuarioController {
     @GetMapping("/perfiles-list")
     public ResponseEntity<?> listarPerfiles() {
         return new ResponseEntity<>(perfilService.listarPerfil(), HttpStatus.OK);
+    }
+
+    @PostMapping("/perfil-save")
+    public ResponseEntity<?> crearPerfil(@RequestBody PerfilCrearRequest perfilCrearRequest){
+
+        perfilService.crearPerfil(perfilCrearRequest);
+
+        return new ResponseEntity<>(new Mensaje("Se creo el perfil exitosamente"),HttpStatus.OK);
     }
 }
