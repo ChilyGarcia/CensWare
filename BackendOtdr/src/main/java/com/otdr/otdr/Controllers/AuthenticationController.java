@@ -34,8 +34,6 @@ public class AuthenticationController {
     private UsuarioService usuarioService;
     @Autowired
     private RolRepository rolRepository;
-    @Autowired
-    private PermisoRepository permisoRepository;
 
 
     @PostMapping("/login")
@@ -99,21 +97,6 @@ public class AuthenticationController {
         System.out.println(usuarioGuardado.getNombre());
 
         return ResponseEntity.ok(new AdminResponse(usuario.getEmail(), pass));
-    }
-
-    @PostMapping("/permisos-admin")
-    public ResponseEntity<?> editarPerAdmin(@RequestBody PermisosRequest permisosRequest){
-
-        Permisos permisos = permisoRepository.findByNombre("Admin");
-        permisos.setCaracterizacion(permisosRequest.isRegistrar());
-        permisos.setMaps(permisosRequest.isMaps());
-
-        Perfil perfil = rolRepository.findByRolNombre("ADMIN");
-        perfil.setPermisos(permisos);
-
-        rolRepository.save(perfil);
-
-        return new ResponseEntity<>(new Mensaje("Permisos actualizados"), HttpStatus.OK);
     }
 
 }

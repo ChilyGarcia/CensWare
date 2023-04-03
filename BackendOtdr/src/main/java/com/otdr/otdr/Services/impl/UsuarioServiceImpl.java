@@ -45,6 +45,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         Perfil perfil = rolRepository.findByRolNombre(crearUsuarioDTO.getPerfil());
+        if (perfil == null){
+            throw new MyException("El perfil no existe");
+        }
 
         Usuario user = modelMapper.map(crearUsuarioDTO, Usuario.class);
         user.setPassword(passwordEncoder.encode(crearUsuarioDTO.getPassword()));
