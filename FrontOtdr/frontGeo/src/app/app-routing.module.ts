@@ -4,6 +4,8 @@ import { MapaComponent } from './mapa/mapa/mapa.component';
 import { LoginComponent } from './login/login/login.component';
 import { PanelComponent } from './panel/panel/panel.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
+import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,16 @@ const routes: Routes = [
     component:MapaComponent,
     pathMatch:'full'
 
+  },
+  {
+    path:'agregar-usuarios',
+    component:AgregarUsuarioComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'perfilamiento',
+    component:PerfilamientoComponent,
+    pathMatch:'full'
   }
 
 ];

@@ -1,0 +1,166 @@
+<app-panel></app-panel>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+
+
+
+<!-- 
+    <form (ngSubmit) ="formSubmit()" id="form">
+
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su nombre"
+            id="nombre"
+            [(ngModel)]="user.nombre"
+            name="nombre">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su apellido"
+            id="apellido"
+            [(ngModel)]="user.apellido"
+            name="apellido">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su email"
+            id="email"
+            [(ngModel)]="user.email"
+            name="email">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su celular"
+            id="celular"
+            [(ngModel)]="user.celular"
+            name="celular">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su cedula"
+            id="cedula"
+            [(ngModel)]="user.cedula"
+            name="cedula">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su password"
+            id="password"
+            [(ngModel)]="user.password"
+            name="password">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite su rol"
+            id="rol"
+            [(ngModel)]="user.perfil"
+            name="rol">
+    
+        </mat-form-field>
+    
+        <mat-form-field class="full-width" appearance="outline">
+            <input required      
+            matInput placeholder="Digite usuario logeado"
+            id="userLogedo"
+            [(ngModel)]="user.userLogeado"
+            name="userLogeado">
+    
+        </mat-form-field>
+    
+        <button mat-raised-button>Enviar</button>
+    
+    </form>
+
+
+-->
+
+<div class="login-box" >
+    
+    <h2>Agregar usuarios</h2>
+    
+    <form (ngSubmit) ="formSubmit()" id="form">
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite su nombre"
+        id="nombre"
+        [(ngModel)]="user.nombre"
+        name="nombre">
+        <label>Nombre</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite su apellido"
+        id="apellido"
+        [(ngModel)]="user.apellido"
+        name="apellido">
+        <label>Apellido</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite su email"
+        id="email"
+        [(ngModel)]="user.email"
+        name="email">
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite su celular"
+        id="celular"
+        [(ngModel)]="user.celular"
+        name="celular">
+        <label>Celular</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite su cedula"
+        id="cedula"
+        [(ngModel)]="user.cedula"
+        name="cedula">
+        <label>Cedula</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="" required="">
+        <label>Password</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Di"
+        id="rol"
+        [(ngModel)]="user.perfil"
+        name="rol">
+        <label>Rol</label>
+      </div>
+      <div class="user-box">
+        <input required      
+        matInput placeholder="Digite usuario logeado"
+        id="logeado"
+        [(ngModel)]="user.userLogeado"
+        name="logeado">
+        <label>Logeado</label>
+      </div>
+
+      <button mat-raised-button style="margin-left: 38%; margin-top: 10%;">Enviar</button>
+
+              
+    </form>
+  </div>
+
+
+
+
+

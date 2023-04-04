@@ -8,6 +8,17 @@ import { MapaComponent } from './mapa/mapa/mapa.component';
 import { LoginComponent } from './login/login/login.component';
 import { DibujarComponent } from './dibujar/dibujar.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
+
+
 
 @NgModule({
   declarations: [
@@ -16,11 +27,22 @@ import { InicioComponent } from './inicio/inicio.component';
     MapaComponent,
     LoginComponent,
     DibujarComponent,
-    InicioComponent
+    InicioComponent,
+    AgregarUsuarioComponent,
+    PerfilamientoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    HttpClientModule, 
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
+
+    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
