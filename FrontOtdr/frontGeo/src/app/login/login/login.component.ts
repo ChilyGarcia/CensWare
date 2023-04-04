@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+
+
+
+
+  formSubmit()
+  {
+
+    window.location.href = "/inicio";
+
+  }
+
 }

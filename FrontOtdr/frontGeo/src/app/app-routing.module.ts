@@ -10,7 +10,7 @@ import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component'
 const routes: Routes = [
   {
     path:'',
-    component:InicioComponent,
+    component:LoginComponent,
     pathMatch:'full'
   },
   {
@@ -28,7 +28,13 @@ const routes: Routes = [
     path:'perfilamiento',
     component:PerfilamientoComponent,
     pathMatch:'full'
+  },
+  {
+    path:'inicio',
+    component:InicioComponent,
+    pathMatch:'full'
   }
+
 
 ];
 

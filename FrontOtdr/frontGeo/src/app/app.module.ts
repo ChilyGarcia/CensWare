@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
 
@@ -39,7 +40,8 @@ import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component'
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule
 
     
     
