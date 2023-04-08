@@ -139,20 +139,19 @@
       </div>
       <div class="user-box">
         <input required      
-        matInput placeholder="Di"
-        id="rol"
-        [(ngModel)]="user.perfil"
-        name="rol">
-        <label>Rol</label>
-      </div>
-      <div class="user-box">
-        <input required      
         matInput placeholder="Digite usuario logeado"
         id="logeado"
         [(ngModel)]="user.userLogeado"
         name="logeado">
         <label>Logeado</label>
       </div>
+
+      <mat-form-field class="selectRol" >
+        <mat-select placeholder="Seleccione Un rol" [(ngModel)]="user.perfil" name="opciones">
+          <mat-option value="CARACT">Caracterizacion</mat-option>
+          <mat-option value="ADMIN">Administrador</mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <button mat-raised-button style="margin-left: 38%; margin-top: 10%;">Enviar</button>
 
