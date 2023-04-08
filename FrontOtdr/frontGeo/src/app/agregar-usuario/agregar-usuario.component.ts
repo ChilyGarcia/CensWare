@@ -22,7 +22,7 @@ export class AgregarUsuarioComponent {
     cedula:'',
     password:'',
     perfil:'',
-    userLogeado:''
+    userLogeado:'alguien'
   }
   ngOnInit()
   {
