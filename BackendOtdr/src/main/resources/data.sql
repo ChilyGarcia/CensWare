@@ -7,3 +7,5 @@ INSERT IGNORE INTO perfiles(id, rol_nombre, permiso_id) VALUES (1, "ADMIN", 1),
                                              (2, "CONSULTA", 2),
                                              (3, "CARACT", 3),
                                              (4, "CUADRILLA", 4);
+
+INSERT IGNORE INTO tipo_punto(id, tipo_nombre) VALUES (1,"ESTACION"),(2,"POSTE");
