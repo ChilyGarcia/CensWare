@@ -3,7 +3,19 @@
      
   </head>
   <body>
-    <div class="area"><app-dibujar></app-dibujar></div>
+
+    <h1 style="margin-left: 5%;">Mapa</h1>
+
+    <select name="select-location" id="select-location" style="margin-left: 5%;">
+		<option value="-1">Seleccione un lugar:</option>
+		<option value="7.896091957192708,-72.50229949934618">Punto 1</option>
+		<option value="7.921171184587934,-72.48024101219407">Punto 2</option>	
+		<option value="7.918014240793359,-72.49329659781102">Punto 3</option>
+		<option value="7.888235561076866,-72.49681042061687">Punto 4</option>
+				
+	</select>
+
+    <div id="map" style="margin-left: 5%; width: 95%; height: 85vh;"></div>
     <nav class="main-menu">
 
             <ul>
