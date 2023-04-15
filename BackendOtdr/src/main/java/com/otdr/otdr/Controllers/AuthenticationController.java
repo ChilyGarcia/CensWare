@@ -2,12 +2,12 @@ package com.otdr.otdr.Controllers;
 
 import com.otdr.otdr.Data.Entidades.*;
 import com.otdr.otdr.Models.Peticiones.JwtRequest;
-import com.otdr.otdr.Models.Peticiones.PermisosRequest;
 import com.otdr.otdr.Models.Respuestas.AdminResponse;
 import com.otdr.otdr.Models.Respuestas.JwtResponse;
-import com.otdr.otdr.Repositories.PermisoRepository;
+import com.otdr.otdr.Models.Respuestas.UserActual;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Security.JwtUtils;
+import com.otdr.otdr.Services.PermisoService;
 import com.otdr.otdr.Services.UsuarioService;
 import com.otdr.otdr.Services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,8 @@ public class AuthenticationController {
     private UsuarioService usuarioService;
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private PermisoService permisoService;
 
 
     @PostMapping("/login")
@@ -97,6 +99,21 @@ public class AuthenticationController {
         System.out.println(usuarioGuardado.getNombre());
 
         return ResponseEntity.ok(new AdminResponse(usuario.getEmail(), pass));
+    }
+
+    @PostMapping("/actual-usuario")
+    public UserActual obtenerUsuarioActual(@RequestBody JwtRequest principal){
+        Usuario usuario = (Usuario) this.userDetailsService.loadUser(principal.getEmail(), principal.getRol());
+        Permisos permisos = permisoService.obtenerPermisosRol(principal.getRol());
+
+        UserActual userActual = new UserActual();
+        userActual.setAuthorities(usuario.getAuthorities());
+        userActual.setMaps(permisos.isMaps());
+        userActual.setCaracterizacion(permisos.isCaracterizacion());
+        userActual.setFallo(permisos.isFallo());
+        userActual.setDashboard(permisos.isDashboard());
+
+        return userActual;
     }
 
 }

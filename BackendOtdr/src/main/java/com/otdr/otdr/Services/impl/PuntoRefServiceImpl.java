@@ -80,37 +80,6 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         return crearPuntoRefDTO;
     }
 
-    @Override
-    public CrearRutaDTO guardarRuta(CrearRutaDTO rutaDTO) {
-
-        String rutaN = rutaDTO.getRutaInicio()+" - "+rutaDTO.getRutaFin();
-        String rutaM = rutaN.toUpperCase();
-
-        Ruta rutaB = rutaRepository.findByRutaNombre(rutaM);
-        if (rutaB != null){
-            throw new MyException("Ya esta registrada esta ruta");
-        }
-
-        Ruta ruta = new Ruta();
-        ruta.setRutaNombre(rutaM);
-
-        rutaRepository.save(ruta);
-
-        return modelMapper.map(ruta, CrearRutaDTO.class);
-    }
-
-    @Override
-    public List<Ruta> listarRuta() {
-
-        List<Ruta> rutaList = rutaRepository.findAll();
-        if (rutaList.isEmpty()){
-            throw new MyException("No hay rutas registradas");
-        }
-
-
-        return rutaList;
-    }
-
     private List<PuntoReferencia> leerExcel(InputStream inputStream, Ruta ruta) throws IOException {
         List<PuntoReferencia> puntoReferencias = new ArrayList<>();
         Workbook workbook = new XSSFWorkbook(inputStream);
@@ -143,6 +112,37 @@ public class PuntoRefServiceImpl implements PuntoRefService {
 
         return puntoReferencias;
 
+    }
+
+    @Override
+    public CrearRutaDTO guardarRuta(CrearRutaDTO rutaDTO) {
+
+        String rutaN = rutaDTO.getRutaInicio()+" - "+rutaDTO.getRutaFin();
+        String rutaM = rutaN.toUpperCase();
+
+        Ruta rutaB = rutaRepository.findByRutaNombre(rutaM);
+        if (rutaB != null){
+            throw new MyException("Ya esta registrada esta ruta");
+        }
+
+        Ruta ruta = new Ruta();
+        ruta.setRutaNombre(rutaM);
+
+        rutaRepository.save(ruta);
+
+        return modelMapper.map(ruta, CrearRutaDTO.class);
+    }
+
+    @Override
+    public List<Ruta> listarRuta() {
+
+        List<Ruta> rutaList = rutaRepository.findAll();
+        if (rutaList.isEmpty()){
+            throw new MyException("No hay rutas registradas");
+        }
+
+
+        return rutaList;
     }
 
 }

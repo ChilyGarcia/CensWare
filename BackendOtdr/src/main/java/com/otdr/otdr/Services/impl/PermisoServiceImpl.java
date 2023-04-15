@@ -63,4 +63,15 @@ public class PermisoServiceImpl implements PermisoService {
         Perfil perfil1 = rolRepository.save(perfil);
 
     }
+
+    @Override
+    public Permisos obtenerPermisosRol(String rol) {
+
+        Permisos permisos = permisoRepository.findByNombre(rol);
+        if (permisos == null){
+            throw new MyException("Este perfil no existe");
+        }
+
+        return permisos;
+    }
 }
