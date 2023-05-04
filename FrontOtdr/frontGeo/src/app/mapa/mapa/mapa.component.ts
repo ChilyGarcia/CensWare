@@ -3,8 +3,6 @@ import { Map, tileLayer } from 'leaflet';
 
 declare function holaMundo() :void; 
   
-
-
 import * as L from 'leaflet';
 
 @Component({

@@ -6,6 +6,8 @@ import { PanelComponent } from './panel/panel/panel.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.component';
 import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
+import { CapturaComponent } from './captura/captura.component';
+import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,16 @@ const routes: Routes = [
   {
     path:'inicio',
     component:InicioComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'captura',
+    component:CapturaComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'caracterizacion',
+    component:CaracterizacionComponent,
     pathMatch:'full'
   }
 

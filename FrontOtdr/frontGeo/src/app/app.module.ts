@@ -18,6 +18,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
+import { CapturaComponent } from './captura/captura.component';
+import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
 
 
 
@@ -30,7 +32,9 @@ import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component'
     DibujarComponent,
     InicioComponent,
     AgregarUsuarioComponent,
-    PerfilamientoComponent
+    PerfilamientoComponent,
+    CapturaComponent,
+    CaracterizacionComponent
   ],
   imports: [
     BrowserModule,
