@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from '../services/usuario.service';
 
 declare function holaMundo() :void; 
 
@@ -8,6 +9,24 @@ declare function holaMundo() :void;
   styleUrls: ['./caracterizacion.component.css']
 })
 export class CaracterizacionComponent {
+
+  constructor(private usuarioService:UsuarioService)
+  {
+
+  }
+
+  caracterizacion ={
+    ruta:'',
+    tipoPunto:'',
+    nombrePunto:'',
+    cantRemanente:'',
+    longitud:'',
+    latitud:'',
+    medicion:true,
+    
+
+  }
+
 
   ngOnInit()
   {
@@ -19,4 +38,15 @@ export class CaracterizacionComponent {
     
   }
 
+  enviarCaracterizacion(){
+    
+
+    console.log(this.caracterizacion.nombrePunto);
+
+    this.usuarioService.caracterizacion(this.caracterizacion).subscribe(
+      (data) =>{
+        console.log(data);
+      }
+    )
+  }
 }

@@ -38,11 +38,11 @@
                 
                 <mat-form-field class="full-width input" appearance="outline" style="background-color: white;">
                     
-                    <input  name="email" required matInput placeholder="Digite su usuario">
+                    <input [(ngModel)]="loginData.email"  name="email" required matInput placeholder="Digite su usuario">
                 </mat-form-field>
 
                 <mat-form-field class="full-width input" appearance="outline" style="background-color: white;">
-                    <input  name="password" style="margin-top: 0px;" required type="password" matInput placeholder="Digite su contraseña">
+                    <input [(ngModel)]="loginData.password" name="password" style="margin-top: 0px;" required type="password" matInput placeholder="Digite su contraseña">
                 </mat-form-field>
                 
                  

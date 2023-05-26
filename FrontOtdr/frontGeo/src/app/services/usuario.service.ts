@@ -14,4 +14,10 @@ export class UsuarioService {
   {
     return this.httpClient.post(`${baseUrl}/usuario/agregar`, user);
   }
+
+  public caracterizacion(caracterizacion:any)
+  {
+    return this.httpClient.post(`${baseUrl}/caracterizacion/puntoref-manual-save`, caracterizacion);
+
+  }
 }

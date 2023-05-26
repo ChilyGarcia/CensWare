@@ -10,83 +10,90 @@
 </div>
  -->
 
-<div style=" width:100%; height: 100%;">
-	<div style=" width:700px; display: inline-block; margin-left: 3%;"> 
-    
+<div style="width: 100%; height: 100%">
+  <div style="width: 700px; display: inline-block; margin-left: 3%">
     <app-mapa></app-mapa>
+  </div>
+  <div
+    style="width: 90px; height: 100%; display: inline-block; margin-left: 50%"
+  >
+    <div class="login-box">
+      <h2>Caracterizacion</h2>
 
-    </div>
-	<div style=" width:90px; height: 100%; display:inline-block; margin-left: 50%;">
+      <form (ngSubmit)="formSubmit()" id="form">
+        <div class="user-box">
+          <input
+            [(ngModel)]="caracterizacion.nombrePunto"
+            required
+            matInput
+            placeholder="Digite su nombre"
+            id="nombre"
+            name="nombre"
+          />
+          <label>Nombre</label>
+        </div>
+        <div class="user-box">
+          <input
+            required
+            matInput
+            placeholder="Digite su apellido"
+            id="apellido"
+            [(ngModel)]="caracterizacion.latitud"
+            name="apellido"
+          />
+          <label>Latitud</label>
+        </div>
+        <div class="user-box">
+          <input
+            required
+            matInput
+            placeholder="Digite su email"
+            id="email"
+            [(ngModel)]="caracterizacion.longitud"
+            name="email"
+          />
+          <label>Longitud</label>
+        </div>
+        <div class="user-box">
+          <input
+            required
+            matInput
+            placeholder="Digite su email"
+            id="email"
+            [(ngModel)]="caracterizacion.cantRemanente"
+            name="email"
+          />
+          <label>Remanente</label>
+        </div>
 
-        <div class="login-box" >
-    
-            <h2>Caracterizacion</h2>
-            
-            <form (ngSubmit) ="formSubmit()" id="form">
-              <div class="user-box">
-                <input required      
-                matInput placeholder="Digite su nombre"
-                id="nombre"
-               
-                name="nombre">
-                <label>Nombre</label>
-              </div>
-              <div class="user-box">
-                <input required      
-                matInput placeholder="Digite su apellido"
-                id="apellido"
-                
-                name="apellido">
-                <label>Latitud</label>
-              </div>
-              <div class="user-box">
-                <input required      
-                matInput placeholder="Digite su email"
-                id="email"
-               
-                name="email">
-                <label>Longitud</label>
-              </div>
-              <div class="user-box">
-                <input required      
-                matInput placeholder="Digite su celular"
-                id="celular"
-                
-                name="celular">
-                <label>Distancia punto anterior</label>
-              </div>
-              <div class="user-box">
-                <input required      
-                matInput placeholder="Digite su cedula"
-                id="cedula"
-                
-                name="cedula">
-                <label>Distancia punto posterior</label>
-              </div>
-              <div class="user-box">
-                <input type="password" name="" required="">
-                <label>Remanente</label>
-              </div>
-            
-              <mat-form-field class="selectRol" >
-                <mat-select placeholder="Ruta"  name="opcines">
-                  <mat-option value="CARACT">Ruta1</mat-option>
-                  <mat-option value="ADMIN">Ruta2</mat-option>
-                </mat-select>
-              </mat-form-field>
-        
-              <button mat-raised-button style="margin-left: 38%; margin-top: 10%;">Enviar</button>
-        
-                      
-            </form>
-          </div>
-    
-    
+        <div class="user-box">
+          <input
+            required
+            matInput
+            placeholder="Digite su email"
+            id="email"
+            [(ngModel)]="caracterizacion.tipoPunto"
+            name="email"
+          />
+          <label>Tipo punto</label>
+        </div>
+
+
+
+        <mat-form-field class="selectRol" >
+          <mat-select placeholder="Ruta" name="opcines" [(ngModel)]="caracterizacion.ruta">
+            <mat-option value="CUCUTA - OCAÑA">Cucuta-Ocana</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          (click)="enviarCaracterizacion()"
+          mat-raised-button
+          style="margin-left: 38%; margin-top: 10%"
+        >
+          Enviar
+        </button>
+      </form>
     </div>
+  </div>
 </div>
-
-
-
-
-
-

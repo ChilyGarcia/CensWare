@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
 import { CapturaComponent } from './captura/captura.component';
 import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
+import { authInterceptorProviders } from './services/auth.interceptor';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -45,12 +47,13 @@ import { CaracterizacionComponent } from './caracterizacion/caracterizacion.comp
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
 
     
     
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
