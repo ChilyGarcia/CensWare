@@ -232,7 +232,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         long1 = Math.toRadians(long1);
         long2 = Math.toRadians(long2);
 
-        DecimalFormat decimalFormat = new DecimalFormat("#.#####");
+        DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
         double difLat = lat2 - lat1;
         double difLong = long2 - long1;
@@ -246,6 +246,17 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         double d = kmTierra * c;
 
         double dMetros = d * 1000;
+        String mString="", dMetro = String.valueOf(dMetros);
+
+        for (int i=0; i< dMetro.length(); i++){
+            if (dMetro.charAt(i) == ','){
+                mString += '.';
+            }else {
+                mString += dMetro.charAt(i);
+            }
+        }
+
+        dMetros = Double.parseDouble(mString);
 
         return decimalFormat.format(dMetros);
 

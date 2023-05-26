@@ -2,7 +2,9 @@ package com.otdr.otdr.Controllers;
 
 import com.opencsv.CSVWriter;
 import com.otdr.otdr.Data.Entidades.PuntoReferencia;
+import com.otdr.otdr.Models.Peticiones.CalcularFallaRequest;
 import com.otdr.otdr.Models.Respuestas.PuntoFallo;
+import com.otdr.otdr.Services.FallaService;
 import com.otdr.otdr.Services.PuntoRefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -27,6 +29,8 @@ public class PruebaFallaController {
 
     @Autowired
     private PuntoRefService puntoRefService;
+    @Autowired
+    private FallaService fallaService;
 
     private List<PuntoReferencia> puntosPrueba(){
 
@@ -63,105 +67,10 @@ public class PruebaFallaController {
 
     }
 
-    @PostMapping("/calcular/{dist}")
-    public ResponseEntity<?> calcularFalla (@PathVariable("dist") double distFalla){
-        List<PuntoReferencia> list = puntoRefService.listarPuntosOrd();
+    @PostMapping("/calcular")
+    public ResponseEntity<?> calcularFalla (@RequestBody CalcularFallaRequest fallaRequest){
 
-
-
-        for(PuntoReferencia puntoReferencia:list){
-            System.out.println(puntoReferencia.getNombrePunto());
-        }
-
-        String mensaje;
-
-        double x =0,dist;
-
-        //Datos punto Anterior
-        String nombre = " ";
-        String longitud = " ";
-        String latitud = " ";
-        double kmTotal = 0;
-
-        //Datos punto Actual
-        String nombreAct = " ";
-        String longitudAct = " ";
-        String latitudAct = " ";
-        String remanenteAct ="0";
-        double kmAnterior = 0;
-        double kmTotalAct = 0;
-
-
-        for (PuntoReferencia puntoReferencia : list){
-            x += (Double.parseDouble(puntoReferencia.getKmAnterior())+ Double.parseDouble(puntoReferencia.getCantRemanente()));
-
-            System.out.println(x);
-            if (x >= distFalla){
-
-                nombreAct = String.valueOf(puntoReferencia.getNombrePunto());
-                longitudAct = String.valueOf(puntoReferencia.getLongitud());
-                latitudAct = String.valueOf(puntoReferencia.getLatitud());
-                remanenteAct = puntoReferencia.getCantRemanente();
-                kmTotalAct = Double.parseDouble(puntoReferencia.getKmAnterior()) / 2;
-                kmAnterior = Double.parseDouble(puntoReferencia.getKmAnterior());
-
-                break;
-            }
-            nombre = String.valueOf(puntoReferencia.getNombrePunto());
-            longitud = String.valueOf(puntoReferencia.getLongitud());
-            latitud = String.valueOf(puntoReferencia.getLatitud());
-            kmTotal = x;
-
-        }
-
-        if (distFalla >= (x - Double.parseDouble(remanenteAct)) && distFalla <= x){
-
-            PuntoFallo puntoFallo = new PuntoFallo();
-            puntoFallo.setNombre(nombreAct);
-            puntoFallo.setLongitud(longitudAct);
-            puntoFallo.setLatitud(latitudAct);
-            puntoFallo.setMensaje("El fallo esta en el poste "+nombreAct);
-
-            return new ResponseEntity<>(puntoFallo, HttpStatus.OK);
-
-        }else {
-
-            List<PuntoFallo> puntoFalloList = new ArrayList<>();
-
-            if (kmTotal < distFalla){
-                dist =  distFalla - kmTotal;
-            }else {
-                dist = kmTotal - distFalla;
-            }
-
-            if (dist <= kmTotalAct){
-                mensaje = "EL FALLO ESTA A "+dist+" METROS DEL POSTE "+nombre;
-            }else {
-                mensaje = "EL FALLO ESTA A "+(kmAnterior - dist)+" METROS ANTES DEL POSTE "+nombreAct;
-            }
-
-
-
-
-            PuntoFallo puntoFallo = new PuntoFallo();
-            puntoFallo.setNombre(nombre);
-            puntoFallo.setLongitud(longitud);
-            puntoFallo.setLatitud(latitud);
-            puntoFallo.setMensaje(mensaje);
-
-            PuntoFallo puntoFallo2 = new PuntoFallo();
-            puntoFallo2.setNombre(nombreAct);
-            puntoFallo2.setLongitud(longitudAct);
-            puntoFallo2.setLatitud(latitudAct);
-            puntoFallo2.setMensaje(mensaje);
-
-            puntoFalloList.add(puntoFallo);
-            puntoFalloList.add(puntoFallo2);
-
-            return new ResponseEntity<>(puntoFalloList, HttpStatus.OK);
-        }
-
-
+        return new ResponseEntity<>(fallaService.calcularFallo(fallaRequest.getPath(), fallaRequest.getNombreP()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/sor", produces = MediaType.TEXT_PLAIN_VALUE)
