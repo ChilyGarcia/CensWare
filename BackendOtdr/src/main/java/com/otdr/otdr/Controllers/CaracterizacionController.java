@@ -64,6 +64,7 @@ public class CaracterizacionController {
 
         PuntoRefCrearResponse crearResponse = modelMapper.map(puntoRefDTO, PuntoRefCrearResponse.class);
 
+
         return new ResponseEntity<>(crearResponse, HttpStatus.OK);
 
     }

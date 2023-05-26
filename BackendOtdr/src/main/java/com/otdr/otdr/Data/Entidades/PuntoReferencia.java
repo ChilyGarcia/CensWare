@@ -18,11 +18,10 @@ public class PuntoReferencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String puntoNombre;
-    private String longitud;
-    private String latitud;
+    private Integer nombrePunto;
+    private double longitud;
+    private double latitud;
     private String kmAnterior;
-    private String kmSiguiente;
     private String cantRemanente;
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "tipo_id")
@@ -31,4 +30,5 @@ public class PuntoReferencia implements Serializable {
     @JoinColumn(nullable = false, name = "ruta_id")
     private Ruta ruta;
     private boolean estado = true;
+    private boolean medicion;
 }

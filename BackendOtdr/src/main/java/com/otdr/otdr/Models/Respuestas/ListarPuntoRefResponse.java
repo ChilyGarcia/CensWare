@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-public class PuntoRefCrearResponse {
+public class ListarPuntoRefResponse {
 
-    private String ruta;
     private String tipoPunto;
     private String nombrePunto;
     private String kmAnterior;
     private String cantRemanente;
     private double longitud;
     private double latitud;
+    private boolean medicion;
+
 }

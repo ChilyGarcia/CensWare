@@ -14,12 +14,12 @@ public class CrearPuntoRefDTO implements Serializable {
 
     private String ruta;
     private String tipoPunto;
-    private String puntoNombre;
-    private String kmAnterior;
-    private String kmSiguiente;
+    private Integer nombrePunto;
     private String cantRemanente;
-    private String longitud;
-    private String latitud;
+    private double longitud;
+    private double latitud;
     private String userLogeado;
+    private boolean medicion;
+    private String kmAnterior;
 
 }
