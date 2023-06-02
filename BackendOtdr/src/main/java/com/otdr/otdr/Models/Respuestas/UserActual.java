@@ -12,6 +12,7 @@ import java.util.Collection;
 public class UserActual {
 
     private Collection<? extends GrantedAuthority> Authorities;
+    private String email;
     private boolean maps;
     private boolean caracterizacion;
     private boolean fallo;

@@ -107,6 +107,7 @@ public class AuthenticationController {
         Permisos permisos = permisoService.obtenerPermisosRol(principal.getRol());
 
         UserActual userActual = new UserActual();
+        userActual.setEmail(usuario.getEmail());
         userActual.setAuthorities(usuario.getAuthorities());
         userActual.setMaps(permisos.isMaps());
         userActual.setCaracterizacion(permisos.isCaracterizacion());
