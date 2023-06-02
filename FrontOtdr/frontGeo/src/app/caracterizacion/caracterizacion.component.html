@@ -66,17 +66,12 @@
           <label>Remanente</label>
         </div>
 
-        <div class="user-box">
-          <input
-            required
-            matInput
-            placeholder="Digite su email"
-            id="email"
-            [(ngModel)]="caracterizacion.tipoPunto"
-            name="email"
-          />
-          <label>Tipo punto</label>
-        </div>
+        <mat-form-field class="selectRol" >
+          <mat-select placeholder="Tipo de punto" name="opcines" [(ngModel)]="caracterizacion.tipoPunto">
+            <mat-option value="POSTE">POSTE</mat-option>
+            <mat-option value="ESTACION">ESTACION</mat-option>
+          </mat-select>
+        </mat-form-field>
 
 
 
