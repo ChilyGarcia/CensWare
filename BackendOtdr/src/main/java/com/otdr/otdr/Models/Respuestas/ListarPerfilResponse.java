@@ -9,4 +9,8 @@ import lombok.Setter;
 public class ListarPerfilResponse {
 
     private String perfilNombre;
+    private boolean maps;
+    private boolean caracterizacion;
+    private boolean fallo;
+    private boolean dashboard;
 }

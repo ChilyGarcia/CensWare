@@ -4,6 +4,7 @@ import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Permisos;
 import com.otdr.otdr.Models.Peticiones.PerfilCrearRequest;
 import com.otdr.otdr.Models.Respuestas.ListarPerfilResponse;
+import com.otdr.otdr.Repositories.PermisoRepository;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PerfilService;
@@ -18,6 +19,10 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private PermisoRepository permisoRepository;
+
+
     @Override
     public List<ListarPerfilResponse> listarPerfil() {
 
@@ -30,8 +35,13 @@ public class PerfilServiceImpl implements PerfilService {
         List<ListarPerfilResponse> listarPerfilResponseList = new ArrayList<>();
 
         for (Perfil perfil:perfils){
+            Permisos permiso = permisoRepository.findByNombre(perfil.getRolNombre());
             ListarPerfilResponse perfilResponse = new ListarPerfilResponse();
             perfilResponse.setPerfilNombre(perfil.getRolNombre());
+            perfilResponse.setMaps(permiso.isMaps());
+            perfilResponse.setCaracterizacion(permiso.isCaracterizacion());
+            perfilResponse.setFallo(permiso.isFallo());
+            perfilResponse.setDashboard(permiso.isDashboard());
 
             listarPerfilResponseList.add(perfilResponse);
         }

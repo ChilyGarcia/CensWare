@@ -5,7 +5,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,22 +27,7 @@ public class LeerOTDR {
 
     @GetMapping("/sor")
     public ResponseEntity<String> getSorContent() {
-        // Ruta relativa del archivo .sor
-        String sorFilePath = "C:/Users/ING.Derian/Desktop/otdr13ERR.sor";
-
-        try {
-            // Obtiene la ruta real del archivo .sor
-            Resource resource = resourceLoader.getResource("file:" + sorFilePath);
-            String sorRealPath = resource.getFile().getAbsolutePath();
-
-            // Lee el contenido del archivo .sor
-            String sorContent = readFileContent(sorRealPath);
-
-            // Devuelve el contenido en formato JSON
-            return ResponseEntity.ok(sorContent);
-        } catch (IOException e) {
-            return ResponseEntity.badRequest().body("Error al leer el archivo .sor: " + e.getMessage());
-        }
+        return null;
     }
 
     private String readFileContent(String filePath) throws IOException {
