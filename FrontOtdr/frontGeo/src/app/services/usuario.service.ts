@@ -43,5 +43,10 @@ export class UsuarioService {
     return this.httpClient.get<Puntos[]>(`${baseUrl}/mostrar/puntos-ruta/`+ ruta);
   }
 
+  public crearNuevoPerfil(cuerpo:any)
+  {
+    return this.httpClient.post(`${baseUrl}/usuario/perfil-save`,cuerpo);
+  }
+
   
 }

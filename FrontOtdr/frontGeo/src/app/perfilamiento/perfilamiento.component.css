@@ -144,7 +144,7 @@ nav.main-menu li.active > a,
 
 .fixed_headers {
   
-  width: 940px;
+  width: 1000px;
   table-layout: fixed;
   border-collapse: collapse;
 }
@@ -176,6 +176,10 @@ th:nth-child(4) {
 }
 td:nth-child(5),
 th:nth-child(5) {
+  width: 290px;
+}
+td:nth-child(6),
+th:nth-child(6) {
   width: 290px;
 }
 thead {
@@ -220,5 +224,14 @@ tbody tr:nth-child(even) {
   background-color: #f0f0f0;
   padding: 20px;
 }
+
+.btnNuevoPerfil{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 
 

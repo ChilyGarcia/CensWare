@@ -2,48 +2,62 @@
   <head> </head>
   <body>
     <div class="area">
-
-        
-
-        <div class="container">
-            <div class="contenido">
-
-                <table class="fixed_headers">
-                    <thead>
-                      <tr>
-                        <th>Perfil</th>
-                        <th>Mapa</th>
-                        <th>Caracterizacion</th>
-                        <th>Dashboard</th>
-                        <th>Fallo</th>
-                       
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let perfiles of listaPerfil">
-                        <td>{{perfiles.perfilNombre}}</td>
-                        <td><input type="checkbox" [(ngModel)]="perfiles.maps"></td>
-                        <td><input type="checkbox" [(ngModel)]="perfiles.caracterizacion"/></td>
-                        <td><input type="checkbox" [(ngModel)]="perfiles.dashboard"/></td>
-                        <td><input type="checkbox" [(ngModel)]="perfiles.fallo"/></td>
-                        <td><button (click)="actualizarPerfil(perfiles.perfilNombre, perfiles.maps, perfiles.caracterizacion, perfiles.dashboard, perfiles.fallo)">Actualizar perfil</button></td>
-                       
-                        
-                      </tr>
-
-                      
-                      
-                    </tbody>
-                  </table>
-
-            </div>
-
-
+      <div class="container">
+        <div class="contenido">
+          <table class="fixed_headers">
+            <thead>
+              <tr>
+                <th>Perfil</th>
+                <th>Mapa</th>
+                <th>Caracterizacion</th>
+                <th>Dashboard</th>
+                <th>Fallo</th>
+                <th>Actualizar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let perfiles of listaPerfil">
+                <td>{{ perfiles.perfilNombre }}</td>
+                <td><input type="checkbox" [(ngModel)]="perfiles.maps" /></td>
+                <td>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="perfiles.caracterizacion"
+                  />
+                </td>
+                <td>
+                  <input type="checkbox" [(ngModel)]="perfiles.dashboard" />
+                </td>
+                <td><input type="checkbox" [(ngModel)]="perfiles.fallo" /></td>
+                <td>
+                  <button
+                    mat-raised-button
+                    (click)="
+                      actualizarPerfil(
+                        perfiles.perfilNombre,
+                        perfiles.maps,
+                        perfiles.caracterizacion,
+                        perfiles.dashboard,
+                        perfiles.fallo
+                      )
+                    "
+                  >
+                    Actualizar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-     
-
-
-    
+        <button
+          mat-raised-button
+          (click)="agregarNuevoPerfil()"
+          class="btnNuevoPerfil"
+          style="background-color: rgb(5, 136, 243); color: white;"
+        >
+          Agregar un nuevo perfil
+        </button>
+      </div>
     </div>
     <nav class="main-menu">
       <ul>

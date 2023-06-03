@@ -8,6 +8,7 @@ import { AgregarUsuarioComponent } from './agregar-usuario/agregar-usuario.compo
 import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component';
 import { CapturaComponent } from './captura/captura.component';
 import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
+import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path:'caracterizacion',
     component:CaracterizacionComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'agregar-perfil',
+    component:AgregarPerfilComponent,
     pathMatch:'full'
   }
 

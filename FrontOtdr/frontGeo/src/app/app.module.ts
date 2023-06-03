@@ -22,6 +22,7 @@ import { CapturaComponent } from './captura/captura.component';
 import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
 
 
 
@@ -36,7 +37,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     AgregarUsuarioComponent,
     PerfilamientoComponent,
     CapturaComponent,
-    CaracterizacionComponent
+    CaracterizacionComponent,
+    AgregarPerfilComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Perfilamiento } from '../perfilamiento';
 import { UsuarioService } from '../services/usuario.service';
 import { LoginServiceService } from '../services/login-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfilamiento',
@@ -51,6 +52,15 @@ export class PerfilamientoComponent {
 
     this.usuarioService.actualizarPerfil(this.cuerpo).subscribe((dato) => {
       console.log(dato);
+
+    
+      Swal.fire({
+        title: 'Actualizacion con éxito',
+        text: 'Se han actualizado los permisos',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+
     });
   }
 
@@ -58,5 +68,10 @@ export class PerfilamientoComponent {
     return this.usuarioService.obtenerListaPerfiles().subscribe((dato) => {
       this.listaPerfil = dato;
     });
+  }
+
+  agregarNuevoPerfil() {
+
+    window.location.href = "agregar-perfil";
   }
 }
