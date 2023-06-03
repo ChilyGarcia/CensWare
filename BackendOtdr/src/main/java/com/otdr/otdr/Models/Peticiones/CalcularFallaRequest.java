@@ -9,6 +9,7 @@ import lombok.Setter;
 public class CalcularFallaRequest {
 
     private String path;
+    private String ruta;
     private int nombreP;
 
 }
