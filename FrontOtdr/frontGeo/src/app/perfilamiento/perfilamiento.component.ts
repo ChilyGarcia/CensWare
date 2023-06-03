@@ -9,32 +9,33 @@ import { LoginServiceService } from '../services/login-service.service';
   styleUrls: ['./perfilamiento.component.css'],
 })
 export class PerfilamientoComponent {
+  constructor(
+    public usuarioService: UsuarioService,
+    public loginService: LoginServiceService
+  ) {}
 
-  constructor(public usuarioService: UsuarioService, public loginService:LoginServiceService) {}
+  cuerpo = {
+    perfil: '',
+    maps: true,
+    caracterizacion: true,
+    dashboard: true,
+    fallo: true,
+    userLogeado: 'adminFesc@fesc.edu.co',
+  };
 
-  cuerpo ={
-    perfil:'',
-    maps:true,
-    caracterizacion:true,
-    dashboard:true,
-    fallo:true,
-    userLogeado: 'adminFesc@fesc.edu.co'
-
-  }
- 
   listaPerfil: Perfilamiento[];
-
-  
 
   ngOnInit(): void {
     this.obtenerListaPerfiles();
   }
 
-  actualizarPerfil(perfilNombre:string, maps:boolean, caracterizacion:boolean, dashboard:boolean, fallo:boolean )
-  {
-
-  
-
+  actualizarPerfil(
+    perfilNombre: string,
+    maps: boolean,
+    caracterizacion: boolean,
+    dashboard: boolean,
+    fallo: boolean
+  ) {
     this.cuerpo.perfil = perfilNombre;
     this.cuerpo.maps = maps;
     this.cuerpo.caracterizacion = caracterizacion;
@@ -50,15 +51,12 @@ export class PerfilamientoComponent {
 
     this.usuarioService.actualizarPerfil(this.cuerpo).subscribe((dato) => {
       console.log(dato);
-    })
-    
+    });
   }
 
   obtenerListaPerfiles() {
     return this.usuarioService.obtenerListaPerfiles().subscribe((dato) => {
-
       this.listaPerfil = dato;
-
     });
   }
 }

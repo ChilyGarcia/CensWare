@@ -66,17 +66,23 @@
           <label>Remanente</label>
         </div>
 
-        <mat-form-field class="selectRol" >
-          <mat-select placeholder="Tipo de punto" name="opcines" [(ngModel)]="caracterizacion.tipoPunto">
+        <mat-form-field class="selectRol">
+          <mat-select
+            placeholder="Tipo de punto"
+            name="opcines"
+            [(ngModel)]="caracterizacion.tipoPunto"
+          >
             <mat-option value="POSTE">POSTE</mat-option>
             <mat-option value="ESTACION">ESTACION</mat-option>
           </mat-select>
         </mat-form-field>
 
-
-
-        <mat-form-field class="selectRol" >
-          <mat-select placeholder="Ruta" name="opcines" [(ngModel)]="caracterizacion.ruta">
+        <mat-form-field class="selectRol">
+          <mat-select
+            placeholder="Ruta"
+            name="opcines"
+            [(ngModel)]="caracterizacion.ruta"
+          >
             <mat-option value="CUCUTA - OCAÑA">Cucuta-Ocana</mat-option>
           </mat-select>
         </mat-form-field>
