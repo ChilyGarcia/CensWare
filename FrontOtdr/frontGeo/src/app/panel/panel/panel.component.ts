@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginServiceService } from 'src/app/services/login-service.service';
 
 @Component({
   selector: 'app-panel',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./panel.component.css']
 })
 export class PanelComponent {
+  constructor(public loginService:LoginServiceService)
+  {
+    
+  }
+
+  salir()
+  {
+
+    console.log("aaaaaaaaaaaaaaaaaaa");
+
+  }
 
 }

@@ -9,6 +9,8 @@ import { PerfilamientoComponent } from './perfilamiento/perfilamiento.component'
 import { CapturaComponent } from './captura/captura.component';
 import { CaracterizacionComponent } from './caracterizacion/caracterizacion.component';
 import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
+import { Path } from 'leaflet';
+import { RutasComponent } from './rutas/rutas.component';
 
 const routes: Routes = [
   {
@@ -50,6 +52,11 @@ const routes: Routes = [
   {
     path:'agregar-perfil',
     component:AgregarPerfilComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'rutas',
+    component:RutasComponent,
     pathMatch:'full'
   }
 

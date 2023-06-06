@@ -218,6 +218,12 @@ tbody tr:nth-child(even) {
   justify-content: center;
   align-items: flex-start;
   height: 200vh;
+
+  position: absolute;
+  top: 1%;
+  left: 10%;
+ 
+  padding: 40px;
 }
 
 .contenido {
@@ -227,7 +233,7 @@ tbody tr:nth-child(even) {
 
 .btnNuevoPerfil{
   position: absolute;
-  top: 80%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

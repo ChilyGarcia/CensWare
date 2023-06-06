@@ -48,5 +48,11 @@ export class UsuarioService {
     return this.httpClient.post(`${baseUrl}/usuario/perfil-save`,cuerpo);
   }
 
+  public crearRuta(cuerpo:any)
+  {
+    return this.httpClient.post(`${baseUrl}/caracterizacion/ruta-save`,cuerpo);
+
+  }
+
   
 }

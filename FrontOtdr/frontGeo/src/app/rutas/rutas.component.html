@@ -1,4 +1,3 @@
-
 <app-panel></app-panel>
 
 <link
@@ -91,5 +90,32 @@
 -->
 
 <div class="login-box">
-  <h2> Este es el componente de inicio</h2>
+  <h2>Nueva ruta</h2>
+
+  <form (ngSubmit)="formSubmit()" id="form">
+    <div class="user-box">
+      <input
+        required
+        matInput
+        id="nombre"
+        [(ngModel)]="cuerpo.rutaInicio"
+        name="nombre"
+      />
+      <label>Inicio de la ruta</label>
+    </div>
+    <div class="user-box">
+      <input
+        required
+        matInput
+        id="apellido"
+        [(ngModel)]="cuerpo.rutaFin"
+        name="apellido"
+      />
+      <label>Fin de la ruta</label>
+    </div>
+
+    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
+      Crear la ruta
+    </button>
+  </form>
 </div>
