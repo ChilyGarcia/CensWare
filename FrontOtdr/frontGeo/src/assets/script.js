@@ -9,12 +9,16 @@ function holaMundo(lista) {
   // - - - - - - - - - - - - - - - - - -
 
   //Zoom a la localizacion de interés
+
+  /*
   document
     .getElementById("select-location")
     .addEventListener("change", function (e) {
       let coords = e.target.value.split(",");
       map.flyTo(coords, 18);
     });
+
+    */
   // - - - - - - - - - - - - - - - - - -
 
   //Marcadores para puntos de interes

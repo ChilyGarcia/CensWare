@@ -1,71 +1,56 @@
 <html>
-  <head>  
-     
-  </head>
+  <head> </head>
   <body>
+    <form>
+      <select
+        name="select-location"
+        id="select-location"
+        style="margin-left: 4%"
+        [(ngModel)]="ruta.ruta"
+      >
+        <option value="-1">Seleccione un lugar:</option>
+        <option value="CUCUTA - OCAÑA">Cúcuta - Ocaña</option>
+      </select>
 
-    
-
-    <select name="select-location" id="select-location" style="margin-left: 4%;">
-		<option value="-1">Seleccione un lugar:</option>
-		<option value="7.896091957192708,-72.50229949934618">Punto 1</option>
-		<option value="7.921171184587934,-72.48024101219407">Punto 2</option>	
-		<option value="7.918014240793359,-72.49329659781102">Punto 3</option>
-		<option value="7.888235561076866,-72.49681042061687">Punto 4</option>
-				
-	</select>
-
-    <div id="map" style="margin-left: 5%; width: 95%; height: 100vh;"></div>
+      <button (click)="envioRuta()">Enviar</button>
+    </form>
+    <div id="map" style="margin-left: 5%; width: 95%; height: 100vh"></div>
     <nav class="main-menu">
+      <ul>
+        <li>
+          <a href="/inicio">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text"> Inicio </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="/mapa">
+            <i class="fa fa-globe fa-2x"></i>
+            <span class="nav-text"> Mapa </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="/perfilamiento">
+            <i class="fa fa-comments fa-2x"></i>
+            <span class="nav-text"> Perfilamiento </span>
+          </a>
+        </li>
 
-            <ul>
-                <li>
-                    <a href="/inicio">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                           Inicio
-                        </span>
-                    </a>
-                  
-                </li>
-                <li class="has-subnav">
-                    <a href="/mapa">
-                        <i class="fa fa-globe fa-2x"></i>
-                        <span class="nav-text">
-                            Mapa
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="/perfilamiento">
-                       <i class="fa fa-comments fa-2x"></i>
-                        <span class="nav-text">
-                            Perfilamiento
-                        </span>
-                    </a>
-                    
-                </li>
+        <li>
+          <a href="/agregar-usuarios">
+            <i class="fa fa-book fa-2x"></i>
+            <span class="nav-text"> Agregar usuarios </span>
+          </a>
+        </li>
 
-                <li>
-                    <a href="/agregar-usuarios">
-                        <i class="fa fa-book fa-2x"></i>
-                        <span class="nav-text">
-                           Agregar usuarios
-                        </span>
-                    </a>
-                </li>
+        <li>
+          <a href="/caracterizacion">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text"> Caracterizacion </span>
+          </a>
+        </li>
 
-                <li>
-                    <a href="/caracterizacion">
-                         <i class="fa fa-map-marker fa-2x"></i>
-                         <span class="nav-text">
-                             Caracterizacion
-                         </span>
-                     </a>
-                 </li>
-
-                <!--  
+        <!--  
                 <li class="has-subnav">
                     <a href="#">
                        <i class="fa fa-camera-retro fa-2x"></i>
@@ -110,22 +95,16 @@
                 </li>
 
             -->
-            </ul>
+      </ul>
 
-            <ul class="logout">
-                <li>
-                   <a href="#">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Cerrar Sesión
-                        </span>
-                    </a>
-                </li>  
-            </ul>
-        </nav>
+      <ul class="logout">
+        <li>
+          <a href="#">
+            <i class="fa fa-power-off fa-2x"></i>
+            <span class="nav-text"> Cerrar Sesión </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </body>
-    </html>
-
-    
-
-
+</html>
