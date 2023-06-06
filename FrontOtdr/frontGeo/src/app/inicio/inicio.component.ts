@@ -15,6 +15,11 @@ export class InicioComponent implements OnInit{
   ngOnInit()
   {
     console.log(this.loginService.getUserRol());
+
+
+
+
+
   }
 
   formSubmit()

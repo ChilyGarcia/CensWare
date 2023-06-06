@@ -18,40 +18,40 @@
     <nav class="main-menu">
       <ul>
         <li>
-          <a href="/inicio">
+          <a href="/inicio" *ngIf="permissions.dashboard">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text"> Inicio </span>
           </a>
         </li>
         <li class="has-subnav">
-          <a href="/mapa">
+          <a href="/mapa" *ngIf="permissions.maps">
             <i class="fa fa-globe fa-2x"></i>
             <span class="nav-text"> Mapa </span>
           </a>
         </li>
 
         <li>
-          <a href="/caracterizacion">
+          <a href="/caracterizacion" *ngIf="permissions.caracterizacion">
             <i class="fa fa-map-marker fa-2x"></i>
             <span class="nav-text"> Caracterizacion </span>
           </a>
         </li>
         <li class="has-subnav">
-          <a href="/perfilamiento">
+          <a href="/perfilamiento" *ngIf="loginService.getUserRol() == 'ADMIN'">
             <i class="fa fa-comments fa-2x"></i>
             <span class="nav-text"> Perfilamiento </span>
           </a>
         </li>
 
         <li>
-          <a href="/agregar-usuarios">
+          <a href="/agregar-usuarios" *ngIf="loginService.getUserRol() == 'ADMIN'">
             <i class="fa fa-book fa-2x"></i>
             <span class="nav-text"> Agregar usuarios </span>
           </a>
         </li>
 
         <li>
-          <a href="/rutas">
+          <a href="/rutas" *ngIf="permissions.caracterizacion">
             <i class="fa fa-map-marker fa-2x"></i>
             <span class="nav-text">Rutas</span>
           </a>

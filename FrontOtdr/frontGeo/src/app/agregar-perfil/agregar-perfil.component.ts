@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
+import { LoginServiceService } from '../services/login-service.service';
 
 @Component({
   selector: 'app-agregar-perfil',
@@ -14,7 +15,7 @@ export class AgregarPerfilComponent {
     caracterizacionForm: '',
     falloForm: '',
     dashboardForm: '',
-    userLogeadoForm: 'adminFesc@fesc.edu.co',
+    userLogeadoForm: this.loginService.getUser().email,
   };
 
   cuerpo = {
@@ -23,10 +24,10 @@ export class AgregarPerfilComponent {
     caracterizacion:false,
     fallo:false,
     dashboard:false,
-    userLogeado: 'adminFesc@fesc.edu.co'
+    userLogeado: this.loginService.getUser().email
   }
 
-  constructor(public userService: UsuarioService) {}
+  constructor(public userService: UsuarioService, public loginService:LoginServiceService) {}
 
   formSubmit()
   {

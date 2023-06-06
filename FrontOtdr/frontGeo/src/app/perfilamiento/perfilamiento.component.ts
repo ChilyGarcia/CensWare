@@ -21,7 +21,7 @@ export class PerfilamientoComponent {
     caracterizacion: true,
     dashboard: true,
     fallo: true,
-    userLogeado: 'adminFesc@fesc.edu.co',
+    userLogeado: this.loginService.getUser().email,
   };
 
   listaPerfil: Perfilamiento[];

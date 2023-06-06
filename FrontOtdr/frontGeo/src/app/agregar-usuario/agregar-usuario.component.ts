@@ -28,6 +28,7 @@ export class AgregarUsuarioComponent {
   }
 
   formSubmit() {
+    
     this.usuarioServices.añadirUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
@@ -49,6 +50,8 @@ export class AgregarUsuarioComponent {
         console.log(error);
       }
     );
+
+    
   }
 
   obtenerListaPerfiles() {

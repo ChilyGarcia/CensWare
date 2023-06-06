@@ -144,7 +144,14 @@
       <label>Cedula</label>
     </div>
     <div class="user-box">
-      <input type="password" name="" required="" />
+      <input
+        required
+        matInput
+        type="password"
+        id="pass"
+        [(ngModel)]="user.password"
+        name="password"
+      />
       <label>Password</label>
     </div>
 

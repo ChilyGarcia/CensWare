@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import baseUrl from './helper';
+import { Perfilamiento } from '../perfilamiento';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
 
+  listaPermisos: Perfilamiento[];
   
 
   constructor(private httpClient: HttpClient) { }
@@ -80,6 +82,16 @@ export class LoginServiceService {
   {
     let user = this.getUser();
     return user.authorities[0].authority;
+  }
+
+  public getUserPermissions()
+  {
+
+    
+    let user = this.getUser();
+    return user.maps;
+
+    
   }
 
   public getCurrentUser(loginData:any)

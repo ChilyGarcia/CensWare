@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Perfilamiento } from 'src/app/perfilamiento';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +12,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit{
 
 
+  listaPerfil: Perfilamiento[];
 
   loginData = {
     email: '',
     password: '',
-    rol: "ADMIN",
+    rol: '',
   };
 
-  constructor(private loginService:LoginServiceService, private snack:MatSnackBar)
+  constructor(private loginService:LoginServiceService, private snack:MatSnackBar, private usuarioServices:UsuarioService)
   {
 
   }
 
   ngOnInit(): void {
       console.log("Inicio de la aplicacion");
-      
-
+    
       this.loginService.logout();
+
+      this.obtenerListaPerfiles();
   }
 
 
   formSubmit()
   {
+
+    console.log(this.loginData.email)
+    console.log(this.loginData.password)
+    console.log(this.loginData.rol)
 
     
     this.loginService.generateToken(this.loginData).subscribe(
@@ -62,6 +70,14 @@ export class LoginComponent implements OnInit{
     );
     
 
+  }
+
+  obtenerListaPerfiles() {
+    return this.usuarioServices.obtenerListaPerfiles().subscribe((dato) => {
+      this.listaPerfil = dato;
+
+      console.log(dato);
+    });
   }
 
 }

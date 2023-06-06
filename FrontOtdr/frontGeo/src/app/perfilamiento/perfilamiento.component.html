@@ -9,8 +9,8 @@
             <th>Perfil</th>
             <th>Mapa</th>
             <th>Caracterizacion</th>
-            <th>Dashboard</th>
             <th>Fallo</th>
+            <th>Dashboard</th>
             <th>Actualizar</th>
           </tr>
         </thead>
@@ -19,15 +19,12 @@
             <td>{{ perfiles.perfilNombre }}</td>
             <td><input type="checkbox" [(ngModel)]="perfiles.maps" /></td>
             <td>
-              <input
-                type="checkbox"
-                [(ngModel)]="perfiles.caracterizacion"
-              />
+              <input type="checkbox" [(ngModel)]="perfiles.caracterizacion" />
             </td>
             <td>
-              <input type="checkbox" [(ngModel)]="perfiles.dashboard" />
+              <input type="checkbox" [(ngModel)]="perfiles.fallo" />
             </td>
-            <td><input type="checkbox" [(ngModel)]="perfiles.fallo" /></td>
+            <td><input type="checkbox" [(ngModel)]="perfiles.dashboard" /></td>
             <td>
               <button
                 mat-raised-button
