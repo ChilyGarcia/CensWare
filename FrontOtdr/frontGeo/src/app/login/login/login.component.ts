@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
       console.log("Inicio de la aplicacion");
+      
 
       this.loginService.logout();
   }
