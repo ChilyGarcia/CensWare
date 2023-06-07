@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
+import { Rutas } from '../rutas';
 
 declare function holaMundo(): void;
 
@@ -10,7 +11,13 @@ declare function holaMundo(): void;
   styleUrls: ['./caracterizacion.component.css'],
 })
 export class CaracterizacionComponent {
-  constructor(private usuarioService: UsuarioService, ) {}
+  listaRutas: Rutas[];
+
+  constructor(private usuarioService: UsuarioService) {}
+
+  comprobacion = {
+    medicion: '',
+  };
 
   caracterizacion = {
     ruta: '',
@@ -19,17 +26,27 @@ export class CaracterizacionComponent {
     cantRemanente: '',
     longitud: '',
     latitud: '',
-    medicion: true,
+    medicion: false,
   };
 
   ngOnInit() {
     //holaMundo();
+
+    this.obtenerListaRutas();
   }
 
   formSubmit() {}
 
   enviarCaracterizacion() {
     console.log(this.caracterizacion.nombrePunto);
+
+    if (this.comprobacion.medicion == 'SI') {
+      this.caracterizacion.medicion = true;
+    } else if (this.comprobacion.medicion == 'NO') {
+      this.caracterizacion.medicion = false;
+    }
+
+    console.log(this.caracterizacion.medicion);
 
     this.usuarioService
       .caracterizacion(this.caracterizacion)
@@ -38,7 +55,7 @@ export class CaracterizacionComponent {
           title: 'Caracterización con éxito',
           text: 'Se ha caracterizado un punto con éxito',
           icon: 'success',
-          confirmButtonText: 'Aceptar'
+          confirmButtonText: 'Aceptar',
         }).then((result) => {
           // Verificar si el botón "Aceptar" se ha presionado
           if (result.isConfirmed) {
@@ -46,17 +63,15 @@ export class CaracterizacionComponent {
             this.reload();
           }
         });
-
-    
-
-        
       });
-
-
   }
 
-  reload()
-  {
-    location.reload()
+  obtenerListaRutas() {
+    this.usuarioService.obtenerListaRutas().subscribe((dato) => {
+      this.listaRutas = dato;
+    });
+  }
+  reload() {
+    location.reload();
   }
 }

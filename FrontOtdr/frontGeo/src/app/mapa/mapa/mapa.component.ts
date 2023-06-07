@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 declare function holaMundo(lista: any): void;
 
 import { Puntos } from 'src/app/puntos';
+import { Rutas } from 'src/app/rutas';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,6 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./mapa.component.css'],
 })
 export class MapaComponent {
+  listaRutas: Rutas[];
 
   permissions ={
     maps:false,
@@ -48,6 +50,8 @@ export class MapaComponent {
     console.log(this.permissions.fallo);
     console.log(this.permissions.dashboard);
 
+    this.obtenerListaRutas();
+
   }
 
   envioRuta(){
@@ -77,6 +81,14 @@ export class MapaComponent {
     }).addTo(map);
 
     */
+  }
+
+  obtenerListaRutas() {
+    this.userService.obtenerListaRutas().subscribe((dato) => {
+      this.listaRutas = dato;
+
+      console.log(dato);
+    });
   }
 }
 

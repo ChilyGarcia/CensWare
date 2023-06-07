@@ -79,18 +79,34 @@
 
         <mat-form-field class="selectRol">
           <mat-select
+            placeholder="Poste medicion?"
+            name="opcines"
+            class="custom-select"
+            [(ngModel)]="comprobacion.medicion"
+          >
+            <mat-option value="SI">SI</mat-option>
+            <mat-option value="NO">NO</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="selectRol">
+          <mat-select
             placeholder="Ruta"
             name="opcines"
             [(ngModel)]="caracterizacion.ruta"
           >
-            <mat-option value="CUCUTA - OCAÑA">Cucuta-Ocana</mat-option>
+            <mat-option
+              *ngFor="let opcion of listaRutas"
+              [value]="opcion.rutaNombre"
+              >{{ opcion.rutaNombre }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
 
         <button
           (click)="enviarCaracterizacion()"
           mat-raised-button
-          style="margin-left: 38%; margin-top: 10%"
+          style="margin-left: 38%; margin-top: 2%"
         >
           Enviar
         </button>

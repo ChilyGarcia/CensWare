@@ -8,8 +8,9 @@
         style="margin-left: 4%"
         [(ngModel)]="ruta.ruta"
       >
-        <option value="-1">Seleccione un lugar:</option>
-        <option value="CUCUTA - OCAÑA">Cúcuta - Ocaña</option>
+        <option *ngFor="let opcion of listaRutas" [value]="opcion.rutaNombre">
+          {{ opcion.rutaNombre }}
+        </option>
       </select>
 
       <button (click)="envioRuta()">Enviar</button>
@@ -44,7 +45,10 @@
         </li>
 
         <li>
-          <a href="/agregar-usuarios" *ngIf="loginService.getUserRol() == 'ADMIN'">
+          <a
+            href="/agregar-usuarios"
+            *ngIf="loginService.getUserRol() == 'ADMIN'"
+          >
             <i class="fa fa-book fa-2x"></i>
             <span class="nav-text"> Agregar usuarios </span>
           </a>

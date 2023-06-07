@@ -4,6 +4,7 @@ import baseUrl from './helper';
 import { Observable } from 'rxjs';
 import { Perfilamiento } from '../perfilamiento';
 import { Puntos } from '../puntos';
+import { Rutas } from '../rutas';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,12 @@ export class UsuarioService {
   {
     return this.httpClient.post(`${baseUrl}/caracterizacion/ruta-save`,cuerpo);
 
+  }
+
+  public obtenerListaRutas(): Observable<Rutas[]>
+  {
+
+    return this.httpClient.get<Rutas[]>(`${baseUrl}/caracterizacion/ruta-list`)
   }
 
   
