@@ -38,10 +38,25 @@ function holaMundo(lista) {
 
     */
 
+  var redIcon = L.icon({
+    iconUrl: "/assets/marker-icon-red.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+
   for (let i = 0; i < lista.length; i++) {
-    puntoInteresInfo.push(
-      L.marker([lista[i].latitud, lista[i].longitud]).addTo(map)
-    );
+    if (lista[i].medicion) {
+      puntoInteresInfo.push(
+        L.marker([lista[i].latitud, lista[i].longitud]).addTo(map)
+      );
+    } else {
+      puntoInteresInfo.push(
+        L.marker([lista[i].latitud, lista[i].longitud], {
+          icon: redIcon,
+        }).addTo(map)
+      );
+    }
   }
 
   //Sirve para dar mas informacion acerca de la latitud y longitud de un punto
