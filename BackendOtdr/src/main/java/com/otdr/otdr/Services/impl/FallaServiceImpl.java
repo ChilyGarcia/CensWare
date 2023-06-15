@@ -1,5 +1,6 @@
 package com.otdr.otdr.Services.impl;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.otdr.otdr.Data.Entidades.PuntoReferencia;
 import com.otdr.otdr.Models.Respuestas.PuntoFallo;
 import com.otdr.otdr.Repositories.PuntoFalloRepository;
@@ -7,13 +8,24 @@ import com.otdr.otdr.Repositories.PuntoRefRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.FallaService;
 import org.apache.poi.ss.usermodel.*;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class FallaServiceImpl implements FallaService {
@@ -25,7 +37,7 @@ public class FallaServiceImpl implements FallaService {
 
 
     @Override
-    public List<PuntoFallo> calcularFallo(String file, int nombreP) {
+    public List<PuntoFallo> calcularFallo(String ruta, int nombreP, MultipartFile file) throws IOException {
         List<PuntoReferencia> list = puntoRefRepository.listarPuntos(nombreP);
 
         for(PuntoReferencia puntoReferencia:list){
@@ -33,7 +45,8 @@ public class FallaServiceImpl implements FallaService {
         }
 
         String mensaje;
-        double distFalla = leerDistancia(file);
+        double distFalla = obtenerDist(file);
+
         double x =0,dist;
 
         //Datos punto Anterior
@@ -124,46 +137,46 @@ public class FallaServiceImpl implements FallaService {
 
     }
 
-    public double leerDistancia(String ruta){
+    public Double obtenerDist(MultipartFile file) throws IOException {
 
-        try (Workbook workbook = WorkbookFactory.create(new File(ruta))){
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
+        String dirFile = "file/sor";
 
-            Sheet sheet = workbook.getSheetAt(0);
-            Row row = sheet.getRow(17);
-            Cell cell = row.getCell(6);
-
-            String dCell="", sNum="";
-
-            if (cell != null){
-                dCell = cell.getStringCellValue();
-            }
-            System.out.println(dCell + " ---------");
-
-            for (int i = 0; i<dCell.length(); i++){
-                if (dCell.charAt(i) == ' '){
-                    break;
-                }
-                if (dCell.charAt(i) == ','){
-                    sNum += '.';
-                }else {
-                    sNum += dCell.charAt(i);
-                }
-            }
-            System.out.println(sNum +"-----------");
-
-            double sNumC = Double.parseDouble(sNum);
-            double sNumM = sNumC * 1000;
-
-            System.out.println(sNumM + " ------------");
-
-            return sNumM;
-
-        }catch (Exception e){
-            e.printStackTrace();
-
-            throw new MyException("Error al leer el archivo");
+        Path uploadPath = Paths.get(dirFile);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
         }
 
+        try (InputStream inputStream = file.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {
+            throw new IOException("Could not save image file: " + fileName, ioe);
+        }
+
+        clojure.lang.PersistentHashMap results;
+
+        Boolean verbose = true; // display results on screen
+        results = cljotdr.parse.sorparse("C:\\Users\\ING.Derian\\Desktop\\otdr13ERR.sor", "trace.dat", verbose);
+        // save result in JSON format
+        cljotdr.dump.save_file(results,"C:\\Users\\ING.Derian\\Desktop\\otdr13ERRJS.json", 1);
+        System.out.println("**********************");
+
+        try {
+            String jsonContent = new String(Files.readAllBytes(Paths.get("C:\\Users\\ING.Derian\\Desktop\\otdr13ERRJS.json")));
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(jsonContent);
+            JSONObject KeyEvents = (JSONObject) json.get("KeyEvents");
+            JSONObject sumary = (JSONObject) KeyEvents.get("Summary");
+            Double resultado = (Double) sumary.get("loss end");
+            System.err.println("\n\n\n\n\n\n\n\nFalla km: " + resultado);
+
+            return resultado;
+
+        } catch (IOException | ParseException ex) {
+            ex.printStackTrace();
+            throw new MyException("Error al leer el sor");
+        }
 
     }
 }
