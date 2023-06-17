@@ -21,6 +21,9 @@ public class SolucionFallo implements Serializable {
     private String nombre;
     private String fecha;
     private String descSolucion;
+
+    @Column(name = "rem_utilizado")
+    private String remUtilizado;
     private String puntoRef2;
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "usuario_id")

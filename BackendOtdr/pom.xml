@@ -92,9 +92,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.otdrWare</groupId>
-			<artifactId>otdrConverter</artifactId>
-			<version>1.1.0</version>
+			<groupId>com.censWare</groupId>
+			<artifactId>censConverter</artifactId>
+			<version>1.1.8</version>
 		</dependency>
 
 		<dependency>

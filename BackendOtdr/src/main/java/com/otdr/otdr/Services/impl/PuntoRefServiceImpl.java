@@ -79,7 +79,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         String kmAnt;
 
         if (puntoRefDTO.getNombrePunto() > 1){
-            PuntoReferencia puntoAnt = puntoRefRepository.findByNombrePunto(puntoRefDTO.getNombrePunto() - 1);
+            PuntoReferencia puntoAnt = puntoRefRepository.findByNombrePunto(puntoRefDTO.getNombrePunto() - 1, ruta.getId());
             double lat1 = puntoAnt.getLatitud();
             double long1 = puntoAnt.getLongitud();
             double lat2 = puntoRefDTO.getLatitud();
@@ -91,7 +91,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         }
 
 
-        List<PuntoReferencia> puntoReferenciaList = puntoRefRepository.listarPuntos(puntoRefDTO.getNombrePunto());
+        List<PuntoReferencia> puntoReferenciaList = puntoRefRepository.listarPuntos(puntoRefDTO.getNombrePunto(), ruta.getId());
         int cont =0, name = puntoRefDTO.getNombrePunto();
 
         if (!puntoReferenciaList.isEmpty()){
@@ -154,7 +154,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
                 }
                 cellIndex++;
             }
-            puntoReferencias.add(configPunto(tipo, long2, lat2, med, nombre, cantR));
+            puntoReferencias.add(configPunto(tipo, long2, lat2, med, nombre, cantR, ruta));
         }
 
         workbook.close();
@@ -246,23 +246,25 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         double d = kmTierra * c;
 
         double dMetros = d * 1000;
-        String mString="", dMetro = String.valueOf(dMetros);
+        String mString="", dMetro = decimalFormat.format(dMetros);
 
         for (int i=0; i< dMetro.length(); i++){
+
             if (dMetro.charAt(i) == ','){
                 mString += '.';
             }else {
                 mString += dMetro.charAt(i);
             }
+
         }
-
         dMetros = Double.parseDouble(mString);
+        double dFinal = dMetros * 1000;
 
-        return decimalFormat.format(dMetros);
+        return String.valueOf(dFinal);
 
     }
 
-    public PuntoReferencia configPunto(String tipo,String longt,String lat,String med,int nombre,int cantR){
+    public PuntoReferencia configPunto(String tipo,String longt,String lat,String med,int nombre,int cantR, Ruta ruta){
 
         TipoPunto tipoPunto = puntoRepository.findByTipoNombre(tipo);
         String cantRem = String.valueOf(cantR);
@@ -280,7 +282,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         }
 
         if (nombre > 1){
-            PuntoReferencia puntoAnt = puntoRefRepository.findByNombrePunto(nombre - 1);
+            PuntoReferencia puntoAnt = puntoRefRepository.findByNombrePunto(nombre - 1, ruta.getId());
             double lat1 = puntoAnt.getLatitud();
             double long1 = puntoAnt.getLongitud();
 
@@ -293,6 +295,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         puntoReferencia.setCantRemanente(cantRem);
         puntoReferencia.setLongitud(long2);
         puntoReferencia.setLatitud(lat2);
+        puntoReferencia.setKmAnterior(kmAnt);
         puntoReferencia.setMedicion(medicion);
 
         return puntoReferencia;

@@ -2,9 +2,11 @@ package com.otdr.otdr.Services.impl;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.otdr.otdr.Data.Entidades.PuntoReferencia;
+import com.otdr.otdr.Data.Entidades.Ruta;
 import com.otdr.otdr.Models.Respuestas.PuntoFallo;
 import com.otdr.otdr.Repositories.PuntoFalloRepository;
 import com.otdr.otdr.Repositories.PuntoRefRepository;
+import com.otdr.otdr.Repositories.RutaRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.FallaService;
 import org.apache.poi.ss.usermodel.*;
@@ -34,11 +36,14 @@ public class FallaServiceImpl implements FallaService {
     private PuntoRefRepository puntoRefRepository;
     @Autowired
     private PuntoFalloRepository falloRepository;
+    @Autowired
+    private RutaRepository rutaRepository;
 
 
     @Override
     public List<PuntoFallo> calcularFallo(String ruta, int nombreP, MultipartFile file) throws IOException {
-        List<PuntoReferencia> list = puntoRefRepository.listarPuntos(nombreP);
+        Ruta ruta2 = rutaRepository.findByRutaNombre(ruta);
+        List<PuntoReferencia> list = puntoRefRepository.listarPuntos(nombreP, ruta2.getId());
 
         for(PuntoReferencia puntoReferencia:list){
             System.out.println(puntoReferencia.getNombrePunto());
@@ -96,8 +101,6 @@ public class FallaServiceImpl implements FallaService {
 
             puntoFalloList.add(puntoFallo);
 
-            return puntoFalloList;
-
         }else {
 
 
@@ -132,8 +135,8 @@ public class FallaServiceImpl implements FallaService {
             puntoFalloList.add(puntoFallo);
             puntoFalloList.add(puntoFallo2);
 
-            return puntoFalloList;
         }
+        return puntoFalloList;
 
     }
 
@@ -157,7 +160,7 @@ public class FallaServiceImpl implements FallaService {
         clojure.lang.PersistentHashMap results;
 
         Boolean verbose = true; // display results on screen
-        results = cljotdr.parse.sorparse("C:\\Users\\ING.Derian\\Desktop\\otdr13ERR.sor", "trace.dat", verbose);
+        results = cljotdr.parse.sorparse(dirFile + "/"+fileName, "trace.dat", verbose);
         // save result in JSON format
         cljotdr.dump.save_file(results,"C:\\Users\\ING.Derian\\Desktop\\otdr13ERRJS.json", 1);
         System.out.println("**********************");

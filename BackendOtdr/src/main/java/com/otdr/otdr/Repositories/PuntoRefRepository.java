@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface PuntoRefRepository extends JpaRepository<PuntoReferencia, Long> {
 
-    public PuntoReferencia findByNombrePunto(Integer nombre);
+    @Query(nativeQuery = true,
+    value = "SELECT * FROM punto_ref p WHERE p.nombre_punto= :nombre AND p.ruta_id= :ruta")
+    public PuntoReferencia findByNombrePunto(Integer nombre, long ruta);
 
     @Query(nativeQuery = true,
     value = "SELECT * FROM punto_ref p WHERE p.ruta_id = :ruta ORDER BY p.nombre_punto ASC")
@@ -21,6 +23,6 @@ public interface PuntoRefRepository extends JpaRepository<PuntoReferencia, Long>
     public List<PuntoReferencia> listarPuntosOrdenados();
 
     @Query(nativeQuery = true,
-    value = "SELECT * FROM punto_ref p WHERE p.nombre_punto >= :nombre ORDER BY p.nombre_punto ASC")
-    public List<PuntoReferencia> listarPuntos(int nombre);
+    value = "SELECT * FROM punto_ref p WHERE p.nombre_punto >= :nombre AND p.ruta_id= :ruta ORDER BY p.nombre_punto ASC")
+    public List<PuntoReferencia> listarPuntos(int nombre, long ruta);
 }
