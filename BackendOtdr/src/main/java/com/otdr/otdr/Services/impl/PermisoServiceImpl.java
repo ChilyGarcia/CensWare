@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -61,6 +63,15 @@ public class PermisoServiceImpl implements PermisoService {
         perfil.setPermisos(permisos);
 
         Perfil perfil1 = rolRepository.save(perfil);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        String fecha = simpleDateFormat.format(calendar.getTime());
+        Usuario usuario = usuarioRepository.findByEmail(permisosDTO.getUserLogeado());
+
+        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+        usuarioService.auditoriaGestion("MODIFICO","Modifico los permisos del perfil: "+perfil1.getRolNombre(),fecha,usuario);
+
 
     }
 

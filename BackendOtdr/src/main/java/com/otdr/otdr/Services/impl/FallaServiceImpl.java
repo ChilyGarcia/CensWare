@@ -1,15 +1,11 @@
 package com.otdr.otdr.Services.impl;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.otdr.otdr.Data.Entidades.PuntoReferencia;
-import com.otdr.otdr.Data.Entidades.Ruta;
+import com.otdr.otdr.Data.Entidades.*;
 import com.otdr.otdr.Models.Respuestas.PuntoFallo;
-import com.otdr.otdr.Repositories.PuntoFalloRepository;
-import com.otdr.otdr.Repositories.PuntoRefRepository;
-import com.otdr.otdr.Repositories.RutaRepository;
+import com.otdr.otdr.Repositories.*;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.FallaService;
-import org.apache.poi.ss.usermodel.*;
+import com.otdr.otdr.Shared.SolucionFalloDTO;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FallaServiceImpl implements FallaService {
@@ -35,9 +29,15 @@ public class FallaServiceImpl implements FallaService {
     @Autowired
     private PuntoRefRepository puntoRefRepository;
     @Autowired
-    private PuntoFalloRepository falloRepository;
+    private FalloRepository falloRepository;
+    @Autowired
+    private SolucionFalloRepository solucionFalloRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private RutaRepository rutaRepository;
+    @Autowired
+    private AuditoriaRepository auditoriaRepository;
 
 
     @Override
@@ -118,8 +118,6 @@ public class FallaServiceImpl implements FallaService {
             }
 
 
-
-
             PuntoFallo puntoFallo = new PuntoFallo();
             puntoFallo.setNombre(nombre);
             puntoFallo.setLongitud(longitud);
@@ -138,6 +136,63 @@ public class FallaServiceImpl implements FallaService {
         }
         return puntoFalloList;
 
+    }
+
+    @Override
+    public String saveSolucionFallo(SolucionFalloDTO solucionFalloDTO) {
+
+        Usuario usuario = usuarioRepository.findByEmail(solucionFalloDTO.getEmail());
+        Ruta ruta = rutaRepository.findByRutaNombre(solucionFalloDTO.getRuta());
+        Fallo fallo = falloRepository.findByFalloNombre(solucionFalloDTO.getTFallo());
+
+        if (ruta == null){
+            throw new MyException("La ruta no existe");
+        } else if (usuario == null) {
+            throw new MyException("El usuario no esta registrado");
+        } else if (fallo == null) {
+            throw new MyException("El tipo de fallo no esta especificado");
+        }
+
+        PuntoReferencia punto1 = puntoRefRepository.findByNombrePunto(solucionFalloDTO.getNombreP(), ruta.getId());
+        PuntoReferencia punto2 = puntoRefRepository.findByNombrePunto(solucionFalloDTO.getNombreP() + 1, ruta.getId());
+        String nRem;
+        if (!(Double.parseDouble(punto1.getCantRemanente()) < Double.parseDouble(solucionFalloDTO.getRemutilizado()))){
+            throw new MyException("El remanente utilizado es mayor a la cantidad que estaba registrada");
+        }else {
+            nRem = String.valueOf(Double.parseDouble(punto1.getCantRemanente()) - Double.parseDouble(solucionFalloDTO.getRemutilizado()));
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String fecha = simpleDateFormat.format(calendar.getTime());
+
+
+        SolucionFallo solucionFallo = new SolucionFallo();
+        solucionFallo.setDescSolucion(solucionFalloDTO.getDescripcion());
+        solucionFallo.setMensaje(solucionFalloDTO.getMensaje());
+        solucionFallo.setRemUtilizado(solucionFalloDTO.getRemutilizado());
+        solucionFallo.setFecha(fecha);
+        solucionFallo.setUsuario(usuario);
+        solucionFallo.setFallo(fallo);
+        solucionFallo.setRuta(ruta);
+        solucionFallo.setPuntoReferencia(punto1);
+        solucionFallo.setPuntoReferencia(punto2);
+
+        solucionFalloRepository.save(solucionFallo);
+
+        punto1.setCantRemanente(nRem);
+        puntoRefRepository.save(punto1);
+
+        Auditoria auditoria = new Auditoria();
+        auditoria.setTitulo(fallo.getFalloNombre());
+        auditoria.setRuta(ruta.getRutaNombre());
+        auditoria.setFecha(solucionFallo.getFecha());
+        auditoria.setSolucionFallo(solucionFallo);
+
+        auditoriaRepository.save(auditoria);
+
+        return "Se registro la solucion del fallo";
     }
 
     public Double obtenerDist(MultipartFile file) throws IOException {

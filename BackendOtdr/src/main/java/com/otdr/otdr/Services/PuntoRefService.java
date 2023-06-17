@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface PuntoRefService {
 
-    public void guardarArchivo(MultipartFile file, String rutaNombre) throws IOException;
+    public void guardarArchivo(MultipartFile file, String rutaNombre, String userLogeado) throws IOException;
     public CrearPuntoRefDTO guardarManual(CrearPuntoRefDTO puntoRefDTO);
 
     public CrearRutaDTO guardarRuta(CrearRutaDTO crearRutaDTO);

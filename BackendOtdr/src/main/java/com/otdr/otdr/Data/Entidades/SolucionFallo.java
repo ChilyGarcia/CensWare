@@ -18,13 +18,11 @@ public class SolucionFallo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
     private String fecha;
     private String descSolucion;
-
+    private String mensaje;
     @Column(name = "rem_utilizado")
     private String remUtilizado;
-    private String puntoRef2;
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "usuario_id")
     private Usuario usuario;
@@ -32,7 +30,13 @@ public class SolucionFallo implements Serializable {
     @JoinColumn(nullable = false, name = "punto_ref1")
     private PuntoReferencia puntoReferencia;
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, name = "punto_ref2")
+    private PuntoReferencia puntoRef2;
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "fallo_id")
     private Fallo fallo;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, name = "ruta_id")
+    private Ruta ruta;
 
 }

@@ -3,10 +3,12 @@ package com.otdr.otdr.Services.impl;
 import com.otdr.otdr.Data.Entidades.PuntoReferencia;
 import com.otdr.otdr.Data.Entidades.Ruta;
 import com.otdr.otdr.Data.Entidades.TipoPunto;
+import com.otdr.otdr.Data.Entidades.Usuario;
 import com.otdr.otdr.Models.Respuestas.ListarPuntoRefResponse;
 import com.otdr.otdr.Repositories.PuntoRefRepository;
 import com.otdr.otdr.Repositories.RutaRepository;
 import com.otdr.otdr.Repositories.TipoPuntoRepository;
+import com.otdr.otdr.Repositories.UsuarioRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PuntoRefService;
 import com.otdr.otdr.Shared.CrearPuntoRefDTO;
@@ -25,10 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class PuntoRefServiceImpl implements PuntoRefService {
@@ -37,6 +37,8 @@ public class PuntoRefServiceImpl implements PuntoRefService {
     @Autowired
     private RutaRepository rutaRepository;
     @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
     private TipoPuntoRepository puntoRepository;
     @Autowired
     private PuntoRefRepository puntoRefRepository;
@@ -44,23 +46,37 @@ public class PuntoRefServiceImpl implements PuntoRefService {
     private ModelMapper modelMapper;
 
     @Override
-    public void guardarArchivo(MultipartFile file, String rutaNombre) throws IOException {
+    public void guardarArchivo(MultipartFile file, String rutaNombre, String userLogeado) {
 
         Ruta ruta = rutaRepository.findByRutaNombre(rutaNombre);
         if (ruta == null){
             throw new MyException("La ruta no existe");
         }
+        try {
+            List<PuntoReferencia> puntoReferenciaList = leerExcel(file.getInputStream(), ruta);
+            for (PuntoReferencia punto : puntoReferenciaList){
+                CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
+                puntoRefDTO.setRuta(punto.getRuta().getRutaNombre());
+                puntoRefDTO.setTipoPunto(punto.getTipoPunto().getTipoNombre());
 
-        List<PuntoReferencia> puntoReferenciaList = leerExcel(file.getInputStream(), ruta);
+                guardarManual(puntoRefDTO);
+            }
+            System.out.println("Se caracterizo los postes");
 
-        for (PuntoReferencia punto : puntoReferenciaList){
-            CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
-            puntoRefDTO.setRuta(punto.getRuta().getRutaNombre());
-            puntoRefDTO.setTipoPunto(punto.getTipoPunto().getTipoNombre());
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+            String fecha = simpleDateFormat.format(calendar.getTime());
+            Usuario usuario = usuarioRepository.findByEmail(userLogeado);
 
-            guardarManual(puntoRefDTO);
+            UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+            usuarioService.auditoriaGestion("CARACTERIZO","Caracterizo por el excel puntos en la ruta: "+ruta.getRutaNombre(),fecha,usuario);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new MyException("Error al leer el excel");
         }
-        System.out.println("Se caracterizo los postes");
+
+
     }
 
     @Override
@@ -123,6 +139,15 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         crearPuntoRefDTO.setRuta(puntoReferencia1.getRuta().getRutaNombre());
         crearPuntoRefDTO.setKmAnterior(puntoReferencia1.getKmAnterior());
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        String fecha = simpleDateFormat.format(calendar.getTime());
+        Usuario usuario = usuarioRepository.findByEmail(puntoRefDTO.getUserLogeado());
+
+        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+        usuarioService.auditoriaGestion("CARACTERIZO","Caracterizo el punto: "+crearPuntoRefDTO.getNombrePunto()+" de la ruta: "+crearPuntoRefDTO.getRuta(),fecha,usuario);
+
+
         return crearPuntoRefDTO;
     }
 
@@ -179,6 +204,15 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         ruta.setRutaNombre(rutaM);
 
         rutaRepository.save(ruta);
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        String fecha = simpleDateFormat.format(calendar.getTime());
+        Usuario usuario = usuarioRepository.findByEmail(rutaDTO.getUserLogeado());
+
+        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+        usuarioService.auditoriaGestion("CREO","Creo la ruta: "+ruta.getRutaNombre(),fecha,usuario);
+
 
         return modelMapper.map(ruta, CrearRutaDTO.class);
     }

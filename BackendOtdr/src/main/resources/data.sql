@@ -9,3 +9,5 @@ INSERT IGNORE INTO perfiles(id, rol_nombre, permiso_id) VALUES (1, "ADMIN", 1),
                                              (4, "CUADRILLA", 4);
 
 INSERT IGNORE INTO tipo_punto(id, tipo_nombre) VALUES (1,"ESTACION"),(2,"POSTE");
+
+INSERT IGNORE INTO fallo(id, fallo_nombre) VALUES (1, "FIBRA ROTA"), (2, "FIBRA QUEMADA");

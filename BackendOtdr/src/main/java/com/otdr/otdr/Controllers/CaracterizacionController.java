@@ -40,12 +40,13 @@ public class CaracterizacionController {
         return new ResponseEntity<>(rutaCrearResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/puntoref-auto-save/{ruta}")
-    public ResponseEntity<?> guardarPuntoRef(@RequestParam("file")MultipartFile file, @PathVariable("ruta") String ruta){
+    @PostMapping("/puntoref-auto-save/{ruta}/{email}")
+    public ResponseEntity<?> guardarPuntoRef(@RequestParam("file")MultipartFile file, @PathVariable("ruta") String ruta,
+                                             @PathVariable("email")String email){
 
         try {
 
-            puntoRefService.guardarArchivo(file, ruta);
+            puntoRefService.guardarArchivo(file, ruta, email);
 
             return new ResponseEntity<>(new Mensaje("Datos guardados"), HttpStatus.OK);
 

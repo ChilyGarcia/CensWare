@@ -1,7 +1,10 @@
 package com.otdr.otdr.Services.impl;
 
+import com.otdr.otdr.Data.Entidades.AuditoriaGestion;
 import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Usuario;
+import com.otdr.otdr.Models.Respuestas.AuditoriaGestionResponse;
+import com.otdr.otdr.Repositories.AuditoriaGestionRepository;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Repositories.UsuarioRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
@@ -12,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -25,6 +31,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private static AuditoriaGestionRepository gestionRepository;
 
     @Override
     public List<Usuario> listarUsuario() {
@@ -40,6 +48,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public CrearUsuarioDTO guardarUsuario(CrearUsuarioDTO crearUsuarioDTO) {
 
         Usuario usuario = usuarioRepository.findByEmail(crearUsuarioDTO.getEmail());
+        Usuario userL = usuarioRepository.findByEmail(crearUsuarioDTO.getUserLogeado());
         if(usuario != null){
             throw new MyException("Ya existe un usuario registrado con este correo");
         }
@@ -58,6 +67,64 @@ public class UsuarioServiceImpl implements UsuarioService {
         CrearUsuarioDTO usuarioDTO = modelMapper.map(usuarioSave, CrearUsuarioDTO.class);
         usuarioDTO.setPerfil(usuarioSave.getRoles().getRolNombre());
 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = simpleDateFormat.format(calendar.getTime());
+
+        auditoriaGestion("REGISTRO","Registro al usuario: "+usuarioSave.getNombre()+" "+usuarioSave.getApellido()+" C.C: "+usuarioSave.getCedula(),fecha,userL);
+
         return usuarioDTO;
+    }
+
+    @Override
+    public List<AuditoriaGestionResponse> allAuditorias() {
+
+        List<AuditoriaGestion> auditoriaGestions = gestionRepository.allAuditoria();
+        List<AuditoriaGestionResponse> gestionResponse = new ArrayList<>();
+
+        for (AuditoriaGestion auditoria: auditoriaGestions){
+            AuditoriaGestionResponse gestionResponse1 = new AuditoriaGestionResponse();
+            gestionResponse1.setTitulo(auditoria.getTitulo());
+            gestionResponse1.setDesc(auditoria.getDescripcion());
+            gestionResponse1.setFecha(auditoria.getFecha());
+            gestionResponse1.setNombreUser(auditoria.getUser().getNombre()+" "+auditoria.getUser().getApellido());
+            gestionResponse1.setCedula(auditoria.getUser().getCedula());
+
+            gestionResponse.add(gestionResponse1);
+        }
+
+        return gestionResponse;
+    }
+
+    @Override
+    public List<AuditoriaGestionResponse> auditoriaTitulo(String titulo) {
+
+        List<AuditoriaGestion> auditoriaGestions = gestionRepository.auditoriaTitulo(titulo);
+        List<AuditoriaGestionResponse> gestionResponse = new ArrayList<>();
+
+        for (AuditoriaGestion auditoria: auditoriaGestions){
+            AuditoriaGestionResponse gestionResponse1 = new AuditoriaGestionResponse();
+            gestionResponse1.setTitulo(auditoria.getTitulo());
+            gestionResponse1.setDesc(auditoria.getDescripcion());
+            gestionResponse1.setFecha(auditoria.getFecha());
+            gestionResponse1.setNombreUser(auditoria.getUser().getNombre()+" "+auditoria.getUser().getApellido());
+            gestionResponse1.setCedula(auditoria.getUser().getCedula());
+
+            gestionResponse.add(gestionResponse1);
+        }
+
+        return gestionResponse;
+    }
+
+    public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
+
+        AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
+        auditoriaGestion.setTitulo(titulo);
+        auditoriaGestion.setDescripcion(desc);
+        auditoriaGestion.setFecha(fecha);
+        auditoriaGestion.setUser(user);
+
+        gestionRepository.save(auditoriaGestion);
+
     }
 }

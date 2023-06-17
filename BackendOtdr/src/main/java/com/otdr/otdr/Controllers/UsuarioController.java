@@ -68,4 +68,14 @@ public class UsuarioController {
 
         return new ResponseEntity<>(new Mensaje("Se creo el perfil exitosamente"),HttpStatus.OK);
     }
+
+    @GetMapping("/auditoria-gestion")
+    public ResponseEntity<?> allAuditoriaGestion (){
+        return new ResponseEntity<>(usuarioService.allAuditorias(),HttpStatus.OK);
+    }
+
+    @GetMapping("/auditoria-gestion/{titulo}")
+    public ResponseEntity<?> auditoriaTitulo (@PathVariable("titulo")String titulo){
+        return new ResponseEntity<>(usuarioService.auditoriaTitulo(titulo),HttpStatus.OK);
+    }
 }

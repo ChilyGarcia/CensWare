@@ -2,16 +2,20 @@ package com.otdr.otdr.Services.impl;
 
 import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Permisos;
+import com.otdr.otdr.Data.Entidades.Usuario;
 import com.otdr.otdr.Models.Peticiones.PerfilCrearRequest;
 import com.otdr.otdr.Models.Respuestas.ListarPerfilResponse;
 import com.otdr.otdr.Repositories.PermisoRepository;
 import com.otdr.otdr.Repositories.RolRepository;
+import com.otdr.otdr.Repositories.UsuarioRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -21,6 +25,8 @@ public class PerfilServiceImpl implements PerfilService {
     private RolRepository rolRepository;
     @Autowired
     private PermisoRepository permisoRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
 
     @Override
@@ -73,6 +79,13 @@ public class PerfilServiceImpl implements PerfilService {
                 perfilCrearRequest.isDashboard()));
 
         rolRepository.save(perfilNuevo);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        String fecha = simpleDateFormat.format(calendar.getTime());
+        Usuario usuario = usuarioRepository.findByEmail(perfilCrearRequest.getUserLogeado());
+
+        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
+        usuarioService.auditoriaGestion("CREO","Creo el perfil: "+perfilNuevo.getRolNombre(),fecha,usuario);
 
     }
 }
