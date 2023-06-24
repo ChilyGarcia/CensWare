@@ -12,6 +12,7 @@ import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.componen
 import { Path } from 'leaflet';
 import { RutasComponent } from './rutas/rutas.component';
 import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
+import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
 
 const routes: Routes = [
   {
@@ -63,6 +64,11 @@ const routes: Routes = [
   {
     path:'registro-fallas',
     component:RegistroFallaComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'auditorias-gestion',
+    component:AuditoriasGestionComponent,
     pathMatch:'full'
   }
 

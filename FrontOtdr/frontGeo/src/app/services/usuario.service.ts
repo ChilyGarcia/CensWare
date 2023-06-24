@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Perfilamiento } from '../perfilamiento';
 import { Puntos } from '../puntos';
 import { Rutas } from '../rutas';
+import { AuditoriasGestion } from '../auditorias-gestion';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,14 @@ export class UsuarioService {
 
     return this.httpClient.get<Rutas[]>(`${baseUrl}/caracterizacion/ruta-list`)
   }
+
+
+  public obtenerListaAuditoriasGestion(): Observable<AuditoriasGestion[]>
+  {
+
+    return this.httpClient.get<AuditoriasGestion[]>(`${baseUrl}/usuario/perfiles-list`)
+  }
+  
 
 
 

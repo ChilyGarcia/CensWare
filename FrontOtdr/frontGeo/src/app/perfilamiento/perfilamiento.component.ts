@@ -53,14 +53,12 @@ export class PerfilamientoComponent {
     this.usuarioService.actualizarPerfil(this.cuerpo).subscribe((dato) => {
       console.log(dato);
 
-    
       Swal.fire({
         title: 'Actualizacion con éxito',
         text: 'Se han actualizado los permisos',
         icon: 'success',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
       });
-
     });
   }
 
@@ -71,7 +69,6 @@ export class PerfilamientoComponent {
   }
 
   agregarNuevoPerfil() {
-
-    window.location.href = "agregar-perfil";
+    window.location.href = 'agregar-perfil';
   }
 }

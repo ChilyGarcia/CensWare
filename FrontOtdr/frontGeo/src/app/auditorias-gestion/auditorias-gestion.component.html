@@ -1,0 +1,30 @@
+<app-panel></app-panel>
+
+<div class="area">
+  <div class="container">
+    <div class="contenido">
+      <table class="fixed_headers">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Cédula</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let auditorias of listaAuditorias">
+            <td>{{ auditorias.titulo }}</td>
+            <td>{{ auditorias.desc }}</td>
+            <td>{{ auditorias.titulo }}</td>
+            <td>{{ auditorias.nombreUser }}</td>
+            <td>{{ auditorias.cedula }}</td>
+            
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

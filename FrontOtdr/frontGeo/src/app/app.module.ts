@@ -25,6 +25,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
 import { RutasComponent } from './rutas/rutas.component';
 import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
+import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
 
 
 
@@ -42,7 +43,8 @@ import { RegistroFallaComponent } from './registro-falla/registro-falla.componen
     CaracterizacionComponent,
     AgregarPerfilComponent,
     RutasComponent,
-    RegistroFallaComponent
+    RegistroFallaComponent,
+    AuditoriasGestionComponent
   ],
   imports: [
     BrowserModule,
