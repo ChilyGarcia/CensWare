@@ -2,8 +2,6 @@
 
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
 
-
-
 .fa-2x {
   font-size: 2em;
 }
@@ -142,7 +140,10 @@ nav.main-menu li.active > a,
       format("woff");
 }
 
+
+
 .fixed_headers {
+  
   width: 1000px;
   table-layout: fixed;
   border-collapse: collapse;
@@ -221,7 +222,7 @@ tbody tr:nth-child(even) {
   position: absolute;
   top: 1%;
   left: 10%;
-
+ 
   padding: 40px;
 }
 
@@ -230,9 +231,14 @@ tbody tr:nth-child(even) {
   padding: 20px;
 }
 
-.btnNuevoPerfil {
+.btnNuevoPerfil{
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+
+
+
