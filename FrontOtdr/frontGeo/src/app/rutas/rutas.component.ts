@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { LoginServiceService } from '../services/login-service.service';
 import Swal from 'sweetalert2';
@@ -9,7 +9,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./rutas.component.css'],
 })
 export class RutasComponent {
-  constructor(public LoginService: LoginServiceService, public userService:UsuarioService) {}
+  @ViewChild('formRef') formRef: any;
+
+  constructor(
+    public LoginService: LoginServiceService,
+    public userService: UsuarioService
+  ) {}
 
   cuerpo = {
     rutaInicio: '',
@@ -18,18 +23,17 @@ export class RutasComponent {
   };
 
   formSubmit() {
-
-    this.userService.crearRuta(this.cuerpo).subscribe((dato) =>{
+    this.userService.crearRuta(this.cuerpo).subscribe((dato) => {
       console.log(dato);
 
       Swal.fire({
         title: 'Ruta creada con éxito',
         text: 'Se ha creado la ruta correctamente',
         icon: 'success',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Aceptar',
       });
-    })
+    });
 
-
+    this.formRef.resetForm();
   }
 }

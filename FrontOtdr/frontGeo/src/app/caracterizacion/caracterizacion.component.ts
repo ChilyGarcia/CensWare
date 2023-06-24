@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { Rutas } from '../rutas';
@@ -11,6 +11,8 @@ declare function holaMundo(): void;
   styleUrls: ['./caracterizacion.component.css'],
 })
 export class CaracterizacionComponent {
+  @ViewChild('formRef') formRef: any;
+
   listaRutas: Rutas[];
 
   constructor(private usuarioService: UsuarioService) {}
@@ -64,6 +66,8 @@ export class CaracterizacionComponent {
           }
         });
       });
+
+      this.formRef.resetForm();
   }
 
   obtenerListaRutas() {

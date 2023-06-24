@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit{
             //close();
             //open("/admin");
 
-            window.location.href = '/inicio';
+            window.location.href = '/mapa';
           });
       },
       (error) => {

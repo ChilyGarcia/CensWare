@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { LoginServiceService } from '../services/login-service.service';
@@ -9,6 +9,10 @@ import { LoginServiceService } from '../services/login-service.service';
   styleUrls: ['./agregar-perfil.component.css'],
 })
 export class AgregarPerfilComponent {
+  @ViewChild('formRef') formRef: any;
+
+
+
   formulario = {
     nombrePerfilForm: '',
     mapsForm: '',
@@ -19,42 +23,43 @@ export class AgregarPerfilComponent {
   };
 
   cuerpo = {
-    nombrePerfil:'',
-    maps:false,
-    caracterizacion:false,
-    fallo:false,
-    dashboard:false,
-    userLogeado: this.loginService.getUser().email
-  }
+    nombrePerfil: '',
+    maps: false,
+    caracterizacion: false,
+    fallo: false,
+    dashboard: false,
+    userLogeado: this.loginService.getUser().email,
+  };
 
-  constructor(public userService: UsuarioService, public loginService:LoginServiceService) {}
+  constructor(
+    public userService: UsuarioService,
+    public loginService: LoginServiceService
+  ) {}
 
-  formSubmit()
-  {
-
+  formSubmit() {
     this.cuerpo.nombrePerfil = this.formulario.nombrePerfilForm;
 
-    if(this.formulario.mapsForm == "SI"){
+    if (this.formulario.mapsForm == 'SI') {
       this.cuerpo.maps = true;
-    }else if(this.formulario.mapsForm == "NO"){
+    } else if (this.formulario.mapsForm == 'NO') {
       this.cuerpo.maps = false;
     }
 
-    if(this.formulario.caracterizacionForm == "SI"){
+    if (this.formulario.caracterizacionForm == 'SI') {
       this.cuerpo.caracterizacion = true;
-    } else if(this.formulario.caracterizacionForm == "NO"){
+    } else if (this.formulario.caracterizacionForm == 'NO') {
       this.cuerpo.caracterizacion = false;
     }
 
-    if(this.formulario.falloForm== "SI"){
+    if (this.formulario.falloForm == 'SI') {
       this.cuerpo.fallo = true;
-    }else if(this.formulario.falloForm == "NO"){
+    } else if (this.formulario.falloForm == 'NO') {
       this.cuerpo.fallo = false;
     }
 
-    if(this.formulario.dashboardForm == "SI"){
+    if (this.formulario.dashboardForm == 'SI') {
       this.cuerpo.dashboard = true;
-    } else if(this.formulario.dashboardForm == "NO"){
+    } else if (this.formulario.dashboardForm == 'NO') {
       this.cuerpo.dashboard = false;
     }
 
@@ -64,17 +69,24 @@ export class AgregarPerfilComponent {
     console.log(this.cuerpo.fallo);
     console.log(this.cuerpo.dashboard);
 
-
-    this.userService.crearNuevoPerfil(this.cuerpo).subscribe((dato) =>{
+    this.userService.crearNuevoPerfil(this.cuerpo).subscribe((dato) => {
       console.log(dato);
 
       Swal.fire({
-        title: 'Perfil creado',
-        text: 'Se ha creado un nuevo perfil con éxito',
+        title: '<strong>Permiso se ha creado con exito</strong>',
         icon: 'success',
-        confirmButtonText: 'Aceptar'
+        html:
+          '<form (ngSubmit) ="recargar()">' +
+          '<button id="but" type="submit" class="btn">' +
+          'Hecho' +
+          '</button>' +
+          '</form>',
+        showCloseButton: true,
+        showConfirmButton: false,
       });
-    })
+    });
 
+
+    this.formRef.resetForm();
   }
 }

@@ -61,5 +61,9 @@ export class UsuarioService {
     return this.httpClient.get<Rutas[]>(`${baseUrl}/caracterizacion/ruta-list`)
   }
 
+
+
+  
+
   
 }

@@ -92,7 +92,7 @@
 <div class="login-box">
   <h2>Agregar usuarios</h2>
 
-  <form (ngSubmit)="formSubmit()" id="form">
+  <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
     <div class="user-box">
       <input
         required

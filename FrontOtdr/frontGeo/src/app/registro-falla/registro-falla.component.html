@@ -1,0 +1,67 @@
+<!-- 
+
+<div style="width: 600px; margin-left: 3%; display: inline-block;">
+    <app-mapa></app-mapa>
+    
+</div>
+
+<div style="width:90px; display:inline-block;">
+    <app-captura></app-captura>
+</div>
+ -->
+
+<div style="width: 100%; height: 100%">
+  <div style="width: 700px; display: inline-block; margin-left: 3%">
+    <app-mapa></app-mapa>
+  </div>
+  <div
+    style="width: 90px; height: 100%; display: inline-block; margin-left: 50%"
+  >
+    <div class="login-box">
+      <h2>Caracterizacion</h2>
+
+      <form (ngSubmit)="formSubmit()" id="form">
+        <div class="user-box">
+          <input
+            required
+            matInput
+            id="apellido"
+            [(ngModel)]="registroFalla.punto"
+            name="apellido"
+          />
+          <label>Nombre punto</label>
+        </div>
+
+        <mat-form-field class="selectRol">
+          <mat-select
+            placeholder="Ruta"
+            name="opcines"
+            [(ngModel)]="registroFalla.ruta"
+          >
+            <mat-option
+              *ngFor="let opcion of listaRutas"
+              [value]="opcion.rutaNombre"
+              >{{ opcion.rutaNombre }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <div class="file-select">
+          <input
+            type="file"
+            class="file-input"
+            (change)="onFileSelected($event)"
+            #fileUpload
+          />
+        </div>
+
+        <button
+          (click)="enviarRegistroFalla()"
+          mat-raised-button
+          style="margin-left: 38%; margin-top: 2%"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

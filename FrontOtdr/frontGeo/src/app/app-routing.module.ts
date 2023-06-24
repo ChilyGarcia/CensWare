@@ -11,6 +11,7 @@ import { CaracterizacionComponent } from './caracterizacion/caracterizacion.comp
 import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
 import { Path } from 'leaflet';
 import { RutasComponent } from './rutas/rutas.component';
+import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,11 @@ const routes: Routes = [
   {
     path:'rutas',
     component:RutasComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'registro-fallas',
+    component:RegistroFallaComponent,
     pathMatch:'full'
   }
 

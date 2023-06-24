@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { Perfilamiento } from '../perfilamiento';
@@ -9,6 +9,8 @@ import { Perfilamiento } from '../perfilamiento';
   styleUrls: ['./agregar-usuario.component.css'],
 })
 export class AgregarUsuarioComponent {
+  @ViewChild('formRef') formRef: any;
+
   listaPerfil: Perfilamiento[];
 
   constructor(private usuarioServices: UsuarioService) {}
@@ -28,7 +30,6 @@ export class AgregarUsuarioComponent {
   }
 
   formSubmit() {
-    
     this.usuarioServices.añadirUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
@@ -51,7 +52,7 @@ export class AgregarUsuarioComponent {
       }
     );
 
-    
+    this.formRef.resetForm();
   }
 
   obtenerListaPerfiles() {

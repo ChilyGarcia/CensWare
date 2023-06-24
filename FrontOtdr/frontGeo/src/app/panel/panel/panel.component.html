@@ -31,7 +31,10 @@
         </li>
 
         <li>
-          <a href="/agregar-usuarios" *ngIf="loginService.getUserRol() == 'ADMIN'">
+          <a
+            href="/agregar-usuarios"
+            *ngIf="loginService.getUserRol() == 'ADMIN'"
+          >
             <i class="fa fa-book fa-2x"></i>
             <span class="nav-text"> Agregar usuarios </span>
           </a>
@@ -41,6 +44,13 @@
           <a href="/rutas" *ngIf="permissions.caracterizacion">
             <i class="fa fa-map-marker fa-2x"></i>
             <span class="nav-text">Rutas</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/registro-fallas" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text">Registro de fallas</span>
           </a>
         </li>
 

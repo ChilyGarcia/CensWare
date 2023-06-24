@@ -24,6 +24,7 @@ import { authInterceptorProviders } from './services/auth.interceptor';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.component';
 import { RutasComponent } from './rutas/rutas.component';
+import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
 
 
 
@@ -40,7 +41,8 @@ import { RutasComponent } from './rutas/rutas.component';
     CapturaComponent,
     CaracterizacionComponent,
     AgregarPerfilComponent,
-    RutasComponent
+    RutasComponent,
+    RegistroFallaComponent
   ],
   imports: [
     BrowserModule,
