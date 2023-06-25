@@ -1,5 +1,6 @@
 package com.otdr.otdr.Controllers;
 
+import com.otdr.otdr.Data.Entidades.Mensaje;
 import com.otdr.otdr.Models.Peticiones.SolucionFalloRequest;
 import com.otdr.otdr.Services.FallaService;
 import com.otdr.otdr.Services.PuntoRefService;
@@ -38,8 +39,9 @@ public class PruebaFallaController {
     public ResponseEntity<?> solucionFalla(@RequestBody SolucionFalloRequest falloRequest){
 
         SolucionFalloDTO falloDTO = modelMapper.map(falloRequest, SolucionFalloDTO.class);
+        String mensaje = fallaService.saveSolucionFallo(falloDTO);
 
-        return new ResponseEntity<>(fallaService.saveSolucionFallo(falloDTO), HttpStatus.OK);
+        return new ResponseEntity<>(new Mensaje(mensaje), HttpStatus.OK);
 
     }
 

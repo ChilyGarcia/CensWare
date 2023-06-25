@@ -148,9 +148,10 @@ public class FallaServiceImpl implements FallaService {
         } else if (fallo == null) {
             throw new MyException("El tipo de fallo no esta especificado");
         }
+        Integer nombrePunto = solucionFalloDTO.getNombreP();
         Integer nPunto=solucionFalloDTO.getNombreP() + 1;
         System.out.println(nPunto+" **********");
-        PuntoReferencia punto1 = puntoRefRepository.findByNombrePunto(solucionFalloDTO.getNombreP(), ruta.getId());
+        PuntoReferencia punto1 = puntoRefRepository.findByNombrePunto(nombrePunto, ruta.getId());
         PuntoReferencia punto2 = puntoRefRepository.findByNombrePunto(nPunto, ruta.getId());
         System.out.println(punto2.toString());
         String nRem;
