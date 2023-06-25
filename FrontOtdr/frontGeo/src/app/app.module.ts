@@ -26,6 +26,8 @@ import { AgregarPerfilComponent } from './agregar-perfil/agregar-perfil.componen
 import { RutasComponent } from './rutas/rutas.component';
 import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
 import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
+import { SolucionarFalloComponent } from './solucionar-fallo/solucionar-fallo.component';
+import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.component';
 
 
 
@@ -44,7 +46,9 @@ import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gest
     AgregarPerfilComponent,
     RutasComponent,
     RegistroFallaComponent,
-    AuditoriasGestionComponent
+    AuditoriasGestionComponent,
+    SolucionarFalloComponent,
+    AuditoriaFalloComponent
   ],
   imports: [
     BrowserModule,

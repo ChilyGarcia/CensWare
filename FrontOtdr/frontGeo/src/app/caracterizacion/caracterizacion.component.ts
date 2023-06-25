@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { Rutas } from '../rutas';
+import { LoginServiceService } from '../services/login-service.service';
 
 declare function holaMundo(): void;
 
@@ -15,7 +16,7 @@ export class CaracterizacionComponent {
 
   listaRutas: Rutas[];
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private loginService:LoginServiceService) {}
 
   comprobacion = {
     medicion: '',
@@ -29,6 +30,7 @@ export class CaracterizacionComponent {
     longitud: '',
     latitud: '',
     medicion: false,
+    userLogeado: this.loginService.getUser().email
   };
 
   ngOnInit() {

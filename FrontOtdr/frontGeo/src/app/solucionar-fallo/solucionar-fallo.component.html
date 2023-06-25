@@ -1,0 +1,77 @@
+<app-panel></app-panel>
+
+<div class="login-box">
+  <h2>Solucion del fallo</h2>
+
+  <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
+    <label style="color: aqua">Ruta:</label>
+    <div class="user-box">
+      <select
+        name="select-location"
+        id="select-location"
+        [(ngModel)]="cuerpo.ruta"
+      >
+        <option *ngFor="let opcion of listaRutas" [value]="opcion.rutaNombre">
+          {{ opcion.rutaNombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="user-box" style="margin-top: 10%">
+      <input
+        required
+        matInput
+        id="nombreP"
+        [(ngModel)]="cuerpo.nombreP"
+        name="nombreP"
+      />
+      <label>Nombre punto</label>
+    </div>
+
+    <div class="user-box" style="margin-top: 10%">
+      <input
+        required
+        matInput
+        id="mensaje"
+        [(ngModel)]="cuerpo.mensaje"
+        name="Mensaje"
+      />
+      <label>Mensaje</label>
+    </div>
+    <div class="user-box" style="margin-top: 10%">
+      <input
+        required
+        matInput
+        id="descripcion"
+        [(ngModel)]="cuerpo.descripcion"
+        name="descripcion"
+      />
+      <label>Descripcion</label>
+    </div>
+    <div class="user-box" style="margin-top: 10%">
+      <input
+        required
+        matInput
+        id="remutilizado"
+        [(ngModel)]="cuerpo.remutilizado"
+        name="remutilizado"
+      />
+      <label>Remanente utilizado</label>
+    </div>
+
+    <div class="user-box" style="margin-top: 10%">
+      <input
+        required
+        matInput
+        id="tFallo"
+        [(ngModel)]="cuerpo.fallo"
+        name="tFallo"
+      />
+      <label>Tipo fallo</label>
+    </div>
+
+    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
+      Solucionar falla
+    </button>
+  </form>
+</div>

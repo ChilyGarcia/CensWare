@@ -56,6 +56,8 @@ export class RegistroFallaComponent {
           showConfirmButton: false,
         });
       });
+
+      window.location.href = "solucionar-fallo";
   }
 
   onFileSelected(event: any) {

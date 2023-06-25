@@ -13,6 +13,8 @@ import { Path } from 'leaflet';
 import { RutasComponent } from './rutas/rutas.component';
 import { RegistroFallaComponent } from './registro-falla/registro-falla.component';
 import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
+import { SolucionarFalloComponent } from './solucionar-fallo/solucionar-fallo.component';
+import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.component';
 
 const routes: Routes = [
   {
@@ -69,6 +71,16 @@ const routes: Routes = [
   {
     path:'auditorias-gestion',
     component:AuditoriasGestionComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'solucionar-fallo',
+    component:SolucionarFalloComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'auditoria-fallo',
+    component:AuditoriaFalloComponent,
     pathMatch:'full'
   }
 

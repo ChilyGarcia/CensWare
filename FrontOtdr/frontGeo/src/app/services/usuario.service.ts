@@ -68,6 +68,12 @@ export class UsuarioService {
 
     return this.httpClient.get<AuditoriasGestion[]>(`${baseUrl}/usuario/auditoria-gestion`)
   }
+
+  public solucionarFalla(cuerpo:any)
+  {
+    return this.httpClient.post(`${baseUrl}/falla/soluc-falla`,cuerpo);
+
+  }
   
 
 
