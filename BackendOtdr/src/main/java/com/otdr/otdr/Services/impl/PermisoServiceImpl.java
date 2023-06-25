@@ -1,8 +1,10 @@
 package com.otdr.otdr.Services.impl;
 
+import com.otdr.otdr.Data.Entidades.AuditoriaGestion;
 import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Permisos;
 import com.otdr.otdr.Data.Entidades.Usuario;
+import com.otdr.otdr.Repositories.AuditoriaGestionRepository;
 import com.otdr.otdr.Repositories.PermisoRepository;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Repositories.UsuarioRepository;
@@ -29,6 +31,8 @@ public class PermisoServiceImpl implements PermisoService {
     private PermisoRepository permisoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private AuditoriaGestionRepository gestionRepository;
 
 
     @Override
@@ -69,8 +73,7 @@ public class PermisoServiceImpl implements PermisoService {
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(permisosDTO.getUserLogeado());
 
-        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-        usuarioService.auditoriaGestion("MODIFICO","Modifico los permisos del perfil: "+perfil1.getRolNombre(),fecha,usuario);
+        auditoriaGestion("MODIFICO","Modifico los permisos del perfil: "+perfil1.getRolNombre(),fecha,usuario);
 
 
     }
@@ -84,5 +87,23 @@ public class PermisoServiceImpl implements PermisoService {
         }
 
         return permisos;
+    }
+
+    public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
+
+        int nRegistros = gestionRepository.numeroRegistros();
+        System.out.println(nRegistros+" ***********");
+
+        AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
+        auditoriaGestion.setId(nRegistros +1);
+        auditoriaGestion.setTitulo(titulo);
+        auditoriaGestion.setDescripcion(desc);
+        auditoriaGestion.setFecha(fecha);
+        auditoriaGestion.setUser(user);
+
+        System.out.println(auditoriaGestion.toString());
+
+        gestionRepository.save(auditoriaGestion);
+
     }
 }

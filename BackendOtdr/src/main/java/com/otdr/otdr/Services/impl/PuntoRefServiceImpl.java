@@ -1,14 +1,8 @@
 package com.otdr.otdr.Services.impl;
 
-import com.otdr.otdr.Data.Entidades.PuntoReferencia;
-import com.otdr.otdr.Data.Entidades.Ruta;
-import com.otdr.otdr.Data.Entidades.TipoPunto;
-import com.otdr.otdr.Data.Entidades.Usuario;
+import com.otdr.otdr.Data.Entidades.*;
 import com.otdr.otdr.Models.Respuestas.ListarPuntoRefResponse;
-import com.otdr.otdr.Repositories.PuntoRefRepository;
-import com.otdr.otdr.Repositories.RutaRepository;
-import com.otdr.otdr.Repositories.TipoPuntoRepository;
-import com.otdr.otdr.Repositories.UsuarioRepository;
+import com.otdr.otdr.Repositories.*;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PuntoRefService;
 import com.otdr.otdr.Shared.CrearPuntoRefDTO;
@@ -42,6 +36,8 @@ public class PuntoRefServiceImpl implements PuntoRefService {
     private TipoPuntoRepository puntoRepository;
     @Autowired
     private PuntoRefRepository puntoRefRepository;
+    @Autowired
+    private AuditoriaGestionRepository gestionRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -192,6 +188,8 @@ public class PuntoRefServiceImpl implements PuntoRefService {
     @Override
     public CrearRutaDTO guardarRuta(CrearRutaDTO rutaDTO) {
 
+        System.out.println(rutaDTO.toString());
+
         String rutaN = rutaDTO.getRutaInicio()+" - "+rutaDTO.getRutaFin();
         String rutaM = rutaN.toUpperCase();
 
@@ -210,8 +208,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(rutaDTO.getUserLogeado());
 
-        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-        usuarioService.auditoriaGestion("CREO","Creo la ruta: "+ruta.getRutaNombre(),fecha,usuario);
+        auditoriaGestion("CREO","Creo la ruta: "+ruta.getRutaNombre(),fecha,usuario);
 
 
         return modelMapper.map(ruta, CrearRutaDTO.class);
@@ -333,5 +330,23 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         puntoReferencia.setMedicion(medicion);
 
         return puntoReferencia;
+    }
+
+    public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
+
+        int nRegistros = gestionRepository.numeroRegistros();
+        System.out.println(nRegistros+" ***********");
+
+        AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
+        auditoriaGestion.setId(nRegistros +1);
+        auditoriaGestion.setTitulo(titulo);
+        auditoriaGestion.setDescripcion(desc);
+        auditoriaGestion.setFecha(fecha);
+        auditoriaGestion.setUser(user);
+
+        System.out.println(auditoriaGestion.toString());
+
+        gestionRepository.save(auditoriaGestion);
+
     }
 }

@@ -1,10 +1,12 @@
 package com.otdr.otdr.Services.impl;
 
+import com.otdr.otdr.Data.Entidades.AuditoriaGestion;
 import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Permisos;
 import com.otdr.otdr.Data.Entidades.Usuario;
 import com.otdr.otdr.Models.Peticiones.PerfilCrearRequest;
 import com.otdr.otdr.Models.Respuestas.ListarPerfilResponse;
+import com.otdr.otdr.Repositories.AuditoriaGestionRepository;
 import com.otdr.otdr.Repositories.PermisoRepository;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Repositories.UsuarioRepository;
@@ -27,6 +29,8 @@ public class PerfilServiceImpl implements PerfilService {
     private PermisoRepository permisoRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private AuditoriaGestionRepository gestionRepository;
 
 
     @Override
@@ -84,8 +88,25 @@ public class PerfilServiceImpl implements PerfilService {
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(perfilCrearRequest.getUserLogeado());
 
-        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-        usuarioService.auditoriaGestion("CREO","Creo el perfil: "+perfilNuevo.getRolNombre(),fecha,usuario);
+        auditoriaGestion("CREO","Creo el perfil: "+perfilNuevo.getRolNombre(),fecha,usuario);
+
+    }
+
+    public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
+
+        int nRegistros = gestionRepository.numeroRegistros();
+        System.out.println(nRegistros+" ***********");
+
+        AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
+        auditoriaGestion.setId(nRegistros +1);
+        auditoriaGestion.setTitulo(titulo);
+        auditoriaGestion.setDescripcion(desc);
+        auditoriaGestion.setFecha(fecha);
+        auditoriaGestion.setUser(user);
+
+        System.out.println(auditoriaGestion.toString());
+
+        gestionRepository.save(auditoriaGestion);
 
     }
 }

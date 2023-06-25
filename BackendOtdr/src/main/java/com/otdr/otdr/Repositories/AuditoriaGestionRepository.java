@@ -1,7 +1,6 @@
 package com.otdr.otdr.Repositories;
 
 import com.otdr.otdr.Data.Entidades.AuditoriaGestion;
-import com.otdr.otdr.Models.Respuestas.AuditoriaGestionResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +15,10 @@ public interface AuditoriaGestionRepository extends JpaRepository<AuditoriaGesti
     @Query(nativeQuery = true,
             value = "SELECT * FROM auditoria_gestion a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d') DESC")
     public List<AuditoriaGestion> allAuditoria();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT COUNT(*) FROM auditoria_gestion"
+    )
+    public int numeroRegistros();
 }

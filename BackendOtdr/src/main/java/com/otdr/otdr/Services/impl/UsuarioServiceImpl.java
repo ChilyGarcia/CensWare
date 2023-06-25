@@ -119,13 +119,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
 
+        int nRegistros = gestionRepository.numeroRegistros();
+        System.out.println(nRegistros+" ***********");
 
         AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
+        auditoriaGestion.setId(nRegistros +1);
         auditoriaGestion.setTitulo(titulo);
         auditoriaGestion.setDescripcion(desc);
         auditoriaGestion.setFecha(fecha);
         auditoriaGestion.setUser(user);
 
+        System.out.println(auditoriaGestion.toString());
 
         gestionRepository.save(auditoriaGestion);
 
