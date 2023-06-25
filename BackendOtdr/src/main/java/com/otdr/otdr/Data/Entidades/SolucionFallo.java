@@ -29,7 +29,7 @@ public class SolucionFallo implements Serializable {
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "punto_ref1")
     private PuntoReferencia puntoReferencia;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(name = "punto_ref2")
     private PuntoReferencia puntoRef2;
     @ManyToOne(optional = false,fetch = FetchType.EAGER)
