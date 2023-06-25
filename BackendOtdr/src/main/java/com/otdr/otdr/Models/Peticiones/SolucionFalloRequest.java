@@ -14,6 +14,6 @@ public class SolucionFalloRequest {
     private String descripcion; //Descripcion de la solucion. La ingresa el usuario
     private String remutilizado; //Cantidad de remanente utilizado
     private String email; //Email del usuario logeado
-    private String tFallo; //tipo de fallo que soluciono
+    private String fallo; //tipo de fallo que soluciono
 
 }
