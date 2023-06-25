@@ -58,17 +58,18 @@
       />
       <label>Remanente utilizado</label>
     </div>
+    
 
-    <div class="user-box" style="margin-top: 10%">
-      <input
-        required
-        matInput
-        id="tFallo"
+    <mat-form-field class="selectRol">
+      <mat-select
+        placeholder="Tipo de fallo"
+        name="opcines"
         [(ngModel)]="cuerpo.fallo"
-        name="tFallo"
-      />
-      <label>Tipo fallo</label>
-    </div>
+      >
+        <mat-option value="FIBRA ROTA">Fibra rota</mat-option>
+        <mat-option value="FIBRA QUEMADA">Fibra quemada</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
       Solucionar falla
