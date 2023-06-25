@@ -1,5 +1,6 @@
 package com.otdr.otdr.Services;
 
+import com.otdr.otdr.Data.Entidades.Auditoria;
 import com.otdr.otdr.Data.Entidades.Usuario;
 import com.otdr.otdr.Models.Respuestas.AuditoriaGestionResponse;
 import com.otdr.otdr.Shared.CrearUsuarioDTO;
@@ -13,4 +14,6 @@ public interface UsuarioService {
     public CrearUsuarioDTO guardarUsuario(CrearUsuarioDTO crearUsuarioDTO);
     public List<AuditoriaGestionResponse> allAuditorias();
     public List<AuditoriaGestionResponse> auditoriaTitulo(String titulo);
+    public List<Object[]> auditoriaFallaTresMeses();
+    public List<Auditoria> allAuditoriaFalla();
 }

@@ -69,7 +69,7 @@ public class PermisoServiceImpl implements PermisoService {
         Perfil perfil1 = rolRepository.save(perfil);
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(permisosDTO.getUserLogeado());
 

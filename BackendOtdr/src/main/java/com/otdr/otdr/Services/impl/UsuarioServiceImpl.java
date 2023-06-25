@@ -1,10 +1,12 @@
 package com.otdr.otdr.Services.impl;
 
+import com.otdr.otdr.Data.Entidades.Auditoria;
 import com.otdr.otdr.Data.Entidades.AuditoriaGestion;
 import com.otdr.otdr.Data.Entidades.Perfil;
 import com.otdr.otdr.Data.Entidades.Usuario;
 import com.otdr.otdr.Models.Respuestas.AuditoriaGestionResponse;
 import com.otdr.otdr.Repositories.AuditoriaGestionRepository;
+import com.otdr.otdr.Repositories.AuditoriaRepository;
 import com.otdr.otdr.Repositories.RolRepository;
 import com.otdr.otdr.Repositories.UsuarioRepository;
 import com.otdr.otdr.Security.Exceptions.MyException;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +36,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     private RolRepository rolRepository;
     @Autowired
     private AuditoriaGestionRepository gestionRepository;
+    @Autowired
+    private AuditoriaRepository auditoriaRepository;
 
     @Override
     public List<Usuario> listarUsuario() {
@@ -115,6 +120,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         return gestionResponse;
+    }
+
+    @Override
+    public List<Object[]> auditoriaFallaTresMeses() {
+        LocalDate fecha = LocalDate.now().minusMonths(3);
+        return auditoriaRepository.rutasMasFallas(fecha);
+    }
+
+    @Override
+    public List<Auditoria> allAuditoriaFalla(){
+        return auditoriaRepository.findAll();
     }
 
     public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){

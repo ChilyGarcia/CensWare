@@ -136,7 +136,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         crearPuntoRefDTO.setKmAnterior(puntoReferencia1.getKmAnterior());
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(puntoRefDTO.getUserLogeado());
 
@@ -203,7 +203,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         rutaRepository.save(ruta);
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(rutaDTO.getUserLogeado());
 

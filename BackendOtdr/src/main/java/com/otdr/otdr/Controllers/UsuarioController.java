@@ -78,4 +78,14 @@ public class UsuarioController {
     public ResponseEntity<?> auditoriaTitulo (@PathVariable("titulo")String titulo){
         return new ResponseEntity<>(usuarioService.auditoriaTitulo(titulo),HttpStatus.OK);
     }
+
+    @GetMapping("/auditoria-falla-trimestre")
+    public ResponseEntity<?> auditoriaFallas(){
+        return new ResponseEntity<>(usuarioService.auditoriaFallaTresMeses(), HttpStatus.OK);
+    }
+
+    @GetMapping("/auditoria-falla")
+    public ResponseEntity<?> allAuditoriaFalla(){
+        return new ResponseEntity<>(usuarioService.allAuditoriaFalla(), HttpStatus.OK);
+    }
 }
