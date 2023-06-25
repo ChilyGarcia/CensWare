@@ -6,13 +6,9 @@ import com.otdr.otdr.Repositories.*;
 import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.FallaService;
 import com.otdr.otdr.Shared.SolucionFalloDTO;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
@@ -156,11 +152,13 @@ public class FallaServiceImpl implements FallaService {
         } else if (fallo == null) {
             throw new MyException("El tipo de fallo no esta especificado");
         }
-
+        Integer nPunto=solucionFalloDTO.getNombreP() + 1;
+        System.out.println(nPunto+" **********");
         PuntoReferencia punto1 = puntoRefRepository.findByNombrePunto(solucionFalloDTO.getNombreP(), ruta.getId());
-        PuntoReferencia punto2 = puntoRefRepository.findByNombrePunto(solucionFalloDTO.getNombreP() + 1, ruta.getId());
+        PuntoReferencia punto2 = puntoRefRepository.findByNombrePunto(nPunto, ruta.getId());
+        System.out.println(punto2.toString());
         String nRem;
-        if (!(Double.parseDouble(punto1.getCantRemanente()) < Double.parseDouble(solucionFalloDTO.getRemutilizado()))){
+        if (!(Double.parseDouble(punto1.getCantRemanente()) > Double.parseDouble(solucionFalloDTO.getRemutilizado()))){
             throw new MyException("El remanente utilizado es mayor a la cantidad que estaba registrada");
         }else {
             nRem = String.valueOf(Double.parseDouble(punto1.getCantRemanente()) - Double.parseDouble(solucionFalloDTO.getRemutilizado()));
@@ -258,7 +256,7 @@ public class FallaServiceImpl implements FallaService {
 
 
     }
-
+/*
     public Double obtenerDist(MultipartFile file) throws IOException {
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
@@ -300,5 +298,5 @@ public class FallaServiceImpl implements FallaService {
             throw new MyException("Error al leer el sor");
         }
 
-    }
+    }*/
 }
