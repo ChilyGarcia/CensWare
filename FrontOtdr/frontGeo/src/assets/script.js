@@ -67,3 +67,7 @@ function holaMundo(lista) {
   }
   //- - - - - - - - - - - - - - - -
 }
+
+function graficasEstadisticas() {
+  
+}
