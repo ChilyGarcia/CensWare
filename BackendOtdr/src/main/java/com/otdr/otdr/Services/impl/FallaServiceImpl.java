@@ -175,7 +175,7 @@ public class FallaServiceImpl implements FallaService {
         solucionFallo.setFallo(fallo);
         solucionFallo.setRuta(ruta);
         solucionFallo.setPuntoReferencia(punto1);
-        solucionFallo.setPuntoReferencia(punto2);
+        solucionFallo.setPuntoRef2(punto2);
 
         solucionFalloRepository.save(solucionFallo);
 
