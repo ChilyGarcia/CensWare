@@ -32,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private RolRepository rolRepository;
     @Autowired
-    private static AuditoriaGestionRepository gestionRepository;
+    private AuditoriaGestionRepository gestionRepository;
 
     @Override
     public List<Usuario> listarUsuario() {
@@ -52,6 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(usuario != null){
             throw new MyException("Ya existe un usuario registrado con este correo");
         }
+        System.out.println(userL.getEmail()+" ********");
 
         Perfil perfil = rolRepository.findByRolNombre(crearUsuarioDTO.getPerfil());
         if (perfil == null){
@@ -118,11 +119,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
 
+
         AuditoriaGestion auditoriaGestion = new AuditoriaGestion();
         auditoriaGestion.setTitulo(titulo);
         auditoriaGestion.setDescripcion(desc);
         auditoriaGestion.setFecha(fecha);
         auditoriaGestion.setUser(user);
+
 
         gestionRepository.save(auditoriaGestion);
 
