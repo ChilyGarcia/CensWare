@@ -66,7 +66,7 @@ export class UsuarioService {
   public obtenerListaAuditoriasGestion(): Observable<AuditoriasGestion[]>
   {
 
-    return this.httpClient.get<AuditoriasGestion[]>(`${baseUrl}/usuario/perfiles-list`)
+    return this.httpClient.get<AuditoriasGestion[]>(`${baseUrl}/usuario/auditoria-gestion`)
   }
   
 

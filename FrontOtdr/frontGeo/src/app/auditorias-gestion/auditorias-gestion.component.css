@@ -140,10 +140,7 @@ nav.main-menu li.active > a,
       format("woff");
 }
 
-
-
 .fixed_headers {
-  
   width: 1000px;
   table-layout: fixed;
   border-collapse: collapse;
@@ -222,7 +219,7 @@ tbody tr:nth-child(even) {
   position: absolute;
   top: 1%;
   left: 10%;
- 
+
   padding: 40px;
 }
 
@@ -231,14 +228,14 @@ tbody tr:nth-child(even) {
   padding: 20px;
 }
 
-.btnNuevoPerfil{
+.btnNuevoPerfil {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-
-
-
-
+.fixed_headers td {
+  max-width: 200px; /* Ajusta el valor según tus necesidades */
+  word-wrap: break-word;
+}
