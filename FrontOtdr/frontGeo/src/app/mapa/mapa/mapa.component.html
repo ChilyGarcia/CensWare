@@ -5,7 +5,7 @@
       <select
         name="select-location"
         id="select-location"
-        style="margin-left: 6%;"
+        style="margin-left: 6%"
         [(ngModel)]="ruta.ruta"
       >
         <option *ngFor="let opcion of listaRutas" [value]="opcion.rutaNombre">
@@ -15,14 +15,27 @@
 
       <button (click)="envioRuta()">Enviar</button>
     </form>
-    <div style="display: flex; flex-direction: column; margin-left: 6%; margin-top: 0;">
-      <img
-        src="/assets/marker-icon-red.png"
-        width="15px"
-        
-      />
-     
+    <div
+      style="display: flex; flex-direction: row; margin-left: 6%; margin-top: 0"
+    >
+      <div style="display: flex; align-items: center">
+        <img
+          src="/assets/marker-icon-red.png"
+          width="15px"
+          style="margin-right: 5px"
+        />
+        <span>Estacion</span>
+      </div>
+      <div style="display: flex; align-items: center; margin-left: 15px;">
+        <img
+          src="/assets/marker-icon-2x-blue.png"
+          width="15px"
+          style="margin-right: 5px"
+        />
+        <span>Poste</span>
+      </div>
     </div>
+
     <div id="map" style="margin-left: 5%; width: 95%; height: 100vh"></div>
     <nav class="main-menu">
       <ul>
