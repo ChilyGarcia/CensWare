@@ -11,5 +11,5 @@ public interface FalloRepository extends JpaRepository<Fallo, Long> {
             nativeQuery = true,
             value = "SELECT * FROM fallo f WHERE f.fallo_nombre= :nombre"
     )
-    public Fallo findByFalloNombre(String nombre);
+    public Fallo findFalloNombre(String nombre);
 }

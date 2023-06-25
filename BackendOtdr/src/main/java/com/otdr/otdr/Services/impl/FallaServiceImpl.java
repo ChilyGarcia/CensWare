@@ -143,9 +143,11 @@ public class FallaServiceImpl implements FallaService {
     @Override
     public String saveSolucionFallo(SolucionFalloDTO solucionFalloDTO) {
 
+        System.out.println(solucionFalloDTO.toString());
+
         Usuario usuario = usuarioRepository.findByEmail(solucionFalloDTO.getEmail());
         Ruta ruta = rutaRepository.findByRutaNombre(solucionFalloDTO.getRuta());
-        Fallo fallo = falloRepository.findByFalloNombre(solucionFalloDTO.getTFallo());
+        Fallo fallo = falloRepository.findFalloNombre(solucionFalloDTO.getFallo());
 
         if (ruta == null){
             throw new MyException("La ruta no existe");
