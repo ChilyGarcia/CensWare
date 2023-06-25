@@ -13,7 +13,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -50,7 +52,7 @@ public class FallaServiceImpl implements FallaService {
         }
 
         String mensaje;
-        double distFalla = obtenerDist(file);
+        double distFalla = leerDistancia(file);
 
         double x =0,dist;
 
@@ -193,6 +195,66 @@ public class FallaServiceImpl implements FallaService {
         auditoriaRepository.save(auditoria);
 
         return "Se registro la solucion del fallo";
+    }
+
+    public double leerDistancia(MultipartFile file) throws IOException {
+
+        String fileName = file.getOriginalFilename();
+        byte[] fileContent = file.getBytes();
+        String ruta;
+
+        try {
+            assert fileName != null;
+            File tempFile = File.createTempFile(fileName, null);
+
+            Files.write(tempFile.toPath(), fileContent);
+
+            ruta = tempFile.getAbsolutePath();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new MyException("Error al sacar el path del file");
+        }
+
+        try (Workbook workbook = WorkbookFactory.create(new File(ruta))){
+
+            Sheet sheet = workbook.getSheetAt(0);
+            Row row = sheet.getRow(17);
+            Cell cell = row.getCell(6);
+
+            String dCell="", sNum="";
+
+            if (cell != null){
+                dCell = cell.getStringCellValue();
+            }
+            System.out.println(dCell + " ---------");
+
+            for (int i = 0; i<dCell.length(); i++){
+                if (dCell.charAt(i) == ' '){
+                    break;
+                }
+                if (dCell.charAt(i) == ','){
+                    sNum += '.';
+                }else {
+                    sNum += dCell.charAt(i);
+                }
+            }
+            System.out.println(sNum +"-----------");
+
+            double sNumC = Double.parseDouble(sNum);
+            double sNumM = sNumC * 1000;
+
+            System.out.println(sNumM + " ------------");
+
+            return sNumM;
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+            throw new MyException("Error al leer el archivo");
+        }
+
+
     }
 
     public Double obtenerDist(MultipartFile file) throws IOException {

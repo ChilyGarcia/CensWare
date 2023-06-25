@@ -140,8 +140,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(puntoRefDTO.getUserLogeado());
 
-        UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-        usuarioService.auditoriaGestion("CARACTERIZO","Caracterizo el punto: "+crearPuntoRefDTO.getNombrePunto()+" de la ruta: "+crearPuntoRefDTO.getRuta(),fecha,usuario);
+        auditoriaGestion("CARACTERIZO","Caracterizo el punto: "+crearPuntoRefDTO.getNombrePunto()+" de la ruta: "+crearPuntoRefDTO.getRuta(),fecha,usuario);
 
 
         return crearPuntoRefDTO;
