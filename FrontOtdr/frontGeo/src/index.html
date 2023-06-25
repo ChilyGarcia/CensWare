@@ -1,57 +1,64 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FrontGeo</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FrontGeo</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
-  <style>
-    .area {
-      display: flex;
-      justify-content: center;
-    }
-    
-    .container {
-      max-width: 100%;
-      padding: 0 15px;
-      box-sizing: border-box;
-    }
-    
-    .contenido {
-      overflow-x: auto;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    th, td {
-      padding: 8px;
-      text-align: left;
-    }
-    
-    @media (max-width: 768px) {
-      table {
-        display: block;
+    <style>
+      .area {
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+      }
+
+      .contenido {
         overflow-x: auto;
-        white-space: nowrap;
       }
-    
-      th, td {
-        display: inline-block;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
       }
-    }
-  </style>
-  
-</head>
-<body class="mat-typography">
-  <app-root></app-root>
-</body>
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      @media (max-width: 768px) {
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        th,
+        td {
+          display: inline-block;
+        }
+      }
+    </style>
+  </head>
+  <body class="mat-typography" style="max-height: 600px; overflow: hidden">
+    <app-root></app-root>
+  </body>
 </html>

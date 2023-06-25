@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import Swal from 'sweetalert2';
 import { Perfilamiento } from '../perfilamiento';
+import { LoginServiceService } from '../services/login-service.service';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -13,7 +14,7 @@ export class AgregarUsuarioComponent {
 
   listaPerfil: Perfilamiento[];
 
-  constructor(private usuarioServices: UsuarioService) {}
+  constructor(private usuarioServices: UsuarioService, private loginService:LoginServiceService) {}
 
   public user = {
     nombre: '',
@@ -23,7 +24,7 @@ export class AgregarUsuarioComponent {
     cedula: '',
     password: '',
     perfil: '',
-    userLogeado: 'adminFesc@fesc.edu.co',
+    userLogeado: this.loginService.getUser().email,
   };
   ngOnInit() {
     this.obtenerListaPerfiles();
