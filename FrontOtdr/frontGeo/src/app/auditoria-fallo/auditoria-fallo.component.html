@@ -1,2 +1,27 @@
 <app-panel></app-panel>
 
+<div class="area">
+  <div class="container">
+    <div class="contenido">
+      <table class="fixed_headers">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Ruta</th>
+            <th>Fecha</th>
+          
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let auditorias of listaFallos">
+            <td>{{ auditorias.titulo }}</td>
+            <td>{{ auditorias.ruta }}</td>
+            <td>{{ auditorias.fecha }}</td>
+     
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

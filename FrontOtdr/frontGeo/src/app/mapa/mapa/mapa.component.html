@@ -26,7 +26,7 @@
         />
         <span>Estacion</span>
       </div>
-      <div style="display: flex; align-items: center; margin-left: 15px;">
+      <div style="display: flex; align-items: center; margin-left: 15px">
         <img
           src="/assets/marker-icon-2x-blue.png"
           width="15px"
@@ -92,6 +92,13 @@
           <a href="/auditorias-gestion" *ngIf="permissions.caracterizacion">
             <i class="fa fa-cogs fa-2x"></i>
             <span class="nav-text">Auditorias gestion</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/auditoria-fallo" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-cogs fa-2x"></i>
+            <span class="nav-text">Auditoria fallo</span>
           </a>
         </li>
       </ul>

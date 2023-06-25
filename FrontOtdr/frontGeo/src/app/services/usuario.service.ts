@@ -6,6 +6,7 @@ import { Perfilamiento } from '../perfilamiento';
 import { Puntos } from '../puntos';
 import { Rutas } from '../rutas';
 import { AuditoriasGestion } from '../auditorias-gestion';
+import { Fallas } from '../fallas';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,11 @@ export class UsuarioService {
 
   }
   
+  public obtenerListaFallos(): Observable<Fallas[]>
+  {
+
+    return this.httpClient.get<Fallas[]>(`${baseUrl}/usuario/auditoria-falla`)
+  }
 
 
 
