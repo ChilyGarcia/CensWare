@@ -5,8 +5,6 @@ import com.otdr.otdr.Models.Peticiones.PerfilCrearRequest;
 import com.otdr.otdr.Models.Peticiones.PermisosRequest;
 import com.otdr.otdr.Models.Peticiones.UsuarioRegisterRequest;
 import com.otdr.otdr.Models.Respuestas.UsuarioRegisterResponse;
-import com.otdr.otdr.Repositories.RolRepository;
-import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PerfilService;
 import com.otdr.otdr.Services.PermisoService;
 import com.otdr.otdr.Services.UsuarioService;
@@ -87,5 +85,10 @@ public class UsuarioController {
     @GetMapping("/auditoria-falla")
     public ResponseEntity<?> allAuditoriaFalla(){
         return new ResponseEntity<>(usuarioService.allAuditoriaFalla(), HttpStatus.OK);
+    }
+
+    @GetMapping("/tipos-fallos-comunes")
+    public ResponseEntity<?> tipoFalloComun(){
+        return new ResponseEntity<>(usuarioService.tipoFalloComun(), HttpStatus.OK);
     }
 }

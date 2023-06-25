@@ -16,4 +16,5 @@ public interface UsuarioService {
     public List<AuditoriaGestionResponse> auditoriaTitulo(String titulo);
     public List<Object[]> auditoriaFallaTresMeses();
     public List<Auditoria> allAuditoriaFalla();
+    public List<Object[]> tipoFalloComun();
 }

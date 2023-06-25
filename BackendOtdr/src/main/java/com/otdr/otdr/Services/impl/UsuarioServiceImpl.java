@@ -133,6 +133,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         return auditoriaRepository.findAll();
     }
 
+    @Override
+    public List<Object[]> tipoFalloComun() {
+        return auditoriaRepository.tiposFalloComun();
+    }
+
     public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){
 
         int nRegistros = gestionRepository.numeroRegistros();
