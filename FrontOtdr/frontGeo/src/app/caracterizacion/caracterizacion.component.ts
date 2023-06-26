@@ -44,7 +44,7 @@ export class CaracterizacionComponent {
   formSubmit() {}
 
   containsOnlyNumbersAndDot(word: string): boolean {
-    const pattern = /^[\d.]+$/;
+    const pattern = /^[\d.-]+$/;
     return pattern.test(word);
   }
 
