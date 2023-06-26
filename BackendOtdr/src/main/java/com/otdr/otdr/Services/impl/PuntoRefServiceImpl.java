@@ -7,10 +7,7 @@ import com.otdr.otdr.Security.Exceptions.MyException;
 import com.otdr.otdr.Services.PuntoRefService;
 import com.otdr.otdr.Shared.CrearPuntoRefDTO;
 import com.otdr.otdr.Shared.CrearRutaDTO;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.modelmapper.ModelMapper;
@@ -18,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -49,7 +48,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
             throw new MyException("La ruta no existe");
         }
         try {
-            List<PuntoReferencia> puntoReferenciaList = leerExcel(file.getInputStream(), ruta);
+            List<PuntoReferencia> puntoReferenciaList = leerExcel(file, ruta);
             for (PuntoReferencia punto : puntoReferenciaList){
                 CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
                 puntoRefDTO.setRuta(punto.getRuta().getRutaNombre());
@@ -64,8 +63,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
             String fecha = simpleDateFormat.format(calendar.getTime());
             Usuario usuario = usuarioRepository.findByEmail(userLogeado);
 
-            UsuarioServiceImpl usuarioService = new UsuarioServiceImpl();
-            usuarioService.auditoriaGestion("CARACTERIZO","Caracterizo por el excel puntos en la ruta: "+ruta.getRutaNombre(),fecha,usuario);
+            auditoriaGestion("CARACTERIZO","Caracterizo por el excel puntos en la ruta: "+ruta.getRutaNombre(),fecha,usuario);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -146,41 +144,74 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         return crearPuntoRefDTO;
     }
 
-    private List<PuntoReferencia> leerExcel(InputStream inputStream, Ruta ruta) throws IOException {
-        List<PuntoReferencia> puntoReferencias = new ArrayList<>();
-        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-        XSSFSheet sheet = workbook.getSheetAt(0);
+    private List<PuntoReferencia> leerExcel(MultipartFile file, Ruta ruta) throws IOException {
 
-        for (Row row: sheet){
-            if (row.getRowNum() == 0){
-                continue;
-            }
-            Iterator<Cell> cellIterator = row.iterator();
-            int cellIndex =0;
-            String tipo="", long2="", lat2="", med="";
-            int nombre=0, cantR=0;
+        String fileName = file.getOriginalFilename();
+        byte[] fileContent = file.getBytes();
+        String ruta1;
+        try {
+            assert fileName != null;
+            File tempFile = File.createTempFile(fileName, null);
 
-            while (cellIterator.hasNext()){
-                Cell cell = cellIterator.next();
+            Files.write(tempFile.toPath(), fileContent);
 
-                switch (cellIndex){
-                    case 0 : tipo = cell.getStringCellValue();break;
-                    case 1 : nombre = (int) cell.getNumericCellValue();break;
-                    case 2 : cantR = (int) cell.getNumericCellValue();break;
-                    case 3 : long2 = cell.getStringCellValue();break;
-                    case 4 : lat2 = cell.getStringCellValue();break;
-                    case 5 : med = cell.getStringCellValue();break;
-                    default: {}
-                }
-                cellIndex++;
-            }
-            puntoReferencias.add(configPunto(tipo, long2, lat2, med, nombre, cantR, ruta));
+            ruta1 = tempFile.getAbsolutePath();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new MyException("Error al sacar el path del file");
         }
 
-        workbook.close();
-        inputStream.close();
 
-        return puntoReferencias;
+        List<PuntoReferencia> puntoReferencias = new ArrayList<>();
+
+        try(Workbook workbook = WorkbookFactory.create(new File(ruta1))) {
+            Sheet sheet = workbook.getSheetAt(0);
+            for (Row row : sheet) {
+                if (row.getRowNum() == 0) {
+                    continue;
+                }
+                Iterator<Cell> cellIterator = row.iterator();
+                int cellIndex = 0;
+                String tipo = "", long2 = "", lat2 = "", med = "";
+                int nombre = 0;
+                double cantR = 0;
+
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+
+                    switch (cellIndex) {
+                        case 0:
+                            tipo = cell.getStringCellValue();
+                            break;
+                        case 1:
+                            nombre = (int) cell.getNumericCellValue();
+                            break;
+                        case 2:
+                            cantR = cell.getNumericCellValue();
+                            break;
+                        case 3:
+                            long2 = cell.getStringCellValue();
+                            break;
+                        case 4:
+                            lat2 = cell.getStringCellValue();
+                            break;
+                        case 5:
+                            med = cell.getStringCellValue();
+                            break;
+                        default: {
+                        }
+                    }
+                    cellIndex++;
+                }
+                puntoReferencias.add(configPunto(tipo, long2, lat2, med, nombre, cantR, ruta));
+            }
+
+            return puntoReferencias;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new MyException("Error al leer el excel");
+        }
 
     }
 
@@ -294,7 +325,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
 
     }
 
-    public PuntoReferencia configPunto(String tipo,String longt,String lat,String med,int nombre,int cantR, Ruta ruta){
+    public PuntoReferencia configPunto(String tipo,String longt,String lat,String med,int nombre,double cantR, Ruta ruta){
 
         TipoPunto tipoPunto = puntoRepository.findByTipoNombre(tipo);
         String cantRem = String.valueOf(cantR);
