@@ -28,6 +28,7 @@ import { RegistroFallaComponent } from './registro-falla/registro-falla.componen
 import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
 import { SolucionarFalloComponent } from './solucionar-fallo/solucionar-fallo.component';
 import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.component';
+import { MapaPuntoFalloComponent } from './mapa-punto-fallo/mapa-punto-fallo.component';
 
 
 
@@ -48,7 +49,8 @@ import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.compo
     RegistroFallaComponent,
     AuditoriasGestionComponent,
     SolucionarFalloComponent,
-    AuditoriaFalloComponent
+    AuditoriaFalloComponent,
+    MapaPuntoFalloComponent
   ],
   imports: [
     BrowserModule,

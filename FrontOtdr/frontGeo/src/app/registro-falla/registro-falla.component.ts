@@ -45,6 +45,8 @@ export class RegistroFallaComponent {
       )
       .subscribe((data) => {
         //En este punto nuestra petición ha funcionado correctamente
+
+        console.log(data);
         Swal.fire({
           title: '<strong>El plato ha sido creado</strong>',
           icon: 'success',

@@ -1,0 +1,81 @@
+<html>
+  <head> </head>
+  <body>
+    <div id="map" style="margin-left: 5%; width: 30%; height: 100vh"></div>
+    <nav class="main-menu">
+      <ul>
+        <li>
+          <a href="/inicio" *ngIf="permissions.dashboard">
+            <i class="fa fa-home fa-2x"></i>
+            <span class="nav-text"> Inicio </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="/mapa" *ngIf="permissions.maps">
+            <i class="fa fa-globe fa-2x"></i>
+            <span class="nav-text"> Mapa </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/caracterizacion" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text"> Caracterizacion </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="/perfilamiento" *ngIf="loginService.getUserRol() == 'ADMIN'">
+            <i class="fa fa-comments fa-2x"></i>
+            <span class="nav-text"> Perfilamiento </span>
+          </a>
+        </li>
+
+        <li>
+          <a
+            href="/agregar-usuarios"
+            *ngIf="loginService.getUserRol() == 'ADMIN'"
+          >
+            <i class="fa fa-book fa-2x"></i>
+            <span class="nav-text"> Agregar usuarios </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/rutas" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text">Rutas</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/registro-fallas" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-map-marker fa-2x"></i>
+            <span class="nav-text">Registro de fallas</span>
+          </a>
+        </li>
+        <li>
+          <a href="/auditorias-gestion" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-cogs fa-2x"></i>
+            <span class="nav-text">Auditorias gestion</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/auditoria-fallo" *ngIf="permissions.caracterizacion">
+            <i class="fa fa-cogs fa-2x"></i>
+            <span class="nav-text">Auditoria fallo</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="logout">
+        <li>
+          <a href="#">
+            <i class="fa fa-power-off fa-2x"></i>
+            <span class="nav-text"> Cerrar Sesión </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -15,6 +15,7 @@ import { RegistroFallaComponent } from './registro-falla/registro-falla.componen
 import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gestion.component';
 import { SolucionarFalloComponent } from './solucionar-fallo/solucionar-fallo.component';
 import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.component';
+import { MapaPuntoFalloComponent } from './mapa-punto-fallo/mapa-punto-fallo.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,11 @@ const routes: Routes = [
   {
     path:'auditoria-fallo',
     component:AuditoriaFalloComponent,
+    pathMatch:'full'
+  },
+  {
+    path:'mapa-fallo',
+    component:MapaPuntoFalloComponent,
     pathMatch:'full'
   }
 
