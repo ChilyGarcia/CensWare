@@ -27,4 +27,10 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
                     "GROUP BY a.titulo"
     )
     public List<Object[]> tiposFalloComun();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM auditorias a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d') DESC"
+    )
+    public List<Auditoria> allAuditoria();
 }

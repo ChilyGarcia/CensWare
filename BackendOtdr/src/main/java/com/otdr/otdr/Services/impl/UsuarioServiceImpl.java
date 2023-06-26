@@ -130,7 +130,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public List<Auditoria> allAuditoriaFalla(){
-        return auditoriaRepository.findAll();
+        return auditoriaRepository.allAuditoria();
     }
 
     @Override
