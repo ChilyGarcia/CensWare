@@ -107,6 +107,7 @@
 
         <button
         *ngIf="caracterizacion.latitud.length > 15 && caracterizacion.longitud.length >15
+        && caracterizacion.latitud.includes('.') && caracterizacion.longitud.includes('.')
         && containsOnlyNumbersAndDot(caracterizacion.latitud) && containsOnlyNumbersAndDot(caracterizacion.longitud)
         && caracterizacion.cantRemanente != '' && containsOnlyNumbersAndDot(caracterizacion.cantRemanente)
         && caracterizacion.tipoPunto != '' && comprobacion.medicion != '' && caracterizacion.ruta != ''"
