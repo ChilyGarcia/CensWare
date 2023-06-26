@@ -36,6 +36,11 @@ export class AgregarPerfilComponent {
     public loginService: LoginServiceService
   ) {}
 
+  containsOnlyLetters(word: string): boolean {
+    const pattern = /^[a-zA-ZñÑ]+$/;
+    return pattern.test(word);
+  }
+  
   formSubmit() {
     this.cuerpo.nombrePerfil = this.formulario.nombrePerfilForm;
 

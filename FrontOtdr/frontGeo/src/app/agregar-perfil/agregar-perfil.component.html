@@ -104,53 +104,81 @@
       <label>Nombre del perfil</label>
     </div>
 
-    <mat-form-field class="selectRol">
-        <mat-select
-          placeholder="Maps"
-          name="opcines"
-          [(ngModel)]="formulario.mapsForm"
-        >
-          <mat-option value="SI">Si</mat-option>
-          <mat-option value="NO">No</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <label style="color: white; margin-top: 5px;">Mapa</label>
 
-      <mat-form-field class="selectRol">
-        <mat-select
-          placeholder="Caracterizacion"
-          name="opcines"
-          [(ngModel)]="formulario.caracterizacionForm"
-        >
-          <mat-option value="SI">Si</mat-option>
-          <mat-option value="NO">No</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <select
+        name="select-location"
+        aria-placeholder="Seleccione el rol"
+        id="select-location"
+        style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px; margin-top: 10px;"
+        [(ngModel)]="formulario.mapsForm"
+      >
+        <option value='' disabled>
+          
+          Acceso al mapa...
+        </option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
+      </select>
 
-      <mat-form-field class="selectRol">
-        <mat-select
-          placeholder="Fallo"
-          name="opcines"
-          [(ngModel)]="formulario.falloForm"
-        >
-          <mat-option value="SI">Si</mat-option>
-          <mat-option value="NO">No</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <label style="color: white; margin-top: 5px;">Caracterización</label>
 
-      <mat-form-field class="selectRol">
-        <mat-select
-          placeholder="Dashboard"
-          name="opcines"
-          [(ngModel)]="formulario.dashboardForm"
-        >
-          <mat-option value="SI">Si</mat-option>
-          <mat-option value="NO">No</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <select
+        name="select-location"
+        aria-placeholder="Seleccione el rol"
+        id="select-location"
+        style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px; margin-top: 10px;"
+        [(ngModel)]="formulario.caracterizacionForm"
+      >
+        <option value='' disabled>
+          
+          Acceso a caracterización...
+        </option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
+      </select>
+
+      <label style="color: white; margin-top: 5px;">Fallos</label>
 
 
-    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
-      Crear perfil
-    </button>
+      <select
+        name="select-location"
+        aria-placeholder="Seleccione el rol"
+        id="select-location"
+        style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px; margin-top: 10px;"
+        [(ngModel)]="formulario.falloForm"
+      >
+        <option value='' disabled>
+          
+          Acceso al fallo...
+        </option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
+      </select>
+
+      <label style="color: white; margin-top: 5px;">Dashboard</label>
+
+      <select
+        name="select-location"
+        aria-placeholder="Seleccione el rol"
+        id="select-location"
+        style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px; margin-top: 10px;"
+        [(ngModel)]="formulario.dashboardForm"
+      >
+        <option value='' disabled>
+          Acceso al dashboard...
+        </option>
+        <option value="SI">Si</option>
+        <option value="NO">No</option>
+      </select>
+
+
+    <div style="width: 100%; display: flex; justify-content: center;">
+      <button *ngIf="containsOnlyLetters(formulario.nombrePerfilForm) && formulario.mapsForm != ''
+      && formulario.caracterizacionForm != '' && formulario.falloForm != '' && formulario.dashboardForm != ''" mat-raised-button style="margin-top: 10%">
+        Crear perfil
+      </button>
+    </div>
+    
   </form>
 </div>
