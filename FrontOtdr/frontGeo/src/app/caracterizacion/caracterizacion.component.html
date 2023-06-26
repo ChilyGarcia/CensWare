@@ -38,7 +38,7 @@
             id="apellido"
             [(ngModel)]="caracterizacion.latitud"
             name="apellido"
-            pattern="[0-9.]{17}" maxlength="17"
+            pattern="[0-9.]{17}" maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Latitud</label>
@@ -50,7 +50,7 @@
             id="email"
             [(ngModel)]="caracterizacion.longitud"
             name="email"
-            pattern="[0-9.]{17}" maxlength="17"
+            pattern="[0-9.]{17}" maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Longitud</label>
@@ -106,9 +106,10 @@
         </mat-form-field>
 
         <button
-        *ngIf="caracterizacion.latitud.length >= 17 && caracterizacion.longitud.length >=17
-        && caracterizacion.latitud.includes('.') && caracterizacion.longitud.includes('.')
-        && containsOnlyNumbersAndDot(caracterizacion.latitud) && containsOnlyNumbersAndDot(caracterizacion.longitud)"
+        *ngIf="caracterizacion.latitud.length > 15 && caracterizacion.longitud.length >15
+        && containsOnlyNumbersAndDot(caracterizacion.latitud) && containsOnlyNumbersAndDot(caracterizacion.longitud)
+        && caracterizacion.cantRemanente != '' && containsOnlyNumbersAndDot(caracterizacion.cantRemanente)
+        && caracterizacion.tipoPunto != '' && comprobacion.medicion != '' && caracterizacion.ruta != ''"
           type="submit"
           mat-raised-button
           style="margin-left: 38%; margin-top: 2%"
