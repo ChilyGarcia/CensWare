@@ -100,6 +100,7 @@
         id="nombre"
         [(ngModel)]="user.nombre"
         name="nombre"
+        pattern="[A-Za-z]+" 
       />
       <label>Nombre</label>
     </div>
@@ -115,6 +116,7 @@
     </div>
     <div class="user-box">
       <input
+      type="email"
         required
         matInput
         id="email"
@@ -130,6 +132,7 @@
         id="celular"
         [(ngModel)]="user.celular"
         name="celular"
+        maxlength="13"
       />
       <label>Celular</label>
     </div>
@@ -151,25 +154,31 @@
         id="pass"
         [(ngModel)]="user.password"
         name="password"
+        minlength="6"
       />
       <label>Password</label>
     </div>
 
-    <mat-form-field class="selectRol">
-      <mat-select
-        placeholder="Seleccione Un rol"
+    <select
+        name="select-location"
+        aria-placeholder="Seleccione el rol"
+        id="select-location"
+        style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px; margin-top: 10px;"
         [(ngModel)]="user.perfil"
-        name="opcines"
       >
-        <mat-option
-          *ngFor="let opcion of listaPerfil"
-          [value]="opcion.perfilNombre"
-          >{{ opcion.perfilNombre }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
+        <option value='' disabled>
+          Seleccione el rol
+        </option>
+        <option *ngFor="let opcion of listaPerfil"
+        [value]="opcion.perfilNombre"
+        >{{ opcion.perfilNombre }}
+        </option>
+      </select>
 
-    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
+
+    <button *ngIf="containsOnlyLetters(user.nombre) && containsOnlyLetters(user.apellido) 
+    && containsNumbersAndPlusSymbol(user.celular) && containsNumbersAndPlusSymbol(user.cedula)
+    && user.perfil != ''" mat-raised-button style="margin-left: 38%; margin-top: 10%">
       Enviar
     </button>
   </form>

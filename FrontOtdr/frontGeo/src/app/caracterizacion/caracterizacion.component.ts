@@ -18,6 +18,8 @@ export class CaracterizacionComponent {
 
   constructor(private usuarioService: UsuarioService, private loginService:LoginServiceService) {}
 
+  
+
   comprobacion = {
     medicion: '',
   };
@@ -41,7 +43,13 @@ export class CaracterizacionComponent {
 
   formSubmit() {}
 
+  containsOnlyNumbersAndDot(word: string): boolean {
+    const pattern = /^[\d.]+$/;
+    return pattern.test(word);
+  }
+
   enviarCaracterizacion() {
+    
     console.log(this.caracterizacion.nombrePunto);
 
     if (this.comprobacion.medicion == 'SI') {

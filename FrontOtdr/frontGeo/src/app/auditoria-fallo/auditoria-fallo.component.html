@@ -5,19 +5,17 @@
     <div class="contenido">
       <table class="fixed_headers">
         <thead>
-          <tr>
-            <th>Titulo</th>
-            <th>Ruta</th>
-            <th>Fecha</th>
-          
-
+          <tr style="width: 100%; text-align: center;">
+            <td style="width: 3%;">Titulo</td>
+            <td style="width: 3%;">Ruta</td>
+            <td style="width: 5%;">Fecha</td>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let auditorias of listaFallos">
-            <td>{{ auditorias.titulo }}</td>
-            <td>{{ auditorias.ruta }}</td>
-            <td>{{ auditorias.fecha }}</td>
+            <td style="width: 3%;">{{ auditorias.titulo }}</td>
+            <td style="width: 3%;">{{ auditorias.ruta }}</td>
+            <td style="width: 5%;">{{ auditorias.fecha }}</td>
      
           </tr>
         </tbody>

@@ -7,6 +7,7 @@
     <label style="color: aqua">Ruta:</label>
     <div class="user-box">
       <select
+      style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px;"
         name="select-location"
         id="select-location"
         [(ngModel)]="cuerpo.ruta"
@@ -55,24 +56,31 @@
         id="remutilizado"
         [(ngModel)]="cuerpo.remutilizado"
         name="remutilizado"
+        pattern="[0-9.]+" 
       />
       <label>Remanente utilizado</label>
     </div>
     
 
-    <mat-form-field class="selectRol">
-      <mat-select
-        placeholder="Tipo de fallo"
+    <label style="color: aqua">Tipo de fallo:</label>
+
+    <div class="user-box">
+      <select
+      style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px;"
         name="opcines"
         [(ngModel)]="cuerpo.fallo"
       >
-        <mat-option value="FIBRA ROTA">Fibra rota</mat-option>
-        <mat-option value="FIBRA QUEMADA">Fibra quemada</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <option value="FIBRA ROTA">Fibra rota</option>
+      <option value="FIBRA QUEMADA">Fibra quemada</option>
+      </select>
+    </div>
+      
 
-    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
+    <div style="width: 100%; justify-content: center;">
+    <button *ngIf="cuerpo.fallo != '' && cuerpo.remutilizado != ''
+    && cuerpo.mensaje != '' && containsNumbers(cuerpo.remutilizado)" mat-raised-button style=" margin-top: 10%">
       Solucionar falla
     </button>
+  </div>
   </form>
 </div>

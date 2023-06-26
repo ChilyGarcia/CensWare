@@ -77,6 +77,12 @@ html {
     margin-top: 40px;
     letter-spacing: 4px
   }
+
+  .selectRol{
+    width: 100%;
+    margin-top: 20px;
+  }
+  
   
   .login-box a:hover {
     background: #03e9f4;

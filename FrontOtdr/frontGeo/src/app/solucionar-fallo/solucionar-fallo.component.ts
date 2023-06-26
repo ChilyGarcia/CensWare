@@ -18,6 +18,14 @@ export class SolucionarFalloComponent {
   ) {}
   listaRutas: Rutas[];
 
+
+  containsNumbers(word: string): boolean {
+    
+    const pattern = /^[\d.]+$/;
+    console.log(pattern.test(word))
+    return pattern.test(word);
+  }
+
   cuerpo = {
     ruta: '',
     nombreP: 0,

@@ -20,48 +20,50 @@
     <div class="login-box">
       <h2>Caracterizacion</h2>
 
-      <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
+      <form (ngSubmit)="enviarCaracterizacion()" id="form" #formRef="ngForm">
         <div class="user-box">
           <input
             [(ngModel)]="caracterizacion.nombrePunto"
-            required
+            [required]="true"
             matInput
-            placeholder="Digite su nombre"
             id="nombre"
-            name="nombre"
+            pattern="[A-Za-z]"
           />
           <label>Nombre</label>
         </div>
         <div class="user-box">
           <input
-            required
+            [required]="true"
             matInput
-            placeholder="Digite su apellido"
             id="apellido"
             [(ngModel)]="caracterizacion.latitud"
             name="apellido"
+            pattern="[0-9.]{17}" maxlength="17"
+            title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Latitud</label>
         </div>
         <div class="user-box">
           <input
-            required
+          [required]="true"
             matInput
-            placeholder="Digite su email"
             id="email"
             [(ngModel)]="caracterizacion.longitud"
             name="email"
+            pattern="[0-9.]{17}" maxlength="17"
+            title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Longitud</label>
         </div>
         <div class="user-box">
           <input
-            required
+          [required]="true"
             matInput
-            placeholder="Digite su email"
             id="email"
             [(ngModel)]="caracterizacion.cantRemanente"
+            pattern="[0-9.]+"
             name="email"
+            title="Ingrese solo números y el carácter '.'"
           />
           <label>Remanente</label>
         </div>
@@ -104,7 +106,10 @@
         </mat-form-field>
 
         <button
-          (click)="enviarCaracterizacion()"
+        *ngIf="caracterizacion.latitud.length >= 17 && caracterizacion.longitud.length >=17
+        && caracterizacion.latitud.includes('.') && caracterizacion.longitud.includes('.')
+        && containsOnlyNumbersAndDot(caracterizacion.latitud) && containsOnlyNumbersAndDot(caracterizacion.longitud)"
+          type="submit"
           mat-raised-button
           style="margin-left: 38%; margin-top: 2%"
         >

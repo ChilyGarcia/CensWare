@@ -114,8 +114,10 @@
       <label>Fin de la ruta</label>
     </div>
 
-    <button mat-raised-button style="margin-left: 38%; margin-top: 10%">
+    <div style="width: 100%; display: flex; justify-content: center;">
+    <button *ngIf="cuerpo.rutaFin != '' && cuerpo.rutaInicio != ''" mat-raised-button style="margin-top: 10%">
       Crear la ruta
     </button>
+  </div>
   </form>
 </div>

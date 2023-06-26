@@ -13,6 +13,8 @@ export class RegistroFallaComponent {
   listaRutas: Rutas[];
 
   formData = new FormData();
+  
+  selectedFileName: string = '';
 
   registroFalla = {
     ruta: '',
@@ -62,6 +64,12 @@ export class RegistroFallaComponent {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      this.selectedFileName = files[0].name;
+    } else {
+      this.selectedFileName = '';
+    }
 
     this.formData.append('file', file);
   }

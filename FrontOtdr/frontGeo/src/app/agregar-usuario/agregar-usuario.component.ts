@@ -30,6 +30,16 @@ export class AgregarUsuarioComponent {
     this.obtenerListaPerfiles();
   }
 
+  containsOnlyLetters(word: string): boolean {
+    const pattern = /^[a-zA-ZñÑ]+$/;
+    return pattern.test(word);
+  }
+
+  containsNumbersAndPlusSymbol(word: string): boolean {
+    const pattern = /^[\d+]+$/;
+    return pattern.test(word);
+  }
+
   formSubmit() {
     this.usuarioServices.añadirUsuario(this.user).subscribe(
       (data) => {
