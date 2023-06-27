@@ -16,7 +16,7 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
             value = "SELECT a.ruta, COUNT(*) AS cantidad\n" +
                     "FROM auditorias a\n" +
                     "WHERE STR_TO_DATE(a.fecha, '%Y-%m-%d %H:%i:%s') >= :fecha\n" +
-                    "GROUP BY a.ruta DESC LIMIT 5"
+                    "GROUP BY a.ruta ORDER BY cantidad DESC LIMIT 5"
     )
     public List<Object[]> rutasMasFallas(LocalDate fecha);
 
