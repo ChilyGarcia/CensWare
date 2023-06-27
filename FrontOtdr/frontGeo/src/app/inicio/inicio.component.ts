@@ -13,9 +13,13 @@ declare function graficasEstadisticas(): any;
 })
 export class InicioComponent implements OnInit {
   listaDatosGratica: any[];
+  listaFallaComun: any[];
 
   listaRutas: any[];
   listaCantidadFallas: any[];
+
+  listaNombreFallaComun: any[];
+  listaCantidadFallaComun: any[];
 
   constructor(
     public loginService: LoginServiceService,
@@ -50,17 +54,16 @@ export class InicioComponent implements OnInit {
       console.log(this.listaRutas);
       console.log(this.listaCantidadFallas);
 
-   
       var ctx = document.getElementById('myChart') as HTMLCanvasElement | null;
       if (ctx) {
         var context = ctx.getContext('2d');
         if (context) {
           var data = {
-            labels: this.listaRutas, //dinamico
+            labels: this.listaRutas,
             datasets: [
               {
                 label: 'Registro de fallas por ruta',
-                data: this.listaCantidadFallas, //Dinamico
+                data: this.listaCantidadFallas,
                 backgroundColor: 'rgba(0, 123, 255, 0.5)',
                 borderColor: 'rgba(0, 123, 255, 1)',
                 borderWidth: 1,
@@ -68,7 +71,7 @@ export class InicioComponent implements OnInit {
             ],
           };
 
-          var myChart = new Chart(context, {
+          var myBarChart = new Chart(context, {
             type: 'bar',
             data: data,
             options: {
@@ -82,6 +85,59 @@ export class InicioComponent implements OnInit {
           });
         }
       }
+
+      this.userService.obtenerDatosTipoFallaComun().subscribe((dato) => {
+        this.listaFallaComun = dato;
+
+        console.log(this.listaFallaComun);
+
+        this.listaNombreFallaComun = [];
+        this.listaCantidadFallaComun = [];
+
+        for (let i = 0; i < this.listaFallaComun.length; i++) {
+          this.listaNombreFallaComun.push(this.listaFallaComun[i][0]);
+          this.listaCantidadFallaComun.push(this.listaFallaComun[i][1]);
+        }
+
+        console.log('-----------------------');
+        console.log(this.listaNombreFallaComun);
+        console.log(this.listaCantidadFallaComun);
+
+        var ctx2 = document.getElementById(
+          'myChart2'
+        ) as HTMLCanvasElement | null;
+        if (ctx2) {
+          var context2 = ctx2.getContext('2d');
+          if (context2) {
+            var data2 = {
+              labels: this.listaNombreFallaComun,
+              datasets: [
+                {
+                  label: 'Cantidad: ',
+                  data: this.listaCantidadFallaComun,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                  ],
+                  borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            };
+
+            var myPieChart = new Chart(context2, {
+              type: 'pie',
+              data: data2,
+              options: {
+                responsive: true,
+              },
+            });
+          }
+        }
+      });
     });
   }
 

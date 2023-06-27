@@ -8,6 +8,7 @@ import { Rutas } from '../rutas';
 import { AuditoriasGestion } from '../auditorias-gestion';
 import { Fallas } from '../fallas';
 import { ListaGraficaEstadistica } from '../lista-grafica-estadistica';
+import { FallaComun } from '../falla-comun';
 
 @Injectable({
   providedIn: 'root'
@@ -87,6 +88,10 @@ export class UsuarioService {
   {
 
     return this.httpClient.get<ListaGraficaEstadistica[]>(`${baseUrl}/usuario/auditoria-falla-trimestre`)
+  }
+
+  public obtenerDatosTipoFallaComun(): Observable<FallaComun[]>{
+    return this.httpClient.get<FallaComun[]>(`${baseUrl}/usuario/tipos-fallos-comunes`)
   }
 
   
