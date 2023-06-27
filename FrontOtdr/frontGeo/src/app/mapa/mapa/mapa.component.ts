@@ -61,6 +61,8 @@ export class MapaComponent {
     this.userService.obtenerListaPuntos(this.ruta.ruta).subscribe((dato) => {
       this.listaPuntos = dato;
 
+      console.log(this.listaPuntos);
+
       for (let i = 0; i < this.listaPuntos.length; i++) {
         // console.log(this.listaPuntos[i].longitud);
         // console.log(this.listaPuntos[i].latitud);

@@ -48,7 +48,7 @@ export class SolucionarFalloComponent {
     console.log(this.cuerpo.fallo);
 
     this.solucionarFallo();
-    window.location.href = 'auditoria-fallo';
+    //window.location.href = 'auditoria-fallo';
     this.formRef.resetForm();
     //window.location.href = "auditoria-fallo";
   }
