@@ -48,15 +48,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
             throw new MyException("La ruta no existe");
         }
         try {
-            List<PuntoReferencia> puntoReferenciaList = leerExcel(file, ruta);
-            for (PuntoReferencia punto : puntoReferenciaList){
-                CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
-                puntoRefDTO.setRuta(punto.getRuta().getRutaNombre());
-                puntoRefDTO.setTipoPunto(punto.getTipoPunto().getTipoNombre());
-                puntoRefDTO.setPArchivo(true);
-
-                guardarManual(puntoRefDTO);
-            }
+            leerExcel(file, ruta);
             System.out.println("Se caracterizo los postes");
 
             Calendar calendar = Calendar.getInstance();
@@ -146,7 +138,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         return crearPuntoRefDTO;
     }
 
-    private List<PuntoReferencia> leerExcel(MultipartFile file, Ruta ruta) throws IOException {
+    private void leerExcel(MultipartFile file, Ruta ruta) throws IOException {
 
         String fileName = file.getOriginalFilename();
         byte[] fileContent = file.getBytes();
@@ -165,8 +157,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         }
 
 
-        List<PuntoReferencia> puntoReferencias = new ArrayList<>();
-
+        PuntoReferencia punto = null;
         try(Workbook workbook = WorkbookFactory.create(new File(ruta1))) {
             Sheet sheet = workbook.getSheetAt(0);
             for (Row row : sheet) {
@@ -206,10 +197,16 @@ public class PuntoRefServiceImpl implements PuntoRefService {
                     }
                     cellIndex++;
                 }
-                puntoReferencias.add(configPunto(tipo, long2, lat2, med, nombre, cantR, ruta));
-            }
+                punto = configPunto(tipo, long2, lat2, med, nombre, cantR, ruta);
 
-            return puntoReferencias;
+                CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
+                puntoRefDTO.setRuta(ruta.getRutaNombre());
+                puntoRefDTO.setTipoPunto(punto.getTipoPunto().getTipoNombre());
+                puntoRefDTO.setPArchivo(true);
+
+                guardarManual(puntoRefDTO);
+
+            }
         }catch (Exception e){
             e.printStackTrace();
             throw new MyException("Error al leer el excel");
@@ -336,6 +333,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         boolean medicion;
         String kmAnt="0";
 
+
         if (Objects.equals(med, "si") || Objects.equals(med, "Si") || Objects.equals(med, "SI") || Objects.equals(med, "sI")){
             medicion = true;
         } else if (Objects.equals(med, "no") || Objects.equals(med, "No") || Objects.equals(med, "NO") || Objects.equals(med, "nO")) {
@@ -344,8 +342,11 @@ public class PuntoRefServiceImpl implements PuntoRefService {
             throw new MyException("Diligencio el campo MEDICION mal");
         }
 
+        System.out.println(tipoPunto.getTipoNombre() +" "+nombre+" "+cantRem+" "+long2+" "+lat2+" "+medicion+" *******");
+
         if (nombre > 1){
             PuntoReferencia puntoAnt = puntoRefRepository.findByNombrePunto(nombre - 1, ruta.getId());
+            System.out.println(puntoAnt.toString());
             double lat1 = puntoAnt.getLatitud();
             double long1 = puntoAnt.getLongitud();
 
