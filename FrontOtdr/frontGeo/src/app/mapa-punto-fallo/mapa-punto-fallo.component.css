@@ -26,6 +26,21 @@ nav.main-menu.expanded {
   overflow: visible;
 }
 
+
+.tooltip {
+  position: absolute;
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  z-index: 2;
+  background-color: #212121;
+  pointer-events: none; /* Evita que el cuadro de texto interrumpa los eventos del ratón */
+  display: none; /* Oculta el cuadro de texto inicialmente */
+}
+
 .main-menu {
   background: #212121;
   border-right: 1px solid #e5e5e5;

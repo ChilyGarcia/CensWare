@@ -40,6 +40,7 @@ export class RegistroFallaComponent {
     localStorage.removeItem('lng2');
     localStorage.removeItem("nombre1");
     localStorage.removeItem("nombre2");
+    localStorage.removeItem("lugFalla");
   }
 
   formSubmit() {}
@@ -83,6 +84,8 @@ export class RegistroFallaComponent {
           localStorage.setItem('lng1', lng1);
           localStorage.setItem('nombre1',nombre1 );
 
+          localStorage.setItem('lugFalla', this.listaPuntoFalla[0].mensaje.toString())
+
           localStorage.setItem('lt2', lt2);
           localStorage.setItem('lng2', lng2);
           localStorage.setItem('nombre2', nombre2);
@@ -96,6 +99,8 @@ export class RegistroFallaComponent {
           localStorage.setItem('lt1', lt1);
           localStorage.setItem('lng1', lng1);
           localStorage.setItem('nombre1', nombre1);
+
+          localStorage.setItem('lugFalla', this.listaPuntoFalla[0].mensaje.toString())
 
           localStorage.setItem('lt2', '0');
           localStorage.setItem('lng2', '0');

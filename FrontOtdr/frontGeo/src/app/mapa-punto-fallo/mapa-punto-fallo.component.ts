@@ -21,6 +21,10 @@ export class MapaPuntoFalloComponent {
 
   */
 
+  
+  fallo : string = ''
+
+
   permissions = {
     maps: false,
     caracterizacion: false,
@@ -33,7 +37,14 @@ export class MapaPuntoFalloComponent {
     public loginService: LoginServiceService
   ) {}
 
+  
+
   ngOnInit() {
+
+    this.fallo = localStorage.getItem('lugFalla')?.toLocaleLowerCase() || '';
+    this.fallo = this.fallo.charAt(0).toUpperCase() + this.fallo.substring(1)
+    
+
     const lt1 = localStorage.getItem('lt1') || '0';
     const lt1Number = parseFloat(lt1);
 

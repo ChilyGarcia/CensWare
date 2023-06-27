@@ -1,3 +1,5 @@
+const { NgClass } = require("@angular/common");
+
 function holaMundo(lista) {
   //Creacion del mapa
   let map = L.map("map").setView([7.887667899791354, -72.49961964550303], 14);
@@ -61,9 +63,22 @@ function holaMundo(lista) {
 
   //Sirve para dar mas informacion acerca de la latitud y longitud de un punto
   for (var i = 0; i < puntoInteresInfo.length; i++) {
-    puntoInteresInfo[i].on("click", function (e) {
-      alert("Latitud: " + e.latlng.lat + "\nLongitud: " + e.latlng.lng);
+
+    puntoInteresInfo[i].addEventListener("mouseover", function (e) {
+      var tooltip = document.getElementById("tooltip");
+        // Obtén la posición del ratón relativa al documento
+
+        // Establece el contenido del cuadro de texto
+        tooltip.innerHTML = "Latitud: " + e.latlng.lat + "<br>Longitud: " + e.latlng.lng;
+        tooltip.style.display = "block"; // Muestra el cuadro de texto
+
     });
+
+    puntoInteresInfo[i].addEventListener("mouseout", function (e) {
+      var tooltip = document.getElementById("tooltip");
+      tooltip.style.display = "none"; // Oculta el cuadro de texto al salir del elemento
+    });
+
   }
   //- - - - - - - - - - - - - - - -
 }
@@ -95,19 +110,27 @@ function mapaFallo(lista) {
 
   for (let i = 0; i < puntoInteresInfo.length; i++) {
     (function (index) {
-      puntoInteresInfo[index].on("click", function (e) {
+      puntoInteresInfo[index].addEventListener("mouseover", function (e) {
         if (lista[index] && lista[index].nombre) {
-          alert(
-            "Latitud: " +
-              e.latlng.lat +
-              "\nLongitud: " +
-              e.latlng.lng +
-              "\nNombrePunto: " +
-              lista[index].nombre
-          );
+          var tooltip = document.getElementById("tooltip");
+
+          tooltip.innerHTML = "Latitud: " + e.latlng.lat + "<br>Longitud: " + e.latlng.lng + "<br>Poste: " + lista[index].nombre;
+          tooltip.style.display = "block"; // Muestra el cuadro de texto
+          // alert(
+          //   "Latitud: " +
+          //     e.latlng.lat +
+          //     "\nLongitud: " +
+          //     e.latlng.lng +
+          //     "\nNombrePunto: " +
+          //     lista[index].nombre
+          // );
         } else {
           alert("No se encontró el nombre del punto de interés.");
         }
+      });
+      puntoInteresInfo[index].addEventListener("mouseout", function (e) {
+        var tooltip = document.getElementById("tooltip");
+        tooltip.style.display = "none"; // Oculta el cuadro de texto al salir del elemento
       });
     })(i);
   }

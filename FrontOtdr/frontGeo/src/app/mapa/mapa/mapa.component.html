@@ -36,9 +36,16 @@
         />
         <span>Poste</span>
       </div>
+      
     </div>
 
-    <div id="map" style="margin-left: 5%; width: 95%; height: 100vh"></div>
+    <div style="width: 100%; display: flex; justify-content: center; position: absolute; margin-top: -70px;">
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+    
+
+    <div id="map" style="margin-left: 5%; width: 95%; height: 100vh; z-index: 1;"></div>
+    
     <nav class="main-menu">
       <ul>
         <li>
@@ -114,5 +121,6 @@
         </li>
       </ul>
     </nav>
+    
   </body>
 </html>
