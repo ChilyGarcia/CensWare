@@ -7,6 +7,7 @@ import { Puntos } from '../puntos';
 import { Rutas } from '../rutas';
 import { AuditoriasGestion } from '../auditorias-gestion';
 import { Fallas } from '../fallas';
+import { ListaGraficaEstadistica } from '../lista-grafica-estadistica';
 
 @Injectable({
   providedIn: 'root'
@@ -82,7 +83,11 @@ export class UsuarioService {
     return this.httpClient.get<Fallas[]>(`${baseUrl}/usuario/auditoria-falla`)
   }
 
+  public obtenerDatosGrafica(): Observable<ListaGraficaEstadistica[]>
+  {
 
+    return this.httpClient.get<ListaGraficaEstadistica[]>(`${baseUrl}/usuario/auditoria-falla-trimestre`)
+  }
 
   
 

@@ -1,4 +1,4 @@
-const { NgClass } = require("@angular/common");
+
 
 function holaMundo(lista) {
   //Creacion del mapa

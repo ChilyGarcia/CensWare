@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from '../services/login-service.service';
 import { Chart } from 'chart.js/auto';
+import { ListaGraficaEstadistica } from '../lista-grafica-estadistica';
+import { UsuarioService } from '../services/usuario.service';
 
 // Resto del código...
 
@@ -12,12 +14,16 @@ declare function graficasEstadisticas(): any;
   styleUrls: ['./inicio.component.css'],
 })
 export class InicioComponent implements OnInit {
-  constructor(public loginService: LoginServiceService) {}
+  listaDatosGratica: ListaGraficaEstadistica[];
+
+  constructor(
+    public loginService: LoginServiceService,
+    private userService: UsuarioService
+  ) {}
 
   ngOnInit() {
+    this.obtenerDatosEstadisticos();
     console.log(this.loginService.getUserRol());
-
-    console.log('Hola graficas');
 
     var ctx = document.getElementById('myChart') as HTMLCanvasElement | null;
 
@@ -25,10 +31,17 @@ export class InicioComponent implements OnInit {
       var context = ctx.getContext('2d');
       if (context) {
         var data = {
-          labels: ['Cúcuta - Ocaña', 'Cúcuta - Bochalema', 'Cúcuta - Durania', 'Cúcuta - Srabena', 'Çúcuta - Puerto', 'Cúcuta - Pamplona'], //dinamico
+          labels: [
+            'Cúcuta - Ocaña',
+            'Cúcuta - Bochalema',
+            'Cúcuta - Durania',
+            'Cúcuta - Srabena',
+            'Çúcuta - Puerto',
+            'Cúcuta - Pamplona',
+          ], //dinamico
           datasets: [
             {
-              label: 'Fallas',
+              label: 'Registro de fallas por ruta',
               data: [1200, 1700, 800, 1500, 2000, 1300], //Dinamico
               backgroundColor: 'rgba(0, 123, 255, 0.5)',
               borderColor: 'rgba(0, 123, 255, 1)',
@@ -47,11 +60,17 @@ export class InicioComponent implements OnInit {
                 beginAtZero: true,
               },
             },
-           
           },
         });
       }
     }
+  }
+
+  obtenerDatosEstadisticos() {
+    return this.userService.obtenerDatosGrafica().subscribe((dato) => {
+      this.listaDatosGratica = dato;
+      
+    });
   }
 
   formSubmit() {}

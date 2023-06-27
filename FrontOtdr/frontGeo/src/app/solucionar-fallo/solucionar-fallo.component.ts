@@ -18,11 +18,9 @@ export class SolucionarFalloComponent {
   ) {}
   listaRutas: Rutas[];
 
-
   containsNumbers(word: string): boolean {
-    
     const pattern = /^[\d.]+$/;
-    console.log(pattern.test(word))
+    console.log(pattern.test(word));
     return pattern.test(word);
   }
 
@@ -38,7 +36,6 @@ export class SolucionarFalloComponent {
 
   ngOnInit() {
     this.obtenerListaRutas();
-
   }
 
   formSubmit() {
@@ -51,9 +48,9 @@ export class SolucionarFalloComponent {
     console.log(this.cuerpo.fallo);
 
     this.solucionarFallo();
+    window.location.href = 'auditoria-fallo';
     this.formRef.resetForm();
-    window.location.href = "auditoria-fallo";
-
+    //window.location.href = "auditoria-fallo";
   }
 
   solucionarFallo() {
@@ -61,14 +58,12 @@ export class SolucionarFalloComponent {
       console.log(dato);
 
       Swal.fire({
-        title: 'Ruta creada con éxito',
-        text: 'Se ha creado la ruta correctamente',
+        title: 'Se ha solucionado el fallo',
+        text: 'Se ha almacenado en la tabla de auditorias de fallos la solución, será redirijido hacia el apartado de auditorias.',
         icon: 'success',
         confirmButtonText: 'Aceptar',
       });
     });
-
-    
   }
 
   obtenerListaRutas() {
