@@ -38,6 +38,7 @@ export class SolucionarFalloComponent {
 
   ngOnInit() {
     this.obtenerListaRutas();
+
   }
 
   formSubmit() {

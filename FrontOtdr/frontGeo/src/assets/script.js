@@ -68,8 +68,7 @@ function holaMundo(lista) {
   //- - - - - - - - - - - - - - - -
 }
 
-function mapaFallo()
-{
+function mapaFallo(lista) {
   let map = L.map("map").setView([7.887667899791354, -72.49961964550303], 14);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -77,10 +76,41 @@ function mapaFallo()
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
 
-  
+  let puntoInteresInfo = [];
 
+  var redIcon = L.icon({
+    iconUrl: "/assets/marker-icon-red.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+
+  for (let i = 0; i < lista.length; i++) {
+    puntoInteresInfo.push(
+      L.marker([lista[i].latitud, lista[i].longitud], {
+        icon: redIcon,
+      }).addTo(map)
+    );
+  }
+
+  for (let i = 0; i < puntoInteresInfo.length; i++) {
+    (function (index) {
+      puntoInteresInfo[index].on("click", function (e) {
+        if (lista[index] && lista[index].nombre) {
+          alert(
+            "Latitud: " +
+              e.latlng.lat +
+              "\nLongitud: " +
+              e.latlng.lng +
+              "\nNombrePunto: " +
+              lista[index].nombre
+          );
+        } else {
+          alert("No se encontró el nombre del punto de interés.");
+        }
+      });
+    })(i);
+  }
 }
 
-function graficasEstadisticas() {
-  
-}
+function graficasEstadisticas() {}

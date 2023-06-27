@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { LoginServiceService } from '../services/login-service.service';
+import { PuntoFallo } from '../punto-fallo';
+import { LngLt } from '../lng-lt';
 
-declare function mapaFallo(): void;
+declare function mapaFallo(lista: any): void;
 
 @Component({
   selector: 'app-mapa-punto-fallo',
@@ -10,6 +12,15 @@ declare function mapaFallo(): void;
   styleUrls: ['./mapa-punto-fallo.component.css'],
 })
 export class MapaPuntoFalloComponent {
+  listaLnglt: LngLt[] = [];
+
+  /*
+   = [
+    {latitud:123213123, longitud:12123123, mensaje:"", nombre:""}
+  ]
+
+  */
+
   permissions = {
     maps: false,
     caracterizacion: false,
@@ -23,6 +34,31 @@ export class MapaPuntoFalloComponent {
   ) {}
 
   ngOnInit() {
+    const lt1 = localStorage.getItem('lt1') || '0';
+    const lt1Number = parseFloat(lt1);
+
+    const lng1 = localStorage.getItem('lng1') || '0';
+    const lng1Number = parseFloat(lng1);
+
+    const lt2 = localStorage.getItem('lt2') || '0';
+    const lt2Number = parseFloat(lt2);
+
+    const lng2 = localStorage.getItem('lng2') || '0';
+    const lng2Number = parseFloat(lng2);
+
+    const nombre1 = localStorage.getItem("nombre1") || '0';
+    const nombre2 = localStorage.getItem("nombre2") || '0';
+
+    if(lt1 != null && lng1 != null && lt2 != null && lng2 != null) {
+      const dato1 = { latitud: lt1Number, longitud: lng1Number, nombre:nombre1 };
+      const dato2 = { latitud: lt2Number, longitud: lng2Number, nombre:nombre2};
+
+      this.listaLnglt.push(dato1);
+      this.listaLnglt.push(dato2);
+    }
+
+    console.log(this.listaLnglt);
+
     let user = this.loginService.getUser();
 
     let permisoMaps = user.maps;
@@ -39,6 +75,6 @@ export class MapaPuntoFalloComponent {
     console.log(this.permissions.caracterizacion);
     console.log(this.permissions.fallo);
     console.log(this.permissions.dashboard);
-    mapaFallo();
+    mapaFallo(this.listaLnglt);
   }
 }

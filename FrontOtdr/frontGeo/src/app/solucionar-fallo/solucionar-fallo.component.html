@@ -1,13 +1,20 @@
-<app-mapa-punto-fallo></app-mapa-punto-fallo>
+<div style="width: 700px; display: inline-block; margin-left: 3%">
+  <app-mapa-punto-fallo></app-mapa-punto-fallo>
+</div>
 
-<div class="login-box">
+<div class="login-box" style="margin-left: 30%">
   <h2>Solucion del fallo</h2>
 
   <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
     <label style="color: aqua">Ruta:</label>
-    <div class="user-box" style="margin-left: 5%;">
+    <div class="user-box" style="margin-left: 5%">
       <select
-      style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px;"
+        style="
+          padding: 10px;
+          width: 100%;
+          border: 1px solid gray;
+          border-radius: 5px;
+        "
         name="select-location"
         id="select-location"
         [(ngModel)]="cuerpo.ruta"
@@ -56,31 +63,42 @@
         id="remutilizado"
         [(ngModel)]="cuerpo.remutilizado"
         name="remutilizado"
-        pattern="[0-9.]+" 
+        pattern="[0-9.]+"
       />
       <label>Remanente utilizado</label>
     </div>
-    
 
     <label style="color: aqua">Tipo de fallo:</label>
 
     <div class="user-box">
       <select
-      style="padding: 10px; width: 100%; border: 1px solid gray; border-radius: 5px;"
+        style="
+          padding: 10px;
+          width: 100%;
+          border: 1px solid gray;
+          border-radius: 5px;
+        "
         name="opcines"
         [(ngModel)]="cuerpo.fallo"
       >
-      <option value="FIBRA ROTA">Fibra rota</option>
-      <option value="FIBRA QUEMADA">Fibra quemada</option>
+        <option value="FIBRA ROTA">Fibra rota</option>
+        <option value="FIBRA QUEMADA">Fibra quemada</option>
       </select>
     </div>
-      
 
-    <div style="width: 100%; justify-content: center;">
-    <button *ngIf="cuerpo.fallo != '' && cuerpo.remutilizado != ''
-    && cuerpo.mensaje != '' && containsNumbers(cuerpo.remutilizado)" mat-raised-button style=" margin-top: 10%">
-      Solucionar falla
-    </button>
-  </div>
+    <div style="width: 100%; justify-content: center">
+      <button
+        *ngIf="
+          cuerpo.fallo != '' &&
+          cuerpo.remutilizado != '' &&
+          cuerpo.mensaje != '' &&
+          containsNumbers(cuerpo.remutilizado)
+        "
+        mat-raised-button
+        style="margin-top: 10%"
+      >
+        Solucionar falla
+      </button>
+    </div>
   </form>
 </div>
