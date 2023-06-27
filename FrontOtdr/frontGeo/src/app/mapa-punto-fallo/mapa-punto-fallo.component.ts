@@ -13,6 +13,7 @@ declare function mapaFallo(lista: any): void;
 })
 export class MapaPuntoFalloComponent {
   listaLnglt: LngLt[] = [];
+  usuario:string = ''
 
   /*
    = [
@@ -71,6 +72,7 @@ export class MapaPuntoFalloComponent {
     console.log(this.listaLnglt);
 
     let user = this.loginService.getUser();
+    this.usuario = user.email;
 
     let permisoMaps = user.maps;
     let permisoCaracterizacion = user.caracterizacion;

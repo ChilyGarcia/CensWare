@@ -6,7 +6,7 @@
       <div id="tooltip" class="tooltip"></div>
     </div>    
 
-    <div *ngIf="listaLnglt[0].longitud && !listaLnglt[1].longitud" style="background-color: #212121 ;color: white;display: flex; position: absolute; width: 350px; height: 110px; z-index: 2; bottom: 10px; margin-left: 35px; padding: 10px; border-radius: 10px;">
+    <div *ngIf="listaLnglt[0].longitud && !listaLnglt[1].longitud" style="background-color: #0E2A47 ;color: white;display: flex; position: absolute; width: 350px; height: 110px; z-index: 2; bottom: 10px; margin-left: 35px; padding: 10px; border-radius: 10px;">
       
       <div>
         <p *ngIf="fallo != ''">Falla : {{fallo}}</p>
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div *ngIf="listaLnglt[0].longitud && listaLnglt[1].longitud" style="background-color: #212121 ;color: white;display: flex; position: absolute; width: 350px; height: 200px; z-index: 2; bottom: 10px; margin-left: 35px; padding: 10px; border-radius: 10px;">
+    <div *ngIf="listaLnglt[0].longitud && listaLnglt[1].longitud" style="background-color: #0E2A47 ;color: white;display: flex; position: absolute; width: 350px; height: 200px; z-index: 2; bottom: 10px; margin-left: 35px; padding: 10px; border-radius: 10px;">
       
       <div>
         <p *ngIf="fallo != ''">Falla : {{fallo}}</p>
@@ -94,6 +94,12 @@
       </ul>
 
       <ul class="logout">
+        <li>
+          <a href="/inicio" *ngIf="usuario">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> {{usuario}} </span>
+          </a>
+        </li>
         <li>
           <a href="#">
             <i class="fa fa-power-off fa-2x"></i>

@@ -65,20 +65,26 @@
           />
         </mat-form-field>
 
-        
-        <mat-form-field class="selectRol">
-          <mat-select
-            placeholder="Seleccione su rol"
-            [(ngModel)]="loginData.rol"
-            name="opcines"
-          >
-            <mat-option
-              *ngFor="let opcion of listaPerfil"
-              [value]="opcion.perfilNombre"
-              >{{ opcion.perfilNombre }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
+        <select
+          name="opcines"
+          placeholder="Ruta"
+          id="select-location"
+          style="
+            padding: 15px;
+            width: 90%;
+            border: 1px solid rgba(133, 131, 131, 0.623);
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+          "
+          [(ngModel)]="loginData.rol"
+        >
+          <option value="" disable style="color: rgba(133, 131, 131, 0.623) !important;">Seleccione el rol...</option>
+          <option style="color: black !important;" *ngFor="let opcion of listaPerfil"
+            [value]="opcion.perfilNombre">
+            {{ opcion.perfilNombre }}
+          </option>
+        </select>
 
         <!-- 
                 <select id="select" name="miselect" [(ngModel)]="rolUsuario.rol">
@@ -90,14 +96,6 @@
     </div>
     <div class="overlay-container">
       <div class="overlay">
-        <div class="overlay-panel overlay-left">
-          <h1>Bienvenido!</h1>
-          <p>
-            Para mantenerse conectado con nosotros por favor ingrese su
-            información personal
-          </p>
-          <button class="ghost" id="signIn">Ingresar</button>
-        </div>
         <div class="overlay-panel overlay-right">
           <h1>CENSWARE</h1>
           <p>Proyecto de geolocalizacion</p>

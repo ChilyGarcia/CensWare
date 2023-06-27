@@ -1,7 +1,7 @@
 <html>
   <head> </head>
   <body>
-    <div class="area"></div>
+    <div class="area fondo"></div>
     <nav class="main-menu">
       <ul>
         <li>
@@ -120,6 +120,12 @@
       </ul>
 
       <ul class="logout">
+        <li>
+          <a href="/inicio" *ngIf="usuario">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> {{usuario}} </span>
+          </a>
+        </li>
         <li>
           <a href="#">
             <i class="fa fa-power-off fa-2x"></i>

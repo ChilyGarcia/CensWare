@@ -44,9 +44,9 @@ a {
 }
 
 button {
-	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border-radius: 15px;
+	background:  #0E2A47;
+	border: none;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -57,9 +57,9 @@ button {
 }
 
 button:hover{
-	background-color: #9c2b17;
+	background-color: #41555f;
 	cursor: pointer;
-	box-shadow: 10px 10px 28px rgb(102, 102, 102);
+	box-shadow: 10px 10px 20px 0px rgb(102, 102, 102);
 }
 
 button:active {
@@ -168,9 +168,10 @@ form {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	
+	background: linear-gradient(to bottom, #0E2A47, #6C8FA1);
+	/* background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C); */
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;

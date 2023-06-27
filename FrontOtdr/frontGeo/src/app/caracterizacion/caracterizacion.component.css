@@ -7,6 +7,9 @@ html {
     font-family: sans-serif;
     background: linear-gradient(#141e30, #243b55);
   }
+
+
+  
   
   .login-box {
     position: absolute;
@@ -16,7 +19,7 @@ html {
     
     padding: 15px;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,.5);
+    background:  #5b7886;
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;

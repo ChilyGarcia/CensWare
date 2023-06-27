@@ -8,6 +8,8 @@ import { LoginServiceService } from 'src/app/services/login-service.service';
 })
 export class PanelComponent implements OnInit {
 
+  usuario:string = '';
+
   permissions ={
     maps:false,
     caracterizacion:false,
@@ -20,6 +22,8 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     let user = this.loginService.getUser();
+
+    this.usuario = user.email;
 
     let permisoMaps = user.maps;
     let permisoCaracterizacion = user.caracterizacion;

@@ -14,6 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class MapaComponent {
   listaRutas: Rutas[];
+  usuario:string = '';
 
   permissions ={
     maps:false,
@@ -34,6 +35,8 @@ export class MapaComponent {
   ngOnInit() {
 
     let user = this.loginService.getUser();
+    this.usuario = user.email;
+
 
     let permisoMaps = user.maps;
     let permisoCaracterizacion = user.caracterizacion;

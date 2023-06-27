@@ -63,6 +63,13 @@ export class SolucionarFalloComponent {
         icon: 'success',
         confirmButtonText: 'Aceptar',
       });
+    } ,(error) => {
+      Swal.fire({
+        title: 'Ha ocurrido un error',
+        text: error.error,
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
     });
   }
 

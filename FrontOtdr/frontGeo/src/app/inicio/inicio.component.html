@@ -2,12 +2,17 @@
 
 <div class="area">
   <div class="container">
-    <div style="display: flex;">
-      <div style="margin-right: 10px;">
-        <canvas id="myChart" style="width: 400px; height: 300px;"></canvas>
+    <h1 style="position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+      <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+    </svg> Gráficas estadísticas</h1>
+    <div style="display: flex; width: 100%; margin-top: 60px;">
+      <div style=" margin-right: 10%; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 5px 5px 10px 0px rgb(36, 36, 36);">
+        <h3 style="z-index: 3; text-align: center;"><b>Total de fallas por rutas</b></h3>
+        <canvas id="myChart" style="width: 45%; min-height: 300px;"></canvas>
       </div>
-      <div>
-        <canvas id="myChart2" style="width: 300px; height: 300px;"></canvas>
+      <div style=" margin-right: -20%; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 5px 5px 10px 0px rgb(36, 36, 36);">
+        <h3 style="z-index: 3; text-align: center;"><b>Fallas más presentadas</b></h3>
+        <canvas id="myChart2" style="width: 50%; min-height: 300px;"></canvas>
       </div>
     </div>
   </div>

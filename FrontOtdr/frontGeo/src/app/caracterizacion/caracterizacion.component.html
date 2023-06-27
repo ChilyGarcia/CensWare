@@ -99,7 +99,7 @@
         <div
           style="display: flex; justify-content: space-between; margin-top: 2%"
         >
-          <button (click)="caracterizacionExcel()" mat-raised-button style="margin-left: 0%; background-color: green; color: white;">Excel</button>
+          <button (click)="caracterizacionExcel()" mat-raised-button style="margin-left: 0%; background-color: green; color: white; width: 48%;">Excel</button>
 
           <button
             *ngIf="
@@ -117,9 +117,32 @@
             "
             type="submit"
             mat-raised-button
+            style="background-color: white; width: 48%;"
           >
             Enviar
           </button>
+
+          <button
+            *ngIf="
+              caracterizacion.latitud.length < 15 ||
+              caracterizacion.longitud.length < 15 ||
+              !caracterizacion.latitud.includes('.') ||
+              !caracterizacion.longitud.includes('.') ||
+              !containsOnlyNumbersAndDot(caracterizacion.latitud) ||
+              !containsOnlyNumbersAndDot(caracterizacion.longitud) ||
+              caracterizacion.cantRemanente == '' ||
+              !containsOnlyNumbersAndDot(caracterizacion.cantRemanente) ||
+              caracterizacion.tipoPunto == '' ||
+              comprobacion.medicion == '' ||
+              caracterizacion.ruta == ''
+            "
+            disabled="true"
+            mat-raised-button
+            style="background-color: gray; width: 48%;"
+          >
+            Enviar
+          </button>
+
         </div>
       </form>
     </div>

@@ -45,6 +45,7 @@
     
 
     <div id="map" style="margin-left: 5%; width: 95%; height: 100vh; z-index: 1;"></div>
+
     
     <nav class="main-menu">
       <ul>
@@ -113,6 +114,12 @@
       </ul>
 
       <ul class="logout">
+        <li>
+          <a href="/inicio" *ngIf="usuario">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> {{usuario}} </span>
+          </a>
+        </li>
         <li>
           <a href="#">
             <i class="fa fa-power-off fa-2x"></i>

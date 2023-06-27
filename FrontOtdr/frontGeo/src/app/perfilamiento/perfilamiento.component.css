@@ -217,7 +217,7 @@ tbody tr:nth-child(even) {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 200vh;
+  height: 270vh;
 
   position: absolute;
   top: 1%;
@@ -229,11 +229,12 @@ tbody tr:nth-child(even) {
 .contenido {
   background-color: #f0f0f0;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .btnNuevoPerfil{
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

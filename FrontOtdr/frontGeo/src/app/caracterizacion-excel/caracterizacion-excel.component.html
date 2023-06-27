@@ -1,23 +1,34 @@
 <app-panel></app-panel>
 
 <div class="login-box">
-  <h2>Caracterizacion</h2>
+  <h2>Caracterizacion por Excel</h2>
 
   <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
     <div style="width: 100%; display: flex; justify-content: center">
-      <mat-form-field class="selectRol">
-        <mat-select
+      <select
           placeholder="Ruta"
+          id="select-location"
+          style="
+            padding: 10px;
+            width: 100%;
+            border: 1px solid gray;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+          "
           name="ruta"
           [(ngModel)]="caracterizacion.ruta"
         >
-          <mat-option
-            *ngFor="let opcion of listaRutas"
+        <option value='' disabled>
+          Seleccione la ruta...
+        </option>
+          <option *ngFor="let opcion of listaRutas"
             [value]="opcion.rutaNombre"
-            >{{ opcion.rutaNombre }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+            >{{ opcion.rutaNombre }}
+          </option>
+        </select>
+
+      
     </div>
 
     <div class="file-select">
@@ -38,9 +49,10 @@
     </div>
 
     <button
+    *ngIf="selectedFileName != '' && caracterizacion.ruta != '' && selectedFileName.includes('.xlsx')"
       (click)="enviarRegistroCaracterizacion()"
       mat-raised-button
-      style="margin-top: 10%"
+      style="margin-top: 10%; width: 40%; margin-left: 30%;"
     >
       Caracterizar
     </button>
