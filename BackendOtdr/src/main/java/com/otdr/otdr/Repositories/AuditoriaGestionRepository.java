@@ -9,11 +9,11 @@ import java.util.List;
 public interface AuditoriaGestionRepository extends JpaRepository<AuditoriaGestion, Long> {
 
     @Query(nativeQuery = true,
-    value = "SELECT * FROM auditoria_gestion a WHERE a.titulo= :titulo ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d') DESC")
+    value = "SELECT * FROM auditoria_gestion a WHERE a.titulo= :titulo ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d %H:%i:%s') DESC")
     public List<AuditoriaGestion> auditoriaTitulo(String titulo);
 
     @Query(nativeQuery = true,
-            value = "SELECT * FROM auditoria_gestion a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d') DESC")
+            value = "SELECT * FROM auditoria_gestion a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d %H:%i:%s') DESC")
     public List<AuditoriaGestion> allAuditoria();
 
     @Query(

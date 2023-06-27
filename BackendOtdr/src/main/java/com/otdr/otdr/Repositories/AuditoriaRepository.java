@@ -15,7 +15,7 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
             nativeQuery = true,
             value = "SELECT a.ruta, COUNT(*) AS cantidad\n" +
                     "FROM auditorias a\n" +
-                    "WHERE STR_TO_DATE(a.fecha, '%Y-%m-%d') >= :fecha\n" +
+                    "WHERE STR_TO_DATE(a.fecha, '%Y-%m-%d %H:%i:%s') >= :fecha\n" +
                     "GROUP BY a.ruta DESC LIMIT 5"
     )
     public List<Object[]> rutasMasFallas(LocalDate fecha);
@@ -30,7 +30,7 @@ public interface AuditoriaRepository extends JpaRepository<Auditoria, Long> {
 
     @Query(
             nativeQuery = true,
-            value = "SELECT * FROM auditorias a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d') DESC"
+            value = "SELECT * FROM auditorias a ORDER BY STR_TO_DATE(a.fecha, '%Y-%m-%d %H:%i:%s') DESC"
     )
     public List<Auditoria> allAuditoria();
 }

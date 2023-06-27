@@ -62,6 +62,7 @@ public class CaracterizacionController {
         CrearPuntoRefDTO crearPuntoRefDTO = modelMapper.map(puntoRefCrearRequest, CrearPuntoRefDTO.class);
 
         CrearPuntoRefDTO puntoRefDTO = puntoRefService.guardarManual(crearPuntoRefDTO);
+        puntoRefDTO.setPArchivo(false);
 
         PuntoRefCrearResponse crearResponse = modelMapper.map(puntoRefDTO, PuntoRefCrearResponse.class);
 

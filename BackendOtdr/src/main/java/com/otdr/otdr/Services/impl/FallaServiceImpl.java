@@ -169,7 +169,7 @@ public class FallaServiceImpl implements FallaService {
         }
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String fecha = simpleDateFormat.format(calendar.getTime());
 
@@ -260,47 +260,4 @@ public class FallaServiceImpl implements FallaService {
 
 
     }
-/*
-    public Double obtenerDist(MultipartFile file) throws IOException {
-
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-        String dirFile = "file/sor";
-
-        Path uploadPath = Paths.get(dirFile);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-
-        try (InputStream inputStream = file.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ioe) {
-            throw new IOException("Could not save image file: " + fileName, ioe);
-        }
-
-        clojure.lang.PersistentHashMap results;
-
-        Boolean verbose = true; // display results on screen
-        results = cljotdr.parse.sorparse(dirFile + "/"+fileName, "trace.dat", verbose);
-        // save result in JSON format
-        cljotdr.dump.save_file(results,"C:\\Users\\ING.Derian\\Desktop\\otdr13ERRJS.json", 1);
-        System.out.println("**********************");
-
-        try {
-            String jsonContent = new String(Files.readAllBytes(Paths.get("C:\\Users\\ING.Derian\\Desktop\\otdr13ERRJS.json")));
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(jsonContent);
-            JSONObject KeyEvents = (JSONObject) json.get("KeyEvents");
-            JSONObject sumary = (JSONObject) KeyEvents.get("Summary");
-            Double resultado = (Double) sumary.get("loss end");
-            System.err.println("\n\n\n\n\n\n\n\nFalla km: " + resultado);
-
-            return resultado;
-
-        } catch (IOException | ParseException ex) {
-            ex.printStackTrace();
-            throw new MyException("Error al leer el sor");
-        }
-
-    }*/
 }

@@ -74,7 +74,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioDTO.setPerfil(usuarioSave.getRoles().getRolNombre());
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fecha = simpleDateFormat.format(calendar.getTime());
 
         auditoriaGestion("REGISTRO","Registro al usuario: "+usuarioSave.getNombre()+" "+usuarioSave.getApellido()+" C.C: "+usuarioSave.getCedula(),fecha,userL);

@@ -53,13 +53,14 @@ public class PuntoRefServiceImpl implements PuntoRefService {
                 CrearPuntoRefDTO puntoRefDTO = modelMapper.map(punto, CrearPuntoRefDTO.class);
                 puntoRefDTO.setRuta(punto.getRuta().getRutaNombre());
                 puntoRefDTO.setTipoPunto(punto.getTipoPunto().getTipoNombre());
+                puntoRefDTO.setPArchivo(true);
 
                 guardarManual(puntoRefDTO);
             }
             System.out.println("Se caracterizo los postes");
 
             Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM--dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String fecha = simpleDateFormat.format(calendar.getTime());
             Usuario usuario = usuarioRepository.findByEmail(userLogeado);
 
@@ -133,13 +134,14 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         crearPuntoRefDTO.setRuta(puntoReferencia1.getRuta().getRutaNombre());
         crearPuntoRefDTO.setKmAnterior(puntoReferencia1.getKmAnterior());
 
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String fecha = simpleDateFormat.format(calendar.getTime());
-        Usuario usuario = usuarioRepository.findByEmail(puntoRefDTO.getUserLogeado());
+        if (!puntoRefDTO.isPArchivo()) {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String fecha = simpleDateFormat.format(calendar.getTime());
+            Usuario usuario = usuarioRepository.findByEmail(puntoRefDTO.getUserLogeado());
 
-        auditoriaGestion("CARACTERIZO","Caracterizo el punto: "+crearPuntoRefDTO.getNombrePunto()+" de la ruta: "+crearPuntoRefDTO.getRuta(),fecha,usuario);
-
+            auditoriaGestion("CARACTERIZO", "Caracterizo el punto: " + crearPuntoRefDTO.getNombrePunto() + " de la ruta: " + crearPuntoRefDTO.getRuta(), fecha, usuario);
+        }
 
         return crearPuntoRefDTO;
     }
@@ -234,7 +236,7 @@ public class PuntoRefServiceImpl implements PuntoRefService {
         rutaRepository.save(ruta);
 
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(rutaDTO.getUserLogeado());
 

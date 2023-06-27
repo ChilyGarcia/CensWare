@@ -84,7 +84,7 @@ public class PerfilServiceImpl implements PerfilService {
 
         rolRepository.save(perfilNuevo);
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String fecha = simpleDateFormat.format(calendar.getTime());
         Usuario usuario = usuarioRepository.findByEmail(perfilCrearRequest.getUserLogeado());
 

@@ -21,5 +21,5 @@ public class CrearPuntoRefDTO implements Serializable {
     private String userLogeado;
     private boolean medicion;
     private String kmAnterior;
-
+    private boolean pArchivo;
 }
