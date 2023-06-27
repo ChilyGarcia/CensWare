@@ -6,6 +6,7 @@ import { Puntos } from 'src/app/puntos';
 import { Rutas } from 'src/app/rutas';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mapa',
@@ -72,6 +73,15 @@ export class MapaComponent {
       }
 
       holaMundo(this.listaPuntos);
+    }, (error) =>{
+
+      Swal.fire({
+        title: 'Error',
+        text: 'La ruta ingresada no tiene puntos para leer',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+
     });
 
   }
