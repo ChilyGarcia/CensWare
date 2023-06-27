@@ -2,6 +2,7 @@ package com.otdr.otdr.Controllers;
 
 import com.otdr.otdr.Data.Entidades.Mensaje;
 import com.otdr.otdr.Data.Entidades.Ruta;
+import com.otdr.otdr.Models.Peticiones.ActualizarPuntoRequest;
 import com.otdr.otdr.Models.Peticiones.PuntoRefCrearRequest;
 import com.otdr.otdr.Models.Peticiones.RutaCrearRequest;
 import com.otdr.otdr.Models.Respuestas.PuntoRefCrearResponse;
@@ -77,5 +78,16 @@ public class CaracterizacionController {
         List<Ruta> rutaList = puntoRefService.listarRuta();
 
         return new ResponseEntity<>(rutaList, HttpStatus.OK);
+    }
+
+    @PostMapping("/agragar-rem")
+    public ResponseEntity<?> actualizarPunto(@RequestBody ActualizarPuntoRequest puntoRequest){
+        try {
+            puntoRefService.actualizarRem(puntoRequest);
+            return new ResponseEntity<>(new Mensaje("Se actualizo el punto"), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new Mensaje("Error al actualizar el punto"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

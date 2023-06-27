@@ -1,6 +1,7 @@
 package com.otdr.otdr.Services.impl;
 
 import com.otdr.otdr.Data.Entidades.*;
+import com.otdr.otdr.Models.Peticiones.ActualizarPuntoRequest;
 import com.otdr.otdr.Models.Respuestas.ListarPuntoRefResponse;
 import com.otdr.otdr.Repositories.*;
 import com.otdr.otdr.Security.Exceptions.MyException;
@@ -283,6 +284,16 @@ public class PuntoRefServiceImpl implements PuntoRefService {
     @Override
     public List<PuntoReferencia> listarPuntosOrd() {
         return puntoRefRepository.listarPuntosOrdenados();
+    }
+
+    @Override
+    public void actualizarRem(ActualizarPuntoRequest puntoRequest) {
+
+        Ruta ruta1 = rutaRepository.findByRutaNombre(puntoRequest.getRuta());
+        PuntoReferencia puntoReferencia = puntoRefRepository.findByNombrePunto(puntoRequest.getNombreP(), ruta1.getId());
+        puntoReferencia.setCantRemanente(puntoRequest.getCantRem());
+
+        puntoRefRepository.save(puntoReferencia);
     }
 
     public static String calcularDistancia (double lat1, double long1, double lat2, double long2){

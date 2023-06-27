@@ -2,6 +2,7 @@ package com.otdr.otdr.Services;
 
 import com.otdr.otdr.Data.Entidades.PuntoReferencia;
 import com.otdr.otdr.Data.Entidades.Ruta;
+import com.otdr.otdr.Models.Peticiones.ActualizarPuntoRequest;
 import com.otdr.otdr.Models.Respuestas.ListarPuntoRefResponse;
 import com.otdr.otdr.Models.Respuestas.PuntoFallo;
 import com.otdr.otdr.Shared.CrearPuntoRefDTO;
@@ -21,5 +22,6 @@ public interface PuntoRefService {
     public List<Ruta> listarRuta();
     public List<ListarPuntoRefResponse> listarPuntosRuta (String ruta);
     public List<PuntoReferencia> listarPuntosOrd();
+    public void actualizarRem(ActualizarPuntoRequest puntoRequest);
 
 }
