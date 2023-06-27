@@ -1,5 +1,3 @@
-
-
 function holaMundo(lista) {
   //Creacion del mapa
   let map = L.map("map").setView([7.887667899791354, -72.49961964550303], 14);
