@@ -61,10 +61,16 @@ public class FallaServiceImpl implements FallaService {
         String remanenteAct ="0";
         double kmAnterior = 0;
         double kmTotalAct = 0;
+        int cont = 0;
 
         List<PuntoFallo> puntoFalloList = new ArrayList<>();
         for (PuntoReferencia puntoReferencia : list){
-            x += (Double.parseDouble(puntoReferencia.getKmAnterior())+ Double.parseDouble(puntoReferencia.getCantRemanente()));
+
+            if (cont == 0){
+                x += Double.parseDouble(puntoReferencia.getCantRemanente());
+            }else {
+                x += (Double.parseDouble(puntoReferencia.getKmAnterior())+ Double.parseDouble(puntoReferencia.getCantRemanente()));
+            }
 
             System.out.println(x);
             if (x >= distFalla){
@@ -82,6 +88,7 @@ public class FallaServiceImpl implements FallaService {
             longitud = String.valueOf(puntoReferencia.getLongitud());
             latitud = String.valueOf(puntoReferencia.getLatitud());
             kmTotal = x;
+            cont++;
 
         }
 
