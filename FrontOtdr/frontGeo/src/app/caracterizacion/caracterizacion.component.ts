@@ -16,9 +16,10 @@ export class CaracterizacionComponent {
 
   listaRutas: Rutas[];
 
-  constructor(private usuarioService: UsuarioService, private loginService:LoginServiceService) {}
-
-  
+  constructor(
+    private usuarioService: UsuarioService,
+    private loginService: LoginServiceService
+  ) {}
 
   comprobacion = {
     medicion: '',
@@ -32,7 +33,7 @@ export class CaracterizacionComponent {
     longitud: '',
     latitud: '',
     medicion: false,
-    userLogeado: this.loginService.getUser().email
+    userLogeado: this.loginService.getUser().email,
   };
 
   ngOnInit() {
@@ -49,7 +50,6 @@ export class CaracterizacionComponent {
   }
 
   enviarCaracterizacion() {
-    
     console.log(this.caracterizacion.nombrePunto);
 
     if (this.comprobacion.medicion == 'SI') {
@@ -77,13 +77,17 @@ export class CaracterizacionComponent {
         });
       });
 
-      this.formRef.resetForm();
+    this.formRef.resetForm();
   }
 
   obtenerListaRutas() {
     this.usuarioService.obtenerListaRutas().subscribe((dato) => {
       this.listaRutas = dato;
     });
+  }
+
+  caracterizacionExcel() {
+    window.location.href = 'caracterizacion-excel';
   }
   reload() {
     location.reload();

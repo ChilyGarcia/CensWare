@@ -27,26 +27,28 @@
             id="latitud"
             [(ngModel)]="caracterizacion.latitud"
             name="latitud"
-            pattern="[0-9.]{17}" maxlength="18"
+            pattern="[0-9.]{17}"
+            maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Latitud</label>
         </div>
         <div class="user-box">
           <input
-          [required]="true"
+            [required]="true"
             matInput
             id="longitud"
             [(ngModel)]="caracterizacion.longitud"
             name="longitud"
-            pattern="[0-9.]{17}" maxlength="18"
+            pattern="[0-9.]{17}"
+            maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
           />
           <label>Longitud</label>
         </div>
         <div class="user-box">
           <input
-          [required]="true"
+            [required]="true"
             matInput
             id="cantRemanente"
             [(ngModel)]="caracterizacion.cantRemanente"
@@ -94,18 +96,31 @@
           </mat-select>
         </mat-form-field>
 
-        <button
-        *ngIf="caracterizacion.latitud.length > 15 && caracterizacion.longitud.length >15
-        && caracterizacion.latitud.includes('.') && caracterizacion.longitud.includes('.')
-        && containsOnlyNumbersAndDot(caracterizacion.latitud) && containsOnlyNumbersAndDot(caracterizacion.longitud)
-        && caracterizacion.cantRemanente != '' && containsOnlyNumbersAndDot(caracterizacion.cantRemanente)
-        && caracterizacion.tipoPunto != '' && comprobacion.medicion != '' && caracterizacion.ruta != ''"
-          type="submit"
-          mat-raised-button
-          style="margin-left: 38%; margin-top: 2%"
+        <div
+          style="display: flex; justify-content: space-between; margin-top: 2%"
         >
-          Enviar
-        </button>
+          <button (click)="caracterizacionExcel()" mat-raised-button style="margin-left: 0%; background-color: green; color: white;">Excel</button>
+
+          <button
+            *ngIf="
+              caracterizacion.latitud.length > 15 &&
+              caracterizacion.longitud.length > 15 &&
+              caracterizacion.latitud.includes('.') &&
+              caracterizacion.longitud.includes('.') &&
+              containsOnlyNumbersAndDot(caracterizacion.latitud) &&
+              containsOnlyNumbersAndDot(caracterizacion.longitud) &&
+              caracterizacion.cantRemanente != '' &&
+              containsOnlyNumbersAndDot(caracterizacion.cantRemanente) &&
+              caracterizacion.tipoPunto != '' &&
+              comprobacion.medicion != '' &&
+              caracterizacion.ruta != ''
+            "
+            type="submit"
+            mat-raised-button
+          >
+            Enviar
+          </button>
+        </div>
       </form>
     </div>
   </div>

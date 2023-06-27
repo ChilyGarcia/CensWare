@@ -29,6 +29,7 @@ import { AuditoriasGestionComponent } from './auditorias-gestion/auditorias-gest
 import { SolucionarFalloComponent } from './solucionar-fallo/solucionar-fallo.component';
 import { AuditoriaFalloComponent } from './auditoria-fallo/auditoria-fallo.component';
 import { MapaPuntoFalloComponent } from './mapa-punto-fallo/mapa-punto-fallo.component';
+import { CaracterizacionExcelComponent } from './caracterizacion-excel/caracterizacion-excel.component';
 
 
 
@@ -50,7 +51,8 @@ import { MapaPuntoFalloComponent } from './mapa-punto-fallo/mapa-punto-fallo.com
     AuditoriasGestionComponent,
     SolucionarFalloComponent,
     AuditoriaFalloComponent,
-    MapaPuntoFalloComponent
+    MapaPuntoFalloComponent,
+    CaracterizacionExcelComponent
   ],
   imports: [
     BrowserModule,

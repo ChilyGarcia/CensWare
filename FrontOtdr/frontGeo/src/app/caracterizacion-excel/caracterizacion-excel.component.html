@@ -1,0 +1,48 @@
+<app-panel></app-panel>
+
+<div class="login-box">
+  <h2>Caracterizacion</h2>
+
+  <form (ngSubmit)="formSubmit()" id="form" #formRef="ngForm">
+    <div style="width: 100%; display: flex; justify-content: center">
+      <mat-form-field class="selectRol">
+        <mat-select
+          placeholder="Ruta"
+          name="ruta"
+          [(ngModel)]="caracterizacion.ruta"
+        >
+          <mat-option
+            *ngFor="let opcion of listaRutas"
+            [value]="opcion.rutaNombre"
+            >{{ opcion.rutaNombre }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="file-select">
+      <div class="file-input-container">
+        <div class="file-input-button">
+          <span class="file-input-text">Seleccionar archivo</span>
+        </div>
+        <input
+          type="file"
+          class="file-input"
+          (change)="onFileSelected($event)"
+          #fileUpload
+        />
+      </div>
+      <p *ngIf="selectedFileName" style="color: white; text-align: center">
+        Archivo seleccionado: {{ selectedFileName }}
+      </p>
+    </div>
+
+    <button
+      (click)="enviarRegistroCaracterizacion()"
+      mat-raised-button
+      style="margin-top: 10%"
+    >
+      Caracterizar
+    </button>
+  </form>
+</div>
