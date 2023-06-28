@@ -43,20 +43,16 @@ public class PerfilServiceImpl implements PerfilService {
         }
 
         List<ListarPerfilResponse> listarPerfilResponseList = new ArrayList<>();
-        int cont=0;
         for (Perfil perfil:perfils){
-            if (cont!=0) {
-                Permisos permiso = permisoRepository.findByNombre(perfil.getRolNombre());
-                ListarPerfilResponse perfilResponse = new ListarPerfilResponse();
-                perfilResponse.setPerfilNombre(perfil.getRolNombre());
-                perfilResponse.setMaps(permiso.isMaps());
-                perfilResponse.setCaracterizacion(permiso.isCaracterizacion());
-                perfilResponse.setFallo(permiso.isFallo());
-                perfilResponse.setDashboard(permiso.isDashboard());
+            Permisos permiso = permisoRepository.findByNombre(perfil.getRolNombre());
+            ListarPerfilResponse perfilResponse = new ListarPerfilResponse();
+            perfilResponse.setPerfilNombre(perfil.getRolNombre());
+            perfilResponse.setMaps(permiso.isMaps());
+            perfilResponse.setCaracterizacion(permiso.isCaracterizacion());
+            perfilResponse.setFallo(permiso.isFallo());
+            perfilResponse.setDashboard(permiso.isDashboard());
 
-                listarPerfilResponseList.add(perfilResponse);
-            }
-            cont++;
+            listarPerfilResponseList.add(perfilResponse);
         }
 
         return listarPerfilResponseList;
