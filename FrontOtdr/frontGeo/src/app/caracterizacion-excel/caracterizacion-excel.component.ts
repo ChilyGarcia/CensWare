@@ -3,6 +3,7 @@ import { Rutas } from '../rutas';
 import { UsuarioService } from '../services/usuario.service';
 import { LoginServiceService } from '../services/login-service.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-caracterizacion-excel',
@@ -48,7 +49,24 @@ export class CaracterizacionExcelComponent {
       .subscribe((data) => {
         //En este punto nuestra petición ha funcionado correctamente
         console.log(data);
+
+        Swal.fire({
+          title: 'Caracterización con éxito',
+          text: 'Se ha caracterizado un punto con éxito',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        }).then((result) => {
+          // Verificar si el botón "Aceptar" se ha presionado
+          if (result.isConfirmed) {
+            // Aquí puedes agregar la lógica que deseas ejecutar después de que el usuario hace clic en "Aceptar"
+            this.reload();
+          }
+        });
       });
+  }
+
+  reload() {
+    location.reload();
   }
 
   onFileSelected(event: any) {

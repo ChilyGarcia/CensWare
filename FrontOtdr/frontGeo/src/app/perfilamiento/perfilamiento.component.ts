@@ -26,6 +26,8 @@ export class PerfilamientoComponent {
 
   listaPerfil: Perfilamiento[];
 
+  listRoles: any[];
+
   ngOnInit(): void {
     this.obtenerListaPerfiles();
   }
@@ -65,8 +67,16 @@ export class PerfilamientoComponent {
   obtenerListaPerfiles() {
     return this.usuarioService.obtenerListaPerfiles().subscribe((dato) => {
       this.listaPerfil = dato;
+      this.listaPerfil.shift(); 
+      /*
+      this.listRoles = [];
+      this.listRoles.push(...this.listaPerfil);
+      console.log(this.listRoles);
+
+      */
     });
   }
+  
 
   agregarNuevoPerfil() {
     window.location.href = 'agregar-perfil';

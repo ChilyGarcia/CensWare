@@ -9,16 +9,28 @@
       <h2>Caracterizacion</h2>
 
       <form (ngSubmit)="enviarCaracterizacion()" id="form" #formRef="ngForm">
+<!--
+        <div class="user-box">
+          <input
+            required
+            matInput
+            id="nombre"
+            [(ngModel)]="cuerpo.rutaInicio"
+            name="nombre"
+          />
+          <label>Inicio de la ruta</label>
+        </div>
+      -->
         <div class="user-box">
           <input
             [(ngModel)]="caracterizacion.nombrePunto"
-            [required]="true"
             matInput
             id="nombre"
             pattern="[A-Za-z]"
             name="nombrePunto"
+            placeholder="Nombre punto"
           />
-          <label>Nombre</label>
+          
         </div>
         <div class="user-box">
           <input
@@ -30,8 +42,9 @@
             pattern="[0-9.]{17}"
             maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
+            placeholder="Latitud"
           />
-          <label>Latitud</label>
+          
         </div>
         <div class="user-box">
           <input
@@ -43,8 +56,9 @@
             pattern="[0-9.]{17}"
             maxlength="18"
             title="Ingrese solo números y el carácter '.' y la longitud debe ser exactamente 17"
+            placeholder="Longitud"
           />
-          <label>Longitud</label>
+         
         </div>
         <div class="user-box">
           <input
@@ -55,8 +69,9 @@
             pattern="[0-9.]+"
             name="cantRemanente"
             title="Ingrese solo números y el carácter '.'"
+            placeholder="Cantidad de remanente"
           />
-          <label>Remanente</label>
+          
         </div>
 
         <mat-form-field class="selectRol">

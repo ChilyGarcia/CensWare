@@ -59,7 +59,7 @@ export class SolucionarFalloComponent {
 
       Swal.fire({
         title: 'Se ha solucionado el fallo',
-        text: 'Se ha almacenado en la tabla de auditorias de fallos la solución, será redirijido hacia el apartado de auditorias.',
+        text: 'Se ha almacenado en la tabla de auditorias de fallos la solución.',
         icon: 'success',
         confirmButtonText: 'Aceptar',
       });
