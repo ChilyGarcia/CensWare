@@ -13,4 +13,5 @@ public class ListarPerfilResponse {
     private boolean caracterizacion;
     private boolean fallo;
     private boolean dashboard;
+    private boolean estado;
 }

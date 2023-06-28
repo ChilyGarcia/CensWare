@@ -9,7 +9,9 @@ import java.util.List;
 public interface PerfilService {
 
     public List<ListarPerfilResponse> listarPerfil();
+    public List<ListarPerfilResponse> listarPerfilHabilitado();
 
     public void crearPerfil(PerfilCrearRequest perfilCrearRequest);
+    public String deshabilitarPerfil(String perfilNombre,boolean estado);
 
 }

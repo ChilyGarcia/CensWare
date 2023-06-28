@@ -17,6 +17,7 @@ public class Perfil implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rolNombre;
+    private boolean estado;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "permiso_id")
     private Permisos permisos;

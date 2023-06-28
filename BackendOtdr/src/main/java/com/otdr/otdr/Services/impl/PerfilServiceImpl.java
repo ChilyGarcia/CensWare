@@ -51,8 +51,36 @@ public class PerfilServiceImpl implements PerfilService {
             perfilResponse.setCaracterizacion(permiso.isCaracterizacion());
             perfilResponse.setFallo(permiso.isFallo());
             perfilResponse.setDashboard(permiso.isDashboard());
+            perfilResponse.setEstado(perfil.isEstado());
 
             listarPerfilResponseList.add(perfilResponse);
+        }
+
+        return listarPerfilResponseList;
+    }
+
+    @Override
+    public List<ListarPerfilResponse> listarPerfilHabilitado() {
+        List<Perfil> perfils = rolRepository.findAll();
+
+        if (perfils.isEmpty()){
+            throw new MyException("No hay perfiles ha mostrar");
+        }
+
+        List<ListarPerfilResponse> listarPerfilResponseList = new ArrayList<>();
+        for (Perfil perfil:perfils){
+            if (perfil.isEstado()){
+                Permisos permiso = permisoRepository.findByNombre(perfil.getRolNombre());
+                ListarPerfilResponse perfilResponse = new ListarPerfilResponse();
+                perfilResponse.setPerfilNombre(perfil.getRolNombre());
+                perfilResponse.setMaps(permiso.isMaps());
+                perfilResponse.setCaracterizacion(permiso.isCaracterizacion());
+                perfilResponse.setFallo(permiso.isFallo());
+                perfilResponse.setDashboard(permiso.isDashboard());
+                perfilResponse.setEstado(perfil.isEstado());
+
+                listarPerfilResponseList.add(perfilResponse);
+            }
         }
 
         return listarPerfilResponseList;
@@ -75,6 +103,7 @@ public class PerfilServiceImpl implements PerfilService {
 
         Perfil perfilNuevo = new Perfil();
         perfilNuevo.setRolNombre(perfilCrearRequest.getNombrePerfil());
+        perfilNuevo.setEstado(true);
         perfilNuevo.setPermisos(new Permisos(id+1,perfilCrearRequest.getNombrePerfil(),
                 perfilCrearRequest.isMaps(),
                 perfilCrearRequest.isCaracterizacion(),
@@ -89,6 +118,19 @@ public class PerfilServiceImpl implements PerfilService {
 
         auditoriaGestion("CREO","Creo el perfil: "+perfilNuevo.getRolNombre(),fecha,usuario);
 
+    }
+
+    @Override
+    public String deshabilitarPerfil(String perfilNombre, boolean estado) {
+        Perfil perfil = rolRepository.findByRolNombre(perfilNombre);
+        perfil.setEstado(estado);
+
+        Perfil perfil1 = rolRepository.save(perfil);
+        if (perfil1.isEstado()){
+            return "Perfil Habilitado";
+        }else {
+            return "Perfil Deshabilitado";
+        }
     }
 
     public void auditoriaGestion(String titulo, String desc, String fecha, Usuario user){

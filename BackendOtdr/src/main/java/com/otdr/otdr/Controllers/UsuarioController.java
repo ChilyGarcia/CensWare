@@ -59,12 +59,28 @@ public class UsuarioController {
         return new ResponseEntity<>(perfilService.listarPerfil(), HttpStatus.OK);
     }
 
+    @GetMapping("/perfiles-list-habilitados")
+    public ResponseEntity<?> listarPerfilesHabilitados(){
+        return new ResponseEntity<>(perfilService.listarPerfilHabilitado(), HttpStatus.OK);
+    }
+
     @PostMapping("/perfil-save")
     public ResponseEntity<?> crearPerfil(@RequestBody PerfilCrearRequest perfilCrearRequest){
 
         perfilService.crearPerfil(perfilCrearRequest);
 
         return new ResponseEntity<>(new Mensaje("Se creo el perfil exitosamente"),HttpStatus.OK);
+    }
+
+    @PostMapping("perfil-deshabilitar/{nombre}/{estado}")
+    public ResponseEntity<?> deshabilitarPerfil(@PathVariable("nombre")String nombreperfil,
+                                                @PathVariable("estado")boolean estado) {
+        try {
+            return new ResponseEntity<>(new Mensaje(perfilService.deshabilitarPerfil(nombreperfil, estado)), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new Mensaje("Error al cambiar el estado del perfil"),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/auditoria-gestion")
